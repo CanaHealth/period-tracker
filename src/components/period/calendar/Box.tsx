@@ -1,54 +1,39 @@
-import clsx from 'clsx';
 import * as React from 'react';
 import { FC } from 'react';
 
-// prediction: true | false;
+import clsxm from '@/lib/clsxm';
 
-// export type Days = {
-//   day: {
-//     color?: 'normal' | 'flow' | 'ovulation';
-//     weekDay?: 'Mo' | 'Tu' | 'We' | 'Th' | 'Fr' | 'Sa' | 'Su';
-//     currentDay?: boolean;
-//   };
-// } & React.ComponentPropsWithoutRef<'div'>;
-export type ColorVariant = 'normal' | 'flow' | 'ovulation';
-export type WeekDay = 'Mo' | 'Tu' | 'We' | 'Th' | 'Fr' | 'Sa' | 'Su';
+export type ColorVariant = 'normal' | 'flow' | 'ovulation'; // "flow" indicates when a user had or will have a period
 
-export type Day = {
-  /**
-   * @default false
-   */
-  isCurrentDay?: boolean;
-  /**
-   * @default 'normal'
-   */
-  color?: ColorVariant;
-  label?: WeekDay;
-};
-export type BoxProps = React.ComponentPropsWithoutRef<'div'> & Day;
+export type DayOfWeekLabel = 'Mo' | 'Tu' | 'We' | 'Th' | 'Fr' | 'Sa' | 'Su';
 
-const colorClasses = {
-  normal: 'bg-gray-200',
+export type BoxProps = {
+  isCurrentDay?: boolean; // @default false
+  color?: ColorVariant; // @default 'normal'
+  DayOfWeekLabel?: DayOfWeekLabel;
+} & React.ComponentPropsWithoutRef<'div'>;
+
+const colorVarientSelector = {
+  normal: 'bg-gray-200', // @default
   flow: 'bg-magenta-94',
-  ovulation: 'bg-blue-81',
+  ovulation: 'bg-blue-100',
 };
 
 const Box: FC<BoxProps> = ({
   isCurrentDay = false,
   color = 'normal',
-  label,
+  DayOfWeekLabel,
   ...rest
 }) => (
   <span
-    className={clsx(
+    className={clsxm(
       'relative flex h-8 w-8 items-center justify-center rounded-md text-xs',
-      colorClasses[color],
-      [isCurrentDay ? 'border-2 border-black text-black' : 'text-gray-100']
+      colorVarientSelector[color],
+      [isCurrentDay ? 'border-2 border-black text-black' : ' text-gray-700']
     )}
     {...rest}
   >
-    {label}
-    {/* if the day is the current day, render a circle behind the parent dive that is larget than it*/}
+    {DayOfWeekLabel}
   </span>
 );
 

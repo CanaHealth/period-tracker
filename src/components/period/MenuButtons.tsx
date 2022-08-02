@@ -8,7 +8,7 @@ export default function MenuButtons({ size, ...rest }: MenuButtonsProps) {
   return (
     <div
       className={
-        (size == 'sm' ? 'h-10 w-10 text-lg' : 'h-16 w-16 text-2xl') +
+        (size == 'sm' ? 'h-16 w-16 text-xl' : 'h-24 w-24 text-4xl') +
         ' flex cursor-pointer items-center justify-center rounded-full border-4 border-gray-300'
       }
     >

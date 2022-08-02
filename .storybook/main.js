@@ -6,6 +6,8 @@ module.exports = {
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
     'storybook-addon-next',
+    '@storybook/testing-library',
+    '@storybook/addon-jest',
   ],
   framework: '@storybook/react',
   core: {

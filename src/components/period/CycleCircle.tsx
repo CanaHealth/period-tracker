@@ -12,11 +12,11 @@ export default function CycleCircle({
 }: CycleCircleProps) {
   return (
     <div
-      className=' border-gray-22 flex h-20 w-20 flex-col items-center justify-center rounded-full border-4'
+      className=' border-gray-22 flex h-32 w-32 flex-col items-center justify-center rounded-full border-4'
       {...rest}
     >
-      <p className='text-xs'>{timeString}</p>
-      <p className='text-2xl font-bold'>{numberString}</p>
+      <p className='text-md'>{timeString}</p>
+      <p className='text-4xl font-bold'>{numberString}</p>
     </div>
   );
 }

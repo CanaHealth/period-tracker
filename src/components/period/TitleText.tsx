@@ -23,9 +23,9 @@ function greetUserBasedOnTime() {
 
 export default function TitleText({ ...rest }: titleTextProps) {
   return (
-    <span className='mr-auto'>
-      <p className='text-xl'>{greetUserBasedOnTime()},</p>
-      <p className='text-xl font-bold'>{rest.username}</p>
+    <span className='mr-auto text-3xl'>
+      <p className=''>{greetUserBasedOnTime()},</p>
+      <p className='font-bold'>{rest.username}</p>
     </span>
   );
 }
