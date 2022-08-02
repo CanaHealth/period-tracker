@@ -2,6 +2,7 @@
   "name": "ts-nextjs-tailwind-starter",
   "version": "0.1.0",
   "private": true,
+  "license": "SEE LICENSE in LICENSE.md",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,10 +23,11 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@bundlr-network/client": "^0.7.15",
     "clsx": "^1.1.1",
     "next": "^12.1.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
     "tailwind-merge": "^1.2.1"
   },
@@ -33,9 +35,11 @@
     "@babel/core": "^7.18.6",
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
+    "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-jest": "^6.5.9",
     "@storybook/addon-links": "^6.5.9",
     "@storybook/builder-webpack5": "^6.5.9",
     "@storybook/manager-webpack5": "^6.5.9",
@@ -45,7 +49,7 @@
     "@tailwindcss/forms": "^0.4.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
-    "@types/react": "^17.0.44",
+    "@types/react": "^18.0.15",
     "@types/tailwindcss": "^2.2.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
@@ -62,13 +66,13 @@
     "lint-staged": "^11.2.6",
     "next-sitemap": "^1.9.12",
     "postcss": "^8.4.12",
-    "prettier": "^2.6.2",
+    "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.8",
     "standard-version": "^9.3.2",
     "storybook": "^6.5.9",
     "storybook-addon-next": "^1.6.7",
     "tailwindcss": "^3.0.24",
-    "typescript": "^4.6.3"
+    "typescript": "^4.7.4"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,}": [
