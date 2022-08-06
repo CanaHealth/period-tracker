@@ -1,6 +1,6 @@
 import { ComponentStory, Meta } from '@storybook/react';
 
-import MenuButtons from '@/components/period/MenuButtons';
+import MenuButtons from '@/components/period/extra/MenuButtons';
 
 export default {
   title: 'MenuButtons',

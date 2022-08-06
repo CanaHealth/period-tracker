@@ -1,6 +1,6 @@
 import { ComponentStory, Meta } from '@storybook/react';
 
-import ColorPalette from '@/components/ColorPalette';
+import ColorPalette from '@/components/colors/ColorPalette';
 
 export default {
   title: 'Components/ColorPalette',

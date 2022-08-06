@@ -1,6 +1,6 @@
 import { ComponentStory, Meta } from '@storybook/react';
 
-import CycleCircle from '@/components/period/CycleCircle';
+import CycleCircle from '@/components/period/extra/CycleCircle';
 
 export default {
   title: 'CycleCircle',
