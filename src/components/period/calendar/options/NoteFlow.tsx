@@ -1,105 +1,181 @@
-/*
-We are working inside extremely well written software repository that included detailed documentation. 
-The following information will help us carefully choose the typescript code for the job
-
-A brief description of the behavior the React Functional Component makes possible:
-A user selects how heavy her period was, to store the information, so that she can track her cycle.
-
-A summary of what the React Functional Component is:
-A modal of three square buttons that pops up after you pick a date to add a note too from a calendar.
-
-A couple words about what the React Functional Component looks like from a user's experience:
-A large rectangle that fills the field of view in some creative way. There will be three options, with a custom icon in each.
-the one all the way to the left is 'low' with an icon of just half a drop filled in
-the middle option is 'average' with the full drop icon colored in.
-and the final is high with two drops filled in.
-*/
-
-import * as React from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import { BsDroplet, BsDropletFill, BsDropletHalf } from 'react-icons/bs';
 
 import clsxm from '@/lib/clsxm';
 
-const greyButtonClass = 'bg-gray-200 text-gray-600';
+import NoteFlowButtons, { buttonsProps } from './NoteFlowButtons';
 
-export const defaultProps: NoteFlowProps = {
-  flowdata: { howHeavy: 'none', dataID: 'tyv4t4wf4t' },
-  buttonProps: [
-    {
-      icon: <BsDroplet />,
-      text: 'low',
-    },
+export type FlowIntensity = 'light' | 'heavy' | 'average' | 'none';
 
-    {
-      icon: <BsDropletHalf />,
-      text: 'average',
-    },
-
-    {
-      icon: <BsDropletFill />,
-      text: 'high',
-    },
-  ],
-};
-
-type FlowData = {
-  howHeavy: string;
-  dataID: string;
+export type FlowData = {
+  howHeavy: FlowIntensity;
+  date: Date;
 };
 
 export type NoteFlowProps = {
   flowdata: FlowData;
-
-  buttonProps: {
-    icon: React.ReactNode;
-    text: string;
-  }[];
+  buttons?: buttonsProps;
   className?: string;
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
+  handleSubmit?: (flowdata: FlowData) => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
 const NoteFlow: React.FC<NoteFlowProps> = ({
+  handleSubmit,
+  setOpen,
+  open,
   flowdata,
-  buttonProps,
+  buttons = [
+    { icon: <BsDroplet />, text: 'light' },
+    { icon: <BsDropletHalf />, text: 'average' },
+    { icon: <BsDropletFill />, text: 'heavy' },
+  ],
   className,
 }) => {
-  const [howHeavy, setHowHeavy] = React.useState(flowdata.howHeavy);
-  const handleSetHowHeavy = (newHowHeavy: string) => {
-    setHowHeavy(newHowHeavy);
+  // don't allow submit data if no selection has been made
+  //use effect to manage canSubmit state
+  const [canSubmit, setCanSubmit] = useState(false);
+
+  const setOpener =
+    setOpen ||
+    (() => {
+      !open;
+    });
+  const handleSubmited =
+    handleSubmit ||
+    (() => {
+      flowdata;
+    });
+
+  useEffect(() => {
+    if (flowdata.howHeavy !== 'none') {
+      setCanSubmit(true);
+    } else {
+      setCanSubmit(false);
+    }
+  }, [flowdata.howHeavy]);
+  // create funtion that checks canSubmit state and if true, calls handleSubmit with flowdata
+  const handleSubmitFlowdata = () => {
+    if (canSubmit) {
+      setOpener(false);
+    } else {
+      alert('Please select a flow or close the dialog');
+    }
   };
 
-  // TODO Handle Save Flow Data to local storage and add a Submit button to the modal
-
   return (
-    <div className={clsxm('', className)}>
-      <h1 className='w-full text-2xl font-semibold'>Todays flow: {howHeavy}</h1>
-      <div className=' flex flex-col-reverse items-center justify-center md:flex-row'>
-        {buttonProps.map((button, index) => (
-          <button
-            aria-label={button.text}
-            key={index}
-            type='button'
-            className={clsxm(
-              'm-2 flex h-44 w-44 flex-col items-center justify-center rounded border-2 border-white shadow-sm hover:shadow-md',
-
-              button.text == howHeavy
-                ? 'border border-blue-93'
-                : greyButtonClass
-            )}
-            onClick={() => handleSetHowHeavy(button.text)}
-          >
-            <div // dynamically set the color
-              className={clsxm(
-                'flex flex-col items-center justify-center text-center align-middle',
-                button.text == howHeavy ? 'text-indigo-600' : 'text-gray-600'
-              )}
+    <Transition.Root show={open} as={Fragment}>
+      <Dialog
+        as='div'
+        className={clsxm('relative z-10', className)}
+        onClose={() => setOpener(false)}
+      >
+        <Transition.Child
+          as={Fragment}
+          enter='ease-out duration-300'
+          enterFrom='opacity-0'
+          enterTo='opacity-100'
+          leave='ease-in duration-200'
+          leaveFrom='opacity-100'
+          leaveTo='opacity-0'
+        >
+          <div className='fixed inset-0 bg-gray-50 bg-opacity-75 transition-opacity' />
+        </Transition.Child>
+        <div className='fixed inset-0 z-10 overflow-y-auto'>
+          <div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
+            <Transition.Child
+              as={Fragment}
+              enter='ease-out duration-300'
+              enterFrom='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+              enterTo='opacity-100 translate-y-0 sm:scale-100'
+              leave='ease-in duration-200'
+              leaveFrom='opacity-100 translate-y-0 sm:scale-100'
+              leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
-              {button.icon}
-              {button.text}
-            </div>
-          </button>
-        ))}
-      </div>
-    </div>
+              <Dialog.Panel className='relative my-auto transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6'>
+                <Dialog.Title>{flowdata.date.toDateString()}</Dialog.Title>
+                <div className='absolute top-0 right-0 hidden pt-4 pr-4 sm:block'>
+                  <button
+                    type='button'
+                    className='rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                    onClick={() => setOpener(false)}
+                  >
+                    <span className='sr-only'>Close</span>
+                    <AiFillCloseCircle className='h-6 w-6' aria-hidden='true' />
+                  </button>
+                </div>
+                <div className='mt-5 sm:mt-4 sm:flex sm:flex-row-reverse'>
+                  <div className=' flex flex-col-reverse items-center justify-center md:flex-row'>
+                    {buttons.map((button, index) => (
+                      <NoteFlowButtons
+                        key={index}
+                        renderButton={button}
+                        index={index}
+                        flowdata={flowdata}
+                        handleSubmit={handleSubmited}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className='mt-4 flex items-center justify-center'>
+                  <div className='inline-flex' role='group'>
+                    <button
+                      type='button'
+                      aria-label='set to none'
+                      onClick={() => {
+                        handleSubmited({
+                          ...flowdata,
+                          howHeavy: 'none',
+                        });
+                        setOpener(false);
+                      }}
+                      className={clsxm(
+                        ' bg-gray-98 shadow-sm ',
+                        'flex flex-col items-center justify-center',
+                        'mx-auto py-4',
+                        ' w-24',
+                        'rounded-l-sm ',
+                        'hover:bg-gray-300 hover:shadow-lg',
+                        'focus:bg-gray-300 focus:outline-none focus:ring-4',
+                        'transition duration-150 ease-in-out',
+                        'text-xs'
+                      )}
+                    >
+                      set as none
+                    </button>
+                    <button
+                      type='button'
+                      aria-label='submit'
+                      onClick={handleSubmitFlowdata}
+                      className={clsxm(
+                        'border-4 bg-gray-98 shadow-sm ',
+                        'flex flex-col items-center justify-center',
+                        'mx-auto py-4',
+                        ' w-20',
+                        'rounded-r-lg border-2 border-gray-100',
+                        'hover:bg-gray-300 hover:shadow-lg',
+                        'focus:bg-gray-300 focus:outline-none focus:ring-4',
+                        'transition duration-150 ease-in-out',
+                        'text-xs',
+                        ''
+                      )}
+                    >
+                      submit
+                    </button>
+                  </div>
+                </div>
+
+                <button></button>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition.Root>
   );
 };
 

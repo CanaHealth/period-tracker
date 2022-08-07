@@ -4,10 +4,11 @@ We choose split the calender component into WeekInCalendar component to enable e
 */
 import * as React from 'react';
 
-import Box, { BoxProps } from '@/components/period/calendar/Box';
+import BoxWithNoteFlow from '@/components/period/calendar/BoxWithNoteFlow';
+import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
 export type WeekProps = {
-  week: BoxProps[];
+  week: [FlowData, FlowData, FlowData, FlowData, FlowData, FlowData, FlowData];
 } & React.ComponentPropsWithoutRef<'div'>;
 
 // isCurrentDay = false,
@@ -17,10 +18,10 @@ export type WeekProps = {
 const WeekInCalendar: React.FC<WeekProps> = ({ week }) => {
   // we might want to set the DayOfWeekLabel based on the index of the object in the week array?
   return (
-    <div className='flex items-center justify-between px-4 pt-3'>
-      {week.map((boxProps, index) => {
-        return <Box key={index} {...boxProps} />;
-      })}
+    <div className='mx-auto flex flex-row items-center justify-evenly text-center align-middle'>
+      {week.map((flowdata, index) => (
+        <BoxWithNoteFlow key={index} currentFlowData={flowdata} />
+      ))}
     </div>
   );
 };

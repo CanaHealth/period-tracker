@@ -3,7 +3,20 @@ import { FC } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-export type ColorVariant = 'normal' | 'flow' | 'ovulation'; // "flow" indicates when a user had or will have a period
+const colorVarientSelector = {
+  normal: 'bg-gray-200', // @default
+  flowHeavy: 'bg-flow-heavy',
+  flow: 'bg-flow-average',
+  flowLight: 'bg-flow-light',
+  ovulation: 'bg-blue-100',
+};
+
+export type ColorVariant =
+  | 'flowHeavy'
+  | 'flowLight'
+  | 'flow'
+  | 'ovulation'
+  | 'normal';
 
 export type DayOfWeekLabel = 'Mo' | 'Tu' | 'We' | 'Th' | 'Fr' | 'Sa' | 'Su';
 
@@ -12,12 +25,6 @@ export type BoxProps = {
   color?: ColorVariant; // @default 'normal'
   DayOfWeekLabel?: DayOfWeekLabel;
 } & React.ComponentPropsWithoutRef<'div'>;
-
-const colorVarientSelector = {
-  normal: 'bg-gray-200', // @default
-  flow: 'bg-magenta-94',
-  ovulation: 'bg-blue-100',
-};
 
 const Box: FC<BoxProps> = ({
   isCurrentDay = false,

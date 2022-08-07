@@ -22,7 +22,7 @@ const colors = {
     99: '#fcfcfd',
     '99_': '#feffff',
   },
-  magenta: { 94: '#fce5e8' },
+  pink: { 94: '#fce5e8' },
 };
 
 export const Default = Template.bind({});
