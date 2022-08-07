@@ -28,7 +28,7 @@ type CalendarProps = {
 
 const Calendar: React.FC<CalendarProps> = ({ weeks }: CalendarProps) => {
   return (
-    <div className='mx-auto h-full  max-w-md p-2  '>
+    <div className='mx-auto h-full max-w-md p-2'>
       {weeks.map((week, whichWeek) => (
         <div
           key={whichWeek}
