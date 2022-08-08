@@ -8,7 +8,7 @@ export type BigButtonProps = {
   height?: '10' | '20' | '24' | '32';
   text?: string;
   className?: string;
-  forwardOnClick?: () => void;
+  OnClickDo?: () => void;
 };
 
 const BigButton: React.FC<BigButtonProps> = ({
@@ -16,7 +16,7 @@ const BigButton: React.FC<BigButtonProps> = ({
   text,
   height = 10,
   iconLocation = 'r',
-  forwardOnClick,
+  OnClickDo,
   className,
 }) => {
   return (
@@ -39,7 +39,7 @@ const BigButton: React.FC<BigButtonProps> = ({
         ],
         className
       )}
-      onClick={forwardOnClick}
+      onClick={OnClickDo}
     >
       <div
         className={clsxm('flex items-center justify-center text-inherit', [

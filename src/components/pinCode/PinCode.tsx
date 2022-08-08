@@ -7,19 +7,17 @@ import clsxm from '@/lib/clsxm';
 import BigButton from '@/components/period/calendar/options/BigButton';
 import PinInput from '@/components/pinCode/PinInput';
 
-// const wallet = '61e52b';
+import {
+  checkForWalletInLocalStorage,
+  createSolanaWalletInHumanReadableFormat,
+  decryptWallet,
+  encryptWallet,
+  getWalletFromLocalStorage,
+  HumanReadableSolanaWallet,
+  storeWalletInLocalStorage,
+} from '@/util/WalletOperations';
 
-// const decryptWithPin = (pincode: number[]) => {
-//   const pin = pincode.join('');
-//   const privateKey =
-//     '61e52bcab3eb58beb6dad63325e59e70ad39951378a924b43078e1eab41f632be1cad08dab2ba60aa8e50101f7649c0c472cd87b2c12e2a6b3ddeb9917d8b42b';
-//   switch (pin) {
-//     case '12345':
-//       return { pvt: privateKey, wallet: wallet };
-//     default:
-//       throw new Error('Invalid pin');
-//   }
-// };
+import InfoCallout from '../period/extra/InfoCallout';
 
 type PinCodeProps = {
   pincode: number[];
@@ -32,8 +30,7 @@ const PinCode: React.FC<PinCodeProps> = ({
   pincode,
   variant = 'row',
 }) => {
-  // const [cryptoInfo, setCryptoInfo] = useState({ pvt: '', wallet: wallet });
-
+  const [wallet = {}, setWallet] = useState<HumanReadableSolanaWallet>({});
   const [pin, setPin] = useState<number[]>(pincode);
   const [refIndex, setRefIndex] = useState<number>(0);
 
@@ -70,10 +67,39 @@ const PinCode: React.FC<PinCodeProps> = ({
     }
   };
 
+  const submitPinCode = () => {
+    if (pin.length === 6) {
+      if (!checkForWalletInLocalStorage()) {
+        const wallet = createSolanaWalletInHumanReadableFormat();
+
+        // Pass in pin in string format to encrypt wallet.
+        const encryptedWallet: HumanReadableSolanaWallet = encryptWallet(
+          wallet,
+          pin.join('')
+        );
+
+        // Store wallet in local storage.
+        storeWalletInLocalStorage(encryptedWallet);
+      } else {
+        alert(
+          'Wallet already exists in local storage. Decrypting wallet now...'
+        );
+        const encryptedWallet = getWalletFromLocalStorage();
+
+        const decryptedWallet: HumanReadableSolanaWallet = decryptWallet(
+          encryptedWallet,
+          pin.join('')
+        );
+        setWallet(decryptedWallet);
+      }
+    }
+  };
+
   return (
     <div
       className={clsxm(
         'relative mx-auto flex max-w-min justify-center transition-all',
+        ' active:animate-blob  ',
         className
       )}
       onKeyDown={handleKeyDown}
@@ -104,6 +130,9 @@ const PinCode: React.FC<PinCodeProps> = ({
         </div>
 
         <BigButton
+          OnClickDo={() => {
+            submitPinCode;
+          }}
           icon={<HiBadgeCheck />}
           iconLocation='r'
           height='10'
@@ -113,6 +142,7 @@ const PinCode: React.FC<PinCodeProps> = ({
           ])}
         />
       </div>
+      <InfoCallout value='wallet.' description='wow' />
     </div>
   );
 };
