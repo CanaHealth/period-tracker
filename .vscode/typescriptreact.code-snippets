@@ -45,19 +45,25 @@
       "import * as React from 'react';\n",
       "import clsxm from '@/lib/clsxm';\n",
       "type ${1:${TM_FILENAME_BASE}}Props= {\n",
+      "className?: string;",
       "} & React.ComponentPropsWithoutRef<'div'>\n",
-      "export default function ${1:${TM_FILENAME_BASE}}({className, ...rest}: ${1:${TM_FILENAME_BASE}}Props) {",
+      "const ${1:${TM_FILENAME_BASE}}: React.FC<${1:${TM_FILENAME_BASE}}Props> = ({",
+      "className,",
+      "}) => {",
+      "// TODO:",
+      "  ",
       "  return (",
-      "    <div className={clsxm('', className)} {...rest}>",
+      "    <div className={clsxm('', className)}>",
       "      $0",
       "    </div>",
       "  )",
-      "}"
+      "}\n",
+      "export default ${1:${TM_FILENAME_BASE}};"
     ]
   },
   //#endregion  //*======== React ===========
 
-  //#region  //*=========== Commons ===========
+  //#region  //*=========== Comments ===========
   "Region": {
     "prefix": "reg",
     "scope": "javascript, typescript, javascriptreact, typescriptreact",
@@ -66,6 +72,11 @@
       "${TM_SELECTED_TEXT}$0",
       "//#endregion  //*======== ${1} ==========="
     ]
+  },
+  "Region Comment": {
+    "prefix": "regCom",
+    "scope": "javascript, typescript, javascriptreact, typescriptreact",
+    "body": ["/*\n", "${1}", "\n*/"]
   },
   "Region CSS": {
     "prefix": "regc",
@@ -83,20 +94,13 @@
     "prefix": "np",
     "body": [
       "import * as React from 'react';\n",
-      "import Layout from '@/components/layout/Layout';",
-      "import Seo from '@/components/Seo';\n",
       "export default function ${1:${TM_FILENAME_BASE/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}}Page() {",
       "  return (",
-      "    <Layout>",
-      "      <Seo templateTitle='${1:${TM_FILENAME_BASE/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}}' />\n",
       "      <main>\n",
-      "        <section className=''>",
-      "          <div className='layout py-20 min-h-screen'>",
+      "        <section className='layout py-20 min-h-screen'>",
       "            $0",
-      "          </div>",
       "        </section>",
       "      </main>",
-      "    </Layout>",
       "  )",
       "}"
     ]
@@ -181,6 +185,22 @@
   "Wrap with clsxm": {
     "prefix": "cxm",
     "body": ["{clsxm(${TM_SELECTED_TEXT}$0, className)}"]
-  }
+  },
   //#endregion  //*======== Snippet Wrap ===========
+
+  //#region  //*=========== Testing ===========
+  "It should": {
+    "prefix": "it",
+    "body": ["it('should"]
+  },
+  "test imports": {
+    "prefix": "test",
+    "body": [
+      "/* eslint-disable unused-imports/no-unused-imports */",
+      "import { describe, expect, it, screen } from '@jest/globals';",
+      "import { fireEvent, render } from '@testing-library/react';",
+      "import { axe } from 'jest-axe';"
+    ]
+  }
+  //#endregion  //*=========== Testing ===========
 }

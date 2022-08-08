@@ -1,29 +1,70 @@
-import * as React from 'react';
+import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
-import ColorPalette from '@/components/ColorPalette';
-import Layout from '@/components/layout/Layout';
+import Calendar from '../components/period/calendar/Calendar';
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-
-const colors = {
-  blue: { 63: '#5f62e4', 81: '#afbef1', 87: '#dcd9e3', 93: '#e7edf8' },
-  electric_cyan: { 81: '#b8dee9', 91: '#d8fcfc', 95: '#eff4f9' },
-  gray: {
-    59: '#949799',
-    72: '#b7bcba',
-    98: '#f8fafc',
-    99: '#fcfcfd',
-    '99_': '#feffff',
-  },
-  magenta: { 94: '#fce5e8' },
+const findMonday = (date: Date) => {
+  const monday = new Date(date);
+  monday.setDate(date.getDate() - ((date.getDay() + 6) % 7));
+  return monday;
 };
+
+const weekFactory = (date: Date, num: number) => {
+  const weeks: { days: FlowData[] }[] = [];
+  for (let i = 0; i < num; i++) {
+    const step = i * 7;
+    const weekToProcess = new Date(date.getTime());
+    weekToProcess.setDate(date.getDate() - step);
+    const mondayOfWeek = findMonday(weekToProcess);
+    const days: FlowData[] = [];
+
+    for (let j = 0; j < 7; j++) {
+      const step = j;
+
+      const day = new Date(mondayOfWeek.getTime());
+      day.setDate(mondayOfWeek.getDate() + step);
+
+      const howHeavy = 'none';
+
+      days.push({ howHeavy, date: day });
+    }
+    weeks.unshift({ days });
+  }
+
+  return weeks;
+};
+
+const today = new Date();
+const weeks = weekFactory(today, 5);
+const userName = 'Gianna';
 
 export default function HomePage() {
   return (
-    <Layout>
-      <div className='mx-auto flex h-full flex-col items-center justify-center space-y-4 py-44'>
-        <ColorPalette colors={colors} />
+    <main className='min-h-screen'>
+      <div className='mx-auto flex h-screen max-w-md flex-col justify-between'>
+        <div className='mx-3 rounded-b-lg bg-gray-98'>
+          <Calendar weeks={weeks} />
+        </div>
       </div>
-    </Layout>
+    </main>
   );
 }
+
+/*
+        <div className='mx-8 mb-auto mt-16'>
+          <TitleText username={userName} />
+        </div>
+        
+          <div className=' flex  w-11/12 flex-col space-y-4 md:mr-auto'>
+            <InfoCallout description='Chance of Pregnancy' value='low' />
+            <InfoCallout description='Next Cycle In' value='2 weeks' />
+          </div>
+
+                      <CycleCircle timeString='on day' numberString='5' />
+
+        div className='relative flex flex-row items-end justify-around p-2'>
+          <MenuButtons size='sm'>⚙️</MenuButtons>
+          <MenuButtons size='lg'>📝</MenuButtons>
+          <MenuButtons size='sm'>📅</MenuButtons>
+          <div className='absolute inset-0 -z-10 rounded-t-3xl bg-gray-98' />
+        </div>
+*/

@@ -45,7 +45,7 @@ FlowWeek.args = {
   week: [
     { color: 'flow', DayOfWeekLabel: 'Mo' },
     { color: 'flow', DayOfWeekLabel: 'Tu' },
-    { isCurrentDay: true, color: 'flow', DayOfWeekLabel: 'We' },
+    { color: 'flow', isCurrentDay: true, DayOfWeekLabel: 'We' },
     { color: 'flow', DayOfWeekLabel: 'Th' },
     { color: 'flow', DayOfWeekLabel: 'Fr' },
     { color: 'flow', DayOfWeekLabel: 'Sa' },

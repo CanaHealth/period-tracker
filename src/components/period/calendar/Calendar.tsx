@@ -1,56 +1,46 @@
 /*
-Generate a Functional Calendar component of n WeekInCalendar compoenent to represent the weeks of the month.
-The Calendar componenet accepts a json of that defines the n number of WeekInCalendar.week indexed from bottom to top.
-Include detailed documentation.
+
+* data structure:
+  weeks:
+    days[]:
+      day:
+        FlowData:
+          - howHeavy: string;
+          - date: Date;
+
+* component heirarchy:  
+  Calender uses BoxFactory to generate a week of boxes at a time.
+  BoxFactory builds a Box using thats days corrisponding FlowData
+  -   Box takes BoxProps { isCurrentDay, color, dayOfWeekLabel }
+  -   NoteFlow takes and updates FlowData { howHeavy, date }
 */
 
 import * as React from 'react';
 
-import WeekInCalendar, {
-  WeekProps,
-} from '@/components/period/calendar/WeekInCalendar';
+import BoxFactory from '@/components/period/calendar/BoxFactory';
+import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
-type CalendarType = {
-  calender: WeekProps[];
+type CalendarProps = {
+  weeks: {
+    days: FlowData[];
+  }[];
 } & React.ComponentPropsWithoutRef<'div'>;
 
-type CalendarProps = CalendarType & React.ComponentPropsWithoutRef<'div'>;
-
-const Calendar: React.FC<CalendarProps> = ({ calender }) => {
+const Calendar: React.FC<CalendarProps> = ({ weeks }: CalendarProps) => {
   return (
-    <div className=' mx-auto max-w-md'>
-      {calender.map((week, index) => {
-        return <WeekInCalendar key={index} {...week} />;
-      })}
+    <div className='mx-auto h-full max-w-md p-2'>
+      {weeks.map((week, whichWeek) => (
+        <div
+          key={whichWeek}
+          className='mx-auto flex flex-row items-center justify-evenly text-center align-middle'
+        >
+          {week.days.map((flowdata, index) => (
+            <BoxFactory key={index} FlowData={flowdata} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
 
 export default Calendar;
-
-/*
-type ColorVariant = 'normal' | 'flow' | 'ovulation'; // "flow" indicates when a user had or will have a period
-
-type DayOfWeekLabel = 'Mo' | 'Tu' | 'We' | 'Th' | 'Fr' | 'Sa' | 'Su';
-
-type BoxProps = {
-  isCurrentDay?: boolean; 
-  color?: ColorVariant;
-  DayOfWeekLabel?: DayOfWeekLabel;
-} & React.ComponentPropsWithoutRef<'div'>;
-
-type Week = [
-  mon: BoxProps,
-  tue: BoxProps,
-  wed: BoxProps,
-  thu: BoxProps,
-  fri: BoxProps,
-  sat: BoxProps,
-  sun: BoxProps
-];
-
-type WeekProps = {
-  week: Week;
-} & React.ComponentPropsWithoutRef<'div'>;
-
-*/
