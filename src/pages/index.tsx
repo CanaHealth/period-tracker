@@ -35,7 +35,7 @@ const weekFactory = (date: Date, num: number) => {
 
 const today = new Date();
 const weeks = weekFactory(today, 5);
-const userName = 'Gianna';
+// const userName = 'Gianna';
 
 export default function HomePage() {
   return (

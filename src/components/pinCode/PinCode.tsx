@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-// import VscDebugStart from reactIocns
 import { HiBadgeCheck } from 'react-icons/hi';
 
 import clsxm from '@/lib/clsxm';
@@ -8,19 +7,19 @@ import clsxm from '@/lib/clsxm';
 import BigButton from '@/components/period/calendar/options/BigButton';
 import PinInput from '@/components/pinCode/PinInput';
 
-const wallet = '61e52b';
+// const wallet = '61e52b';
 
-const decryptWithPin = (pincode: number[]) => {
-  const pin = pincode.join('');
-  const privateKey =
-    '61e52bcab3eb58beb6dad63325e59e70ad39951378a924b43078e1eab41f632be1cad08dab2ba60aa8e50101f7649c0c472cd87b2c12e2a6b3ddeb9917d8b42b';
-  switch (pin) {
-    case '12345':
-      return { pvt: privateKey, wallet: wallet };
-    default:
-      throw new Error('Invalid pin');
-  }
-};
+// const decryptWithPin = (pincode: number[]) => {
+//   const pin = pincode.join('');
+//   const privateKey =
+//     '61e52bcab3eb58beb6dad63325e59e70ad39951378a924b43078e1eab41f632be1cad08dab2ba60aa8e50101f7649c0c472cd87b2c12e2a6b3ddeb9917d8b42b';
+//   switch (pin) {
+//     case '12345':
+//       return { pvt: privateKey, wallet: wallet };
+//     default:
+//       throw new Error('Invalid pin');
+//   }
+// };
 
 type PinCodeProps = {
   pincode: number[];
@@ -33,8 +32,7 @@ const PinCode: React.FC<PinCodeProps> = ({
   pincode,
   variant = 'row',
 }) => {
-  // use state for cryptoInfo
-  const [cryptoInfo, setCryptoInfo] = useState({ pvt: '', wallet: wallet });
+  // const [cryptoInfo, setCryptoInfo] = useState({ pvt: '', wallet: wallet });
 
   const [pin, setPin] = useState<number[]>(pincode);
   const [refIndex, setRefIndex] = useState<number>(0);
@@ -71,8 +69,6 @@ const PinCode: React.FC<PinCodeProps> = ({
         break;
     }
   };
-
-  // check the index the return rounded-l-full if index is 0
 
   return (
     <div
