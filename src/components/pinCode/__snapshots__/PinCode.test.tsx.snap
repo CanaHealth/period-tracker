@@ -5,42 +5,47 @@ exports[`PinCode should render 1`] = `
   <div
     class=""
   >
+    <div>
+      0
+      0
+      0
+      0
+      0
+      0
+    </div>
+    <div>
+      0
+    </div>
     <div
-      class="flex min-w-full flex-row justify-between"
+      class="flex min-w-full flex-row justify-center"
     >
       <input
-        class="h-24 w-24 appearance-none rounded border-2 border-gray-300 py-2 px-4 text-center text-5xl leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none"
-        placeholder="0"
+        class="appearance-none rounded border-2 border-gray-300 px-4 text-center leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none m-1 h-12 w-12"
         type="number"
         value="0"
       />
       <input
-        class="h-24 w-24 appearance-none rounded border-2 border-gray-300 py-2 px-4 text-center text-5xl leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none"
-        placeholder="0"
+        class="appearance-none rounded border-2 border-gray-300 px-4 text-center leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none m-1 h-12 w-12"
         type="number"
         value="0"
       />
       <input
-        class="h-24 w-24 appearance-none rounded border-2 border-gray-300 py-2 px-4 text-center text-5xl leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none"
-        placeholder="0"
+        class="appearance-none rounded border-2 border-gray-300 px-4 text-center leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none m-1 h-12 w-12"
         type="number"
         value="0"
       />
       <input
-        class="h-24 w-24 appearance-none rounded border-2 border-gray-300 py-2 px-4 text-center text-5xl leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none"
-        placeholder="0"
+        class="appearance-none rounded border-2 border-gray-300 px-4 text-center leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none m-1 h-12 w-12"
         type="number"
         value="0"
       />
       <input
-        class="h-24 w-24 appearance-none rounded border-2 border-gray-300 py-2 px-4 text-center text-5xl leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none"
-        placeholder="0"
+        class="appearance-none rounded border-2 border-gray-300 px-4 text-center leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none m-1 h-12 w-12"
         type="number"
         value="0"
       />
       <input
-        class="h-24 w-24 appearance-none rounded border-2 border-gray-300 py-2 px-4 text-center text-5xl leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none"
-        placeholder="0"
+        class="appearance-none rounded border-2 border-gray-300 px-4 text-center leading-tight text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none m-1 h-12 w-12"
         type="number"
         value="0"
       />

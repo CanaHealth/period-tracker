@@ -1,5 +1,4 @@
 import { FlowData } from '@/components/period/calendar/options/NoteFlow';
-import TitleText from '@/components/period/extra/TitleText';
 
 import Calendar from '../components/period/calendar/Calendar';
 
@@ -45,15 +44,16 @@ export default function HomePage() {
         <div className='mx-3 rounded-b-lg bg-gray-98'>
           <Calendar weeks={weeks} />
         </div>
-        <div className='mx-8 mb-auto mt-16'>
-          <TitleText username={userName} />
-        </div>
       </div>
     </main>
   );
 }
 
 /*
+        <div className='mx-8 mb-auto mt-16'>
+          <TitleText username={userName} />
+        </div>
+        
           <div className=' flex  w-11/12 flex-col space-y-4 md:mr-auto'>
             <InfoCallout description='Chance of Pregnancy' value='low' />
             <InfoCallout description='Next Cycle In' value='2 weeks' />

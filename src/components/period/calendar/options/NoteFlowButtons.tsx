@@ -2,11 +2,14 @@ import * as React from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-import { NoteFlowProps } from '@/components/period/calendar/options/NoteFlow';
+import {
+  FlowIntensity,
+  NoteFlowProps,
+} from '@/components/period/calendar/options/NoteFlow';
 
 export type buttonProp = {
   icon: React.ReactNode;
-  text: string;
+  text: FlowIntensity;
   className?: string;
 };
 
