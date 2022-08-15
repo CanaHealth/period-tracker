@@ -1,5 +1,11 @@
 {
   "name": "ts-nextjs-tailwind-starter",
+  "jest": {
+    "resetMocks": false,
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "license": "SEE LICENSE in LICENSE.md",

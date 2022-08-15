@@ -16,7 +16,6 @@
 */
 
 import * as React from 'react';
-import { useEffect } from 'react';
 
 import BoxFactory from '@/components/period/calendar/BoxFactory';
 import { FlowData } from '@/components/period/calendar/options/NoteFlow';
@@ -54,45 +53,45 @@ const Calendar: React.FC<CalendarProps> = ({ weeks }: CalendarProps) => {
 
   // create a react context to store local storage
 
-  const [localFlow, setLocalFlow] = React.useState([]);
-  useEffect(() => {
-    const localData = window.localStorage.getItem('FLOWDATA');
-    if (localData) {
-      setLocalFlow(JSON.parse(localData));
-    }
-  }, []);
+  // const [localFlow, setLocalFlow] = React.useState([]);
+  // useEffect(() => {
+  //   const localData = window.localStorage.getItem('FLOWDATA');
+  //   if (localData) {
+  //     setLocalFlow(JSON.parse(localData));
+  //   }
+  // }, []);
 
-  const localFlowDataContext = React.createContext(localData);
+  // const localFlowDataContext = React.createContext(localData);
 
   return (
     <>
-      <localFlowDataContext.Provider value={localData}>
-        <div className=' relativemx-auto h-full max-w-md p-2'>
-          <button className=' absolute inset-0 z-10 bg-white opacity-50'></button>
-          {weeks.map((week, whichWeek) => (
-            <div
-              key={whichWeek}
-              className='mx-auto flex flex-row items-center justify-evenly text-center align-middle'
-            >
-              {week.days.map((flowdata, index) => (
-                <BoxFactory key={index} FlowData={flowdata} />
-              ))}
-            </div>
-          ))}
-
-          <div // button to generate mock local data
+      {/* <localFlowDataContext.Provider value={localData}> */}
+      <div className=' relativemx-auto h-full max-w-md p-2'>
+        {/* <button className=' absolute inset-0 z-10 bg-white opacity-50'></button> */}
+        {weeks.map((week, whichWeek) => (
+          <div
+            key={whichWeek}
+            className='mx-auto flex flex-row items-center justify-evenly text-center align-middle'
           >
-            <button
-              className='rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700'
-              onClick={() => {
-                localStorage.setItem('FLOWDATA', JSON.stringify(mockFlowData));
-              }}
-            >
-              Generate Mock Local Data
-            </button>
+            {week.days.map((flowdata, index) => (
+              <BoxFactory key={index} FlowData={flowdata} />
+            ))}
           </div>
+        ))}
+
+        <div // button to generate mock local data
+        >
+          <button
+            className='rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700'
+            onClick={() => {
+              localStorage.setItem('FLOWDATA', JSON.stringify(mockFlowData));
+            }}
+          >
+            Generate Mock Local Data
+          </button>
         </div>
-      </localFlowDataContext.Provider>
+      </div>
+      {/* </localFlowDataContext.Provider> */}
     </>
   );
 };

@@ -17,7 +17,7 @@ today.setMinutes(0);
 today.setMilliseconds(0);
 today.setSeconds(0);
 
-const getLocal = (flowData: FlowData, localFlowData: string) => {
+const getLocalArray = (flowData: FlowData, localFlowData: string) => {
   if (localFlowData) {
     const localFlowDataArray = JSON.parse(localFlowData);
     const currentFlowData = flowData.date.getTime();
@@ -33,7 +33,7 @@ const getLocal = (flowData: FlowData, localFlowData: string) => {
   }
 };
 
-const manageLocalStorage = (nextFlowData: FlowData) => {
+const manageLocalStorageArray = (nextFlowData: FlowData) => {
   const localFlowData = localStorage.getItem('FLOWDATA');
 
   if (localFlowData) {
@@ -105,8 +105,7 @@ const BoxFactory: React.FC<BoxFactoryInputs> = ({ FlowData }) => {
       ];
     const nextFlowData = { ...flowdata, howHeavy: nextHowHeavy };
     setFlowdata(nextFlowData);
-
-    manageLocalStorage(nextFlowData);
+    // manageLocalStorage(nextFlowData);
   };
 
   const ColorVariant = setColorVariant(flowdata.howHeavy);
