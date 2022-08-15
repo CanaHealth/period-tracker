@@ -34,6 +34,7 @@
     "@headlessui/react": "^1.6.6",
     "@metaplex-foundation/js": "^0.14.0",
     "@solana/web3.js": "^1.50.1",
+    "@stablelib/base64": "^1.0.1",
     "clsx": "^1.1.1",
     "jest-dom": "^4.0.0",
     "jest-localstorage-mock": "^2.4.22",
