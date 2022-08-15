@@ -10,13 +10,6 @@ import NoteFlow, {
 
 // const today = new Date();
 
-const today = new Date();
-
-today.setHours(4);
-today.setMinutes(0);
-today.setMilliseconds(0);
-today.setSeconds(0);
-
 const getLocalArray = (flowData: FlowData, localFlowData: string) => {
   if (localFlowData) {
     const localFlowDataArray = JSON.parse(localFlowData);

@@ -20,26 +20,23 @@ import * as React from 'react';
 import BoxFactory from '@/components/period/calendar/BoxFactory';
 import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
+import { daysAgo } from '@/util/calenderFunc';
+
 type CalendarProps = {
   weeks: {
     days: FlowData[];
   }[];
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const today = new Date();
-
-today.setHours(4);
-today.setMinutes(0);
-today.setMilliseconds(0);
-today.setSeconds(0);
-
 const mockFlowData = [
-  { howHeavy: 'light', date: new Date(today.getTime() - 86400000) },
-  { howHeavy: 'light', date: new Date(today.getTime() - 86400000 * 2) },
-  { howHeavy: 'heavy', date: new Date(today.getTime() - 86400000 * 3) },
-  { howHeavy: 'heavy', date: new Date(today.getTime() - 86400000 * 4) },
-  { howHeavy: 'light', date: new Date(today.getTime() - 86400000 * 5) },
-  { howHeavy: 'light', date: new Date(today.getTime() - 86400000 * 6) },
+  { howHeavy: 'average', date: daysAgo(1) },
+  { howHeavy: 'heavy', date: daysAgo(3) },
+  { howHeavy: 'light', date: daysAgo(5) },
+  { howHeavy: 'average', date: daysAgo(7) },
+  { howHeavy: 'heavy', date: daysAgo(9) },
+  { howHeavy: 'average', date: daysAgo(11) },
+  { howHeavy: 'light', date: daysAgo(13) },
+  { howHeavy: 'heavy', date: daysAgo(15) },
 ];
 
 const Calendar: React.FC<CalendarProps> = ({ weeks }: CalendarProps) => {

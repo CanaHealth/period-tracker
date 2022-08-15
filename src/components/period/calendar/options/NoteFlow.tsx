@@ -12,7 +12,6 @@ export type FlowIntensity = 'light' | 'heavy' | 'average' | 'none';
 export type FlowData = {
   howHeavy: FlowIntensity;
   date: Date;
-  dateMS?: number;
 };
 
 export type NoteFlowProps = {
