@@ -21,7 +21,6 @@ const PinInput: React.FC<PinInputProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   //usestate for blur
-  const [blur, setBlur] = React.useState(true);
 
   React.useEffect(() => {
     if (myRef) {
@@ -31,12 +30,6 @@ const PinInput: React.FC<PinInputProps> = ({
 
   return (
     <div className=' relative'>
-      <div
-        className={clsxm(
-          ' absolute inset-2 hidden bg-gray-100 transition-all duration-500',
-          [blur && ['block blur-sm']]
-        )}
-      />
       <input
         className={clsxm(
           ' appearance-none border-gray-100 text-center leading-tight text-gray-700 shadow-sm transition-all duration-150 ease-in-out focus:outline-none',
@@ -54,10 +47,6 @@ const PinInput: React.FC<PinInputProps> = ({
         onFocus={() => {
           inputRef.current?.focus();
           whenFocused(refIndex);
-          setBlur(false);
-        }}
-        onBlur={() => {
-          setBlur(true);
         }}
       />
     </div>

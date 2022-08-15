@@ -34,8 +34,8 @@ const BigButton: React.FC<BigButtonProps> = ({
           height === '20' && ['h-20'],
           height === '24' && ['h-24'],
           height === '32' && ['h-32'],
-          !text && ['text-lg'],
-          !icon && ['text-lg'],
+          !text && ['text-xl'],
+          !icon && ['text-xl'],
         ],
         className
       )}

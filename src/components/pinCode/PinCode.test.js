@@ -1,5 +1,7 @@
-import { render } from '@testing-library/react';
-import React from 'react';
+/* eslint-disable unused-imports/no-unused-imports */
+import { describe, expect, it, screen } from '@jest/globals';
+import { fireEvent, render } from '@testing-library/react';
+import { axe } from 'jest-axe';
 
 import PinCode from '@/components/pinCode/PinCode';
 
@@ -10,4 +12,4 @@ describe('PinCode', () => {
     );
     expect(container).toMatchSnapshot();
   });
-}); //render the PinCode component with a pincode of [0, 0, 0, 0, 0, 0]
+});

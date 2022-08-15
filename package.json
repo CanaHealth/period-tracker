@@ -29,6 +29,7 @@
     "@solana/web3.js": "^1.50.1",
     "clsx": "^1.1.1",
     "jest-dom": "^4.0.0",
+    "jest-localstorage-mock": "^2.4.22",
     "next": "^12.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

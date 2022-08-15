@@ -17,8 +17,6 @@ import {
   storeWalletInLocalStorage,
 } from '@/util/WalletOperations';
 
-import InfoCallout from '../period/extra/InfoCallout';
-
 type PinCodeProps = {
   pincode: number[];
   className?: string;
@@ -142,7 +140,6 @@ const PinCode: React.FC<PinCodeProps> = ({
           ])}
         />
       </div>
-      <InfoCallout value='wallet.' description='wow' />
     </div>
   );
 };

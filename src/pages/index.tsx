@@ -2,7 +2,7 @@ import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
 import Calendar from '../components/period/calendar/Calendar';
 
-const findMonday = (date: Date) => {
+export const findMonday = (date: Date) => {
   const monday = new Date(date);
   monday.setDate(date.getDate() - ((date.getDay() + 6) % 7));
   return monday;
@@ -34,6 +34,11 @@ const weekFactory = (date: Date, num: number) => {
 };
 
 const today = new Date();
+
+today.setHours(4);
+today.setMinutes(0);
+today.setMilliseconds(0);
+today.setSeconds(0);
 const weeks = weekFactory(today, 5);
 // const userName = 'Gianna';
 
