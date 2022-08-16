@@ -8,12 +8,11 @@ import BigButton from '@/components/period/calendar/options/BigButton';
 import PinInput from '@/components/pinCode/PinInput';
 
 import {
-  checkForWalletInLocalStorage,
-  createSolanaWalletInHumanReadableFormat,
-  decryptWallet,
+  createSolanaWallet,
   encryptWallet,
   getWalletFromLocalStorage,
   HumanReadableSolanaWallet,
+  storePasscodeAsCookie,
   storeWalletInLocalStorage,
 } from '@/util/WalletOperations';
 
@@ -21,14 +20,15 @@ type PinCodeProps = {
   pincode: number[];
   className?: string;
   variant?: 'row' | 'col';
+  setPublicKey: React.Dispatch<React.SetStateAction<string>>
 } & React.ComponentPropsWithoutRef<'div'>;
 
 const PinCode: React.FC<PinCodeProps> = ({
   className,
   pincode,
   variant = 'row',
+  setPublicKey
 }) => {
-  const [wallet = {}, setWallet] = useState<HumanReadableSolanaWallet>({});
   const [pin, setPin] = useState<number[]>(pincode);
   const [refIndex, setRefIndex] = useState<number>(0);
 
@@ -66,29 +66,34 @@ const PinCode: React.FC<PinCodeProps> = ({
   };
 
   const submitPinCode = () => {
+    const pinConcat = pin.join('');  // Concatenated pincode as string
     if (pin.length === 6) {
-      if (!checkForWalletInLocalStorage()) {
-        const wallet = createSolanaWalletInHumanReadableFormat();
+      if (getWalletFromLocalStorage().publicKey === "") {
+        const wallet = createSolanaWallet();
 
         // Pass in pin in string format to encrypt wallet.
         const encryptedWallet: HumanReadableSolanaWallet = encryptWallet(
           wallet,
-          pin.join('')
+          pinConcat
         );
+
+        setPublicKey(encryptedWallet.publicKey);
 
         // Store wallet in local storage.
         storeWalletInLocalStorage(encryptedWallet);
+
+        storePasscodeAsCookie(pinConcat);
       } else {
-        alert(
-          'Wallet already exists in local storage. Decrypting wallet now...'
-        );
         const encryptedWallet = getWalletFromLocalStorage();
 
-        const decryptedWallet: HumanReadableSolanaWallet = decryptWallet(
-          encryptedWallet,
-          pin.join('')
-        );
-        setWallet(decryptedWallet);
+        // const decryptedWallet: HumanReadableSolanaWallet = decryptWallet(
+        //   encryptedWallet,
+        //   pinConcat
+        // );
+
+        setPublicKey(encryptedWallet.publicKey);
+
+        storePasscodeAsCookie(pinConcat);
       }
     }
   };
@@ -129,7 +134,7 @@ const PinCode: React.FC<PinCodeProps> = ({
 
         <BigButton
           OnClickDo={() => {
-            submitPinCode;
+            submitPinCode();
           }}
           icon={<HiBadgeCheck />}
           iconLocation='r'
