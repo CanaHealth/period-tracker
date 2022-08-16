@@ -1,7 +1,7 @@
 {
   "name": "ts-nextjs-tailwind-starter",
   "jest": {
-    "resetMocks": false,
+    "resetMocks": true,
     "setupFiles": [
       "jest-localstorage-mock"
     ]

@@ -1,46 +1,4 @@
-import { FlowData } from '@/components/period/calendar/options/NoteFlow';
-
 import Calendar from '../components/period/calendar/Calendar';
-
-export const findMonday = (date: Date) => {
-  const monday = new Date(date);
-  monday.setDate(date.getDate() - ((date.getDay() + 6) % 7));
-  return monday;
-};
-
-const weekFactory = (date: Date, num: number) => {
-  const weeks: { days: FlowData[] }[] = [];
-  for (let i = 0; i < num; i++) {
-    const step = i * 7;
-    const weekToProcess = new Date(date.getTime());
-    weekToProcess.setDate(date.getDate() - step);
-    const mondayOfWeek = findMonday(weekToProcess);
-    const days: FlowData[] = [];
-
-    for (let j = 0; j < 7; j++) {
-      const step = j;
-
-      const day = new Date(mondayOfWeek.getTime());
-      day.setDate(mondayOfWeek.getDate() + step);
-
-      const howHeavy = 'none';
-
-      days.push({ howHeavy, date: day });
-    }
-    weeks.unshift({ days });
-  }
-
-  return weeks;
-};
-
-const today = new Date();
-
-today.setHours(4);
-today.setMinutes(0);
-today.setMilliseconds(0);
-today.setSeconds(0);
-const weeks = weekFactory(today, 5);
-// const userName = 'Gianna';
 
 export default function HomePage() {
   return (
