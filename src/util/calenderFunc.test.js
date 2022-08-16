@@ -1,6 +1,6 @@
 /* eslint-disable unused-imports/no-unused-imports */
-import { describe, expect, it, screen } from '@jest/globals';
-import { fireEvent, render } from '@testing-library/react';
+import { afterAll, describe, expect, it } from '@jest/globals';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 import {
@@ -78,6 +78,8 @@ describe('findPrevMonday', () => {
 describe('weekOfDates', () => {
   it('returns an array of 7 objects { timestamp: flow intencity }', () => {
     const week = weekOfDates(defaultDay);
+    console.log('week:', week);
+
     expect(week.length).toEqual(7);
     expect(week[0]).toBeInstanceOf(Object);
   });
@@ -91,14 +93,22 @@ describe('weekOfDates', () => {
 // test manyWeeks
 describe('manyWeeks', () => {
   it('returns an array of 5 arrays of 7 objects { timestamp: flow intencity }', () => {
-    const weeks = manyWeeks(defaultDay);
+    const weeks = manyWeeks(defaultDay, 5);
     expect(weeks.length).toEqual(5);
     expect(weeks[0].length).toEqual(7);
     expect(weeks[0][0]).toBeInstanceOf(Object);
   });
   it('[0][0] is { timestamp: none }', () => {
-    const weeks = manyWeeks(defaultDay);
+    const weeks = manyWeeks(defaultDay, 5);
     const timestampString = String(normalizeDate(defaultDay).getTime());
     expect(weeks[0][0]).toEqual({ [timestampString]: 'none' });
   });
+
+  afterAll(() => {
+    // cleanup
+    cleanup();
+    localStorage.clear();
+  });
+
+
 });

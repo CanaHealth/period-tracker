@@ -32,24 +32,47 @@ const findPrevMonday = (date: Date) => {
   return normalizeDate(monday);
 };
 
-const weekOfDates = (mondayOfWeek: Date) => {
+const mockArrayOfFlowData = [
+  {
+    '1660550400000': 'light',
+  },
+  {
+    '1660636800000': 'average',
+  },
+  {
+    '1660723200000': 'heavy',
+  },
+  {
+    '1660896000000': 'heavy',
+  },
+  {
+    '1661068800000': 'heavy',
+  },
+];
+
+const weekOfDates = (monday: Date) => {
   const days = [];
-  const monday = findPrevMonday(mondayOfWeek);
+  const mondayInTest = findPrevMonday(monday);
+  const defaultFlow = 'none';
+
   for (let i = 0; i < 7; i++) {
     const step = i;
+    const day = new Date(mondayInTest.getTime());
+    day.setDate(mondayInTest.getDate() + step);
+    const timestamp = daysFrom(day, step).getTime();
+    const dayFlow = mockArrayOfFlowData.find((day) => day[timestamp]);
 
-    const day = new Date(monday.getTime());
-    day.setDate(monday.getDate() + step);
-
-    const howHeavy = 'none';
-    const timestamp = day.getTime();
-
-    days.push({ [timestamp]: howHeavy });
+    if (dayFlow) {
+      days.push(dayFlow);
+    } else {
+      days.push({ [timestamp]: defaultFlow });
+    }
   }
+
   return days;
 };
 
-const manyWeeks = (weeks: number) => {
+const manyWeeks = (monday: Date, weeks: number) => {
   const weeksArray = [];
   for (let i = 0; i < weeks; i++) {
     const step = i;
