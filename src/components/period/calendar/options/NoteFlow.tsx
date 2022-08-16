@@ -10,8 +10,7 @@ import NoteFlowButtons, { buttonsProps } from './NoteFlowButtons';
 export type FlowIntensity = 'light' | 'heavy' | 'average' | 'none';
 
 export type FlowData = {
-  howHeavy: FlowIntensity;
-  date: Date;
+  [key: string]: FlowIntensity;
 };
 
 export type NoteFlowProps = {
