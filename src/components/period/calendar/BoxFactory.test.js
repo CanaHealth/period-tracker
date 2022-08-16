@@ -3,7 +3,7 @@ import { afterAll, clearAllMocks, describe, expect, it } from '@jest/globals';
 import { fireEvent, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-import { newToday } from '@/util/calenderFunc';
+import { newToday } from '@/util/calendarFunc';
 
 import BoxFactory from './BoxFactory';
 

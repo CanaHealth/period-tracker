@@ -1,7 +1,8 @@
 /* eslint-disable unused-imports/no-unused-imports */
 import { afterAll, describe, expect, it } from '@jest/globals';
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import { axe } from 'jest-axe';
+
+import { mockFlowInfoFromStorage } from '@/components/period/calendar/Calendar'
 
 import {
   daysFrom,
@@ -10,7 +11,7 @@ import {
   normalizeDate,
   weekOfDates,
   weeksFrom,
-} from '@/util/calenderFunc';
+} from '@/util/calendarFunc';
 
 // Mon Aug 15 2022 08:00:00 GMT-0400 (Eastern Daylight Time)
 const unixTimeDefault = 1660564800000;
@@ -46,6 +47,7 @@ describe('daysFrom', () => {
     const dayOfMonth = defaultDay.getDate() + diff;
     expect(dateForTest.getDate()).toEqual(dayOfMonth);
   });
+
 });
 
 // test WeeksFrom
@@ -56,6 +58,7 @@ describe('weeksFrom', () => {
     const dayOfMonth = defaultDay.getDate() + diff * 7;
     expect(dateForTest.getDate()).toEqual(dayOfMonth);
   });
+
 });
 
 // test findPrevMonday
@@ -72,43 +75,28 @@ describe('findPrevMonday', () => {
     const dayOfMonth = defaultPrevMonday.getDate() - 7;
     expect(dateForTest.getDate()).toEqual(dayOfMonth);
   });
+
 });
 
 // test weekOfDates
 describe('weekOfDates', () => {
-  it('returns an array of 7 objects { timestamp: flow intencity }', () => {
-    const week = weekOfDates(defaultDay);
-    console.log('week:', week);
+  it('returns an array of 7 objects { timestamp: flow Intensity }', () => {
+    const week = weekOfDates(defaultDay, mockFlowInfoFromStorage);
+    expect(Object.keys(week).length).toEqual(7);
+  });
 
-    expect(week.length).toEqual(7);
-    expect(week[0]).toBeInstanceOf(Object);
-  });
-  it('[0] is { timestamp: none }', () => {
-    const week = weekOfDates(defaultDay);
-    const timestampString = String(normalizeDate(defaultDay).getTime());
-    expect(week[0]).toEqual({ [timestampString]: 'none' });
-  });
 });
 
 // test manyWeeks
 describe('manyWeeks', () => {
-  it('returns an array of 5 arrays of 7 objects { timestamp: flow intencity }', () => {
-    const weeks = manyWeeks(defaultDay, 5);
-    expect(weeks.length).toEqual(5);
-    expect(weeks[0].length).toEqual(7);
-    expect(weeks[0][0]).toBeInstanceOf(Object);
+  it('returns an array of 5 arrays of 7 objects { timestamp: flow Intensity }', () => {
+    const weeks = manyWeeks(defaultDay, 5, mockFlowInfoFromStorage);
+    expect(Object.keys(weeks).length).toEqual(5 * 7);
   });
-  it('[0][0] is { timestamp: none }', () => {
-    const weeks = manyWeeks(defaultDay, 5);
-    const timestampString = String(normalizeDate(defaultDay).getTime());
-    expect(weeks[0][0]).toEqual({ [timestampString]: 'none' });
-  });
-
-  afterAll(() => {
-    // cleanup
-    cleanup();
-    localStorage.clear();
-  });
+});
 
 
+afterAll(() => {
+  cleanup();
+  localStorage.clear();
 });

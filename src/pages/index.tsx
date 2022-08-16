@@ -5,7 +5,7 @@ export default function HomePage() {
     <main className='min-h-screen'>
       <div className='mx-auto flex h-screen max-w-md flex-col justify-between'>
         <div className='mx-3 rounded-b-lg bg-gray-98'>
-          <Calendar weeks={weeks} />
+          <Calendar />
         </div>
       </div>
     </main>

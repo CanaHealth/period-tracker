@@ -1,3 +1,5 @@
+import { FlowData } from '@/components/period/calendar/options/NoteFlow';
+
 const normalizeDate = (date: Date): Date => {
   const newDate = new Date(date);
 
@@ -32,54 +34,35 @@ const findPrevMonday = (date: Date) => {
   return normalizeDate(monday);
 };
 
-const mockArrayOfFlowData = [
-  {
-    '1660550400000': 'light',
-  },
-  {
-    '1660636800000': 'average',
-  },
-  {
-    '1660723200000': 'heavy',
-  },
-  {
-    '1660896000000': 'heavy',
-  },
-  {
-    '1661068800000': 'heavy',
-  },
-];
-
-const weekOfDates = (monday: Date) => {
-  const days = [];
+const weekOfDates = (monday: Date, flowInfoFromStorage: FlowData): FlowData => {
+  const days: FlowData = {};
   const mondayInTest = findPrevMonday(monday);
   const defaultFlow = 'none';
 
   for (let i = 0; i < 7; i++) {
     const step = i;
-    const day = new Date(mondayInTest.getTime());
-    day.setDate(mondayInTest.getDate() + step);
-    const timestamp = daysFrom(day, step).getTime();
-    const dayFlow = mockArrayOfFlowData.find((day) => day[timestamp]);
+    const day = daysFrom(mondayInTest, step);
+    const timestamp = day.getTime();
+    const dayFlow = flowInfoFromStorage[timestamp] || defaultFlow;
 
-    if (dayFlow) {
-      days.push(dayFlow);
-    } else {
-      days.push({ [timestamp]: defaultFlow });
-    }
+    days[timestamp] = dayFlow;
   }
 
   return days;
 };
 
-const manyWeeks = (monday: Date, weeks: number) => {
-  const weeksArray = [];
-  for (let i = 0; i < weeks; i++) {
+const manyWeeks = (
+  numWeeks: number,
+  flowInfoFromStorage: FlowData
+): FlowData => {
+  const weeks = {};
+  for (let i = 0; i < numWeeks; i++) {
     const step = i;
-    const monday = weeksFrom(today, step);
-    weeksArray.push(weekOfDates(monday));
+    const monday = weeksFrom(findPrevMonday(today), step);
+    const week = weekOfDates(monday, flowInfoFromStorage);
+    Object.assign(weeks, week);
   }
-  return weeksArray;
+  return weeks;
 };
 
 export {

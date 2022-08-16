@@ -70,13 +70,14 @@ const howHeavyOptions: FlowIntensity[] = ['none', 'light', 'average', 'heavy'];
 
 export type BoxFactoryInputs = {
   date: Date;
+  color: FlowIntensity;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const BoxFactory: React.FC<BoxFactoryInputs> = ({ date }) => {
+const BoxFactory: React.FC<BoxFactoryInputs> = ({ date, color }) => {
   const [open, setOpen] = useState(false);
   const [howHeavy, setHowHeavy] = useLocalStorage(
     String(date.getTime()),
-    'none'
+    color
   );
 
   const handleDoubleClick = () => {
