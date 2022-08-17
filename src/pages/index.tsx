@@ -13,16 +13,18 @@ export default function HomePage() {
         <div className='mx-3 rounded-b-lg bg-gray-98'>
           <Calendar />
         </div>
-        <div className='mt-16 flex flex-row justify-center text-center'>
-          {publicKey != '' ? (
-            <>
-              <h4 className='scroll flex max-w-xs flex-wrap break-all font-semibold text-black'>
-                Public key: {publicKey}
-              </h4>
-            </>
-          ) : (
-            <></>
-          )}
+
+        <div //* public key
+          className='mt-8 flex flex-row justify-center text-center'
+        >
+          <div className='mx-auto w-64 rounded-lg bg-gray-99 p-4'>
+            <h4 className='flex max-w-xs flex-wrap break-words break-all font-semibold text-black'>
+              Public key:
+            </h4>
+            <p className='mx-auto flex max-w-xs flex-wrap break-words break-all text-center text-black'>
+              {publicKey ? publicKey : '...'}
+            </p>
+          </div>
         </div>
         <div className='mt-16 flex flex-col items-center justify-center'>
           <PinCode
