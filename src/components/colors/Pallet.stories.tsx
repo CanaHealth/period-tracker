@@ -22,7 +22,7 @@ const colors = {
     99: '#fcfcfd',
     '99_': '#feffff',
   },
-  pink: { 94: '#fce5e8' },
+  flow: { heavy: '#FD9AA7', average: '#FCCCD3', light: '#FCE5E8' },
 };
 
 export const Default = Template.bind({});

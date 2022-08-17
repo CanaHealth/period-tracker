@@ -1,51 +1,46 @@
-import { FlowData } from '@/components/period/calendar/options/NoteFlow';
+import * as React from 'react';
+
+import PinCode from '@/components/pinCode/PinCode';
 
 import Calendar from '../components/period/calendar/Calendar';
-
-const findMonday = (date: Date) => {
-  const monday = new Date(date);
-  monday.setDate(date.getDate() - ((date.getDay() + 6) % 7));
-  return monday;
-};
-
-const weekFactory = (date: Date, num: number) => {
-  const weeks: { days: FlowData[] }[] = [];
-  for (let i = 0; i < num; i++) {
-    const step = i * 7;
-    const weekToProcess = new Date(date.getTime());
-    weekToProcess.setDate(date.getDate() - step);
-    const mondayOfWeek = findMonday(weekToProcess);
-    const days: FlowData[] = [];
-
-    for (let j = 0; j < 7; j++) {
-      const step = j;
-
-      const day = new Date(mondayOfWeek.getTime());
-      day.setDate(mondayOfWeek.getDate() + step);
-
-      const howHeavy = 'none';
-
-      days.push({ howHeavy, date: day });
-    }
-    weeks.unshift({ days });
-  }
-
-  return weeks;
-};
-
-const today = new Date();
-const weeks = weekFactory(today, 5);
-const userName = 'Gianna';
+import Head from 'next/head';
 
 export default function HomePage() {
+  const [publicKey, setPublicKey] = React.useState('');
+
   return (
-    <main className='min-h-screen'>
-      <div className='mx-auto flex h-screen max-w-md flex-col justify-between'>
-        <div className='mx-3 rounded-b-lg bg-gray-98'>
-          <Calendar weeks={weeks} />
+    <>
+      <Head>
+        <title>Cana Health</title>
+      </Head>
+      <main className='min-h-screen'>
+        <div className='mx-auto flex h-screen max-w-md flex-col'>
+          <div className='mx-3 rounded-b-lg bg-gray-98'>
+            <Calendar />
+          </div>
+
+          <div //* public key
+            className='mt-8 flex flex-row justify-center text-center'
+          >
+            <div className='mx-auto w-64 rounded-lg bg-gray-99 p-4'>
+              <h4 className='flex max-w-xs flex-wrap break-words break-all font-semibold text-black'>
+                Public key:
+              </h4>
+              <p className='mx-auto flex max-w-xs flex-wrap break-words break-all text-center text-black'>
+                {publicKey ? publicKey : '...'}
+              </p>
+            </div>
+          </div>
+          <div className='mt-16 flex flex-col items-center justify-center'>
+            <PinCode
+              pincode={[0, 0, 0, 0, 0, 0]}
+              setPublicKey={setPublicKey}
+              variant='col'
+            />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
 

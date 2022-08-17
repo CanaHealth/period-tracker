@@ -2,32 +2,8 @@ import { useState } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-import Box, { BoxProps } from '@/components/period/calendar/Box';
-import NoteFlow, {
-  FlowData,
-  FlowIntensity,
-} from '@/components/period/calendar/options/NoteFlow';
-
-const setDayOfWeekLabel = (num: number) => {
-  switch (num) {
-    case 1:
-      return 'Mo';
-    case 2:
-      return 'Tu';
-    case 3:
-      return 'We';
-    case 4:
-      return 'Th';
-    case 5:
-      return 'Fr';
-    case 6:
-      return 'Sa';
-    case 0:
-      return 'Su';
-    default:
-      return undefined;
-  }
-};
+import Box from '@/components/period/calendar/Box';
+import { FlowIntensity } from '@/components/period/calendar/options/NoteFlow';
 
 const setColorVariant = (howHeavy: FlowIntensity) => {
   switch (howHeavy) {
@@ -44,56 +20,101 @@ const setColorVariant = (howHeavy: FlowIntensity) => {
   }
 };
 
+const howHeavyOptions: FlowIntensity[] = ['light', 'average', 'heavy', 'none'];
+
 export type BoxFactoryInputs = {
-  FlowData: FlowData;
+  date: Date;
+  howHeavy: FlowIntensity;
+  handleFunction: (date: Date, howHeavy: string) => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const BoxFactory: React.FC<BoxFactoryInputs> = ({ FlowData }) => {
-  const [flowdata, setFlowdata] = useState(FlowData);
+const BoxFactory: React.FC<BoxFactoryInputs> = ({
+  date,
+  howHeavy,
+  handleFunction,
+}) => {
   const [open, setOpen] = useState(false);
 
-  const findMonday = (date: Date) => {
-    const monday = new Date();
-    monday.setDate(date.getDate() - ((date.getDay() + 6) % 7));
-    return monday;
+  const handleDoubleClick = () => {
+    setOpen(!open);
   };
 
-  const today = new Date();
-  const mondayOfToday = findMonday(today);
-  const mondayOfFlowData = findMonday(flowdata.date);
-  const isCurrentWeek =
-    mondayOfToday.toLocaleDateString() == mondayOfFlowData.toLocaleDateString();
+  const handleClick = () => {
+    const nextHowHeavy =
+      howHeavyOptions[
+        (howHeavyOptions.indexOf(howHeavy) + 1) % howHeavyOptions.length
+      ];
 
-  const isCurrentDay =
-    today.toLocaleDateString() == flowdata.date.toLocaleDateString();
-
-  const ColorVariant = setColorVariant(flowdata.howHeavy);
-
-  const DayOfWeekNum = flowdata.date.getDay();
-
-  const DayOfWeekLabel = isCurrentWeek
-    ? setDayOfWeekLabel(DayOfWeekNum)
-    : undefined;
-
-  const box: BoxProps = {
-    isCurrentDay: isCurrentDay,
-    color: ColorVariant,
-    DayOfWeekLabel: DayOfWeekLabel,
+    handleFunction(date, nextHowHeavy);
   };
+
+  const ColorVariant = setColorVariant(howHeavy);
+
   return (
-    <div className={clsxm('m-1 sm:m-2', '')}>
-      <NoteFlow
+    <div className={clsxm(' m-1 sm:m-2', '')}>
+      {/* <NoteFlow
         flowdata={flowdata}
         open={open}
         setOpen={setOpen}
         handleSubmit={setFlowdata}
-      />
+      /> */}
 
-      <button onClick={() => setOpen(true)}>
-        <Box {...box} />
+      <button
+        data-testid='handle-flow-change'
+        onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
+      >
+        <Box color={ColorVariant} date={date} />
       </button>
     </div>
   );
 };
 
 export default BoxFactory;
+
+/*
+
+const getLocalArray = (flowData: FlowData, localFlowData: string) => {
+  if (localFlowData) {
+    const localFlowDataArray = JSON.parse(localFlowData);
+    const currentFlowData = flowData.date.getTime();
+
+    const index = localFlowDataArray.findIndex((el: FlowData) => {
+      const localDateHolder = new Date(el.date);
+      return localDateHolder.getTime() === currentFlowData;
+    });
+
+    if (index !== -1) {
+      return localFlowDataArray[index];
+    }
+  }
+};
+
+const manageLocalStorageArray = (nextFlowData: FlowData) => {
+  const localFlowData = localStorage.getItem('FLOWDATA');
+
+  if (localFlowData) {
+    const localFlowDataArray = JSON.parse(localFlowData);
+    const nextFlowDataDate = nextFlowData.date.getTime();
+
+    const index = localFlowDataArray.findIndex((el: FlowData) => {
+      const localDateHolder = new Date(el.date);
+      return localDateHolder.getTime() === nextFlowDataDate;
+    });
+
+    if (index !== -1) {
+      if (nextFlowData.howHeavy === 'none') {
+        localFlowDataArray.splice(index, 1);
+      } else {
+        localFlowDataArray[index] = nextFlowData;
+      }
+    } else {
+      localFlowDataArray.push(nextFlowData);
+    }
+    localStorage.setItem('FLOWDATA', JSON.stringify(localFlowDataArray));
+  } else {
+    localStorage.setItem('FLOWDATA', JSON.stringify([nextFlowData]));
+  }
+};
+
+*/
