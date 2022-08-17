@@ -13,7 +13,7 @@ function initializeMetaplex() {
   return metaplex;
 }
 
-async function createNFT(data: Object, secretKey: Uint8Array) {
+async function createNFT(data: Object, secretKey: Uint8Array): Promise<string> {
   const wallet = Keypair.fromSecretKey(secretKey);
 
   const metaplex = initializeMetaplex();
@@ -31,10 +31,7 @@ async function createNFT(data: Object, secretKey: Uint8Array) {
   })
   .run();
 
-  console.log(nft);
-  console.log(nft.mint.address.toString());
-
-  return nft
+  return nft.mint.address.toString()
 }
 
 async function uploadNFT(data: Object, key: Uint8Array) {
