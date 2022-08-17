@@ -1,8 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-
-
-import { CopyBlock, monoBlue } from "react-code-blocks";
+import { CopyBlock, monoBlue } from 'react-code-blocks';
 
 import clsxm from '@/lib/clsxm';
 
@@ -65,7 +63,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
               leaveFrom='opacity-100 translate-y-0 sm:scale-100'
               leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
-              <Dialog.Panel className=' relative flex flex-col justify-center'>
+              <Dialog.Panel className=' relative flex flex-col justify-center space-y-12'>
                 <div
                   className={clsxm(
                     'mx-auto flex w-max flex-col items-center justify-center'
@@ -77,7 +75,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                     </div>
                   )}
 
-                  <div className='relative my-auto flex h-80 w-80 max-w-md transform flex-col justify-between overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6'>
+                  <div className='relative my-auto flex h-96 w-96 max-w-md transform flex-col justify-between overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6'>
                     <div className={clsxm('flex flex-col items-center')}>
                       Save on-chain
                     </div>
@@ -88,7 +86,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                     </div> */}
                     <div className='overflow-x-auto'>
                       <CopyBlock
-                        language="json"
+                        language='json'
                         text={data}
                         codeBlock
                         theme={monoBlue}
@@ -102,22 +100,24 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                       <p>0.022 SOL</p>
                     </div>
 
-                    {blockExplorer ? (
-                      <BigButton
-                        OnClickDo={launchBlockExplorer}
-                        text='View on Block Explorer'
-                        className="text-sm"
-                        iconLocation='r'
-                        height='20'
-                      />
-                    ) : (
-                      <BigButton
-                        OnClickDo={handleSubmit}
-                        text='Accept'
-                        iconLocation='r'
-                        height='20'
-                      />
-                    )}
+                    <div className='my-2 flex flex-col items-center justify-center'>
+                      {blockExplorer ? (
+                        <BigButton
+                          OnClickDo={launchBlockExplorer}
+                          text='View on Block Explorer'
+                          className='text-sm'
+                          iconLocation='r'
+                          height='20'
+                        />
+                      ) : (
+                        <BigButton
+                          OnClickDo={handleSubmit}
+                          text='Accept'
+                          iconLocation='r'
+                          height='20'
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </Dialog.Panel>
