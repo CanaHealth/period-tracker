@@ -1,4 +1,4 @@
-import { Keypair } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import {
   createCipheriv,
   createDecipheriv,
@@ -159,6 +159,12 @@ const getPasscodeFromCookie = (): string => {
   return passcode!;
 };
 
+const getSolanaBalance = async (publicKey: string) => {
+  const connection = new Connection("https://api.devnet.solana.com");
+  const balance = await connection.getBalance(new PublicKey(publicKey));
+  return (balance / LAMPORTS_PER_SOL);
+};
+
 export {
   createSolanaWallet,
   decryptWallet,
@@ -169,6 +175,7 @@ export {
   storePasscodeAsCookie,
   storeWalletInLocalStorage,
   usableSecretKey,
+  getSolanaBalance
 };
 
 // /**
