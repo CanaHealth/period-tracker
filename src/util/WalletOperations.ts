@@ -142,14 +142,23 @@ const usableSecretKey = (secretKey: string): Uint8Array => {
   return Uint8Array.from(secretKey.split(',').map((item) => parseInt(item)));
 };
 
+/**
+ * `storePasscodeAsCookie` that expires in 10mins.
+ * @param passcode entered by user to decrypt wallet.
+ */
+const storePasscodeAsCookie = (passcode: string) => {
+  document.cookie = `passcode=${passcode}; max-age=600` 
+}
+
 export {
   createSolanaWallet,
   decryptWallet,
   encryptWallet,
   getWalletFromLocalStorage,
   hashPasscode,
+  storePasscodeAsCookie,
   storeWalletInLocalStorage,
-  usableSecretKey,
+  usableSecretKey
 };
 
 // /**
