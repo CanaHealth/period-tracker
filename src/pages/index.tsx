@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-import Banner from '@/components/basic/Banner';
 import Calendar from '@/components/period/calendar/Calendar';
+import BigButton from '@/components/period/calendar/options/BigButton';
+import Accordion from '@/components/pinCode/Accordion';
 import PinCode from '@/components/pinCode/PinCode';
 
 export default function HomePage() {
@@ -13,18 +14,41 @@ export default function HomePage() {
       <Head>
         <title>Cana Health</title>
       </Head>
-      <main className='min-h-screen'>
-        <div className='mx-auto flex h-screen max-w-xl flex-col justify-start'>
-          <Calendar />
+      <main className='h-full min-h-screen'>
+        <div className='mx-auto flex max-w-xl flex-col justify-start'>
+          <div className='flex h-96 justify-center'>
+            <Calendar />
+          </div>
+          <Accordion
+            title='Set up wallet'
+            description={
+              <div className='flex flex-col items-center justify-center space-y-3'>
+                <BigButton
+                  OnClickDo={() => setPublicKey('000000')}
+                  text='Phantom'
+                  height='10'
+                  className='text-xs'
+                />
+                <BigButton
+                  OnClickDo={() => setPublicKey('000000')}
+                  text='Metamask'
+                  height='10'
+                  className='text-xs'
+                />
+                <BigButton
+                  OnClickDo={() => setPublicKey('000000')}
+                  text='Rainbow'
+                  height='10'
+                  className='text-xs'
+                />
+              </div>
+            }
+          />
 
           <div //* public key
             className='mt-8 flex flex-row justify-center text-center'
           >
-            {/* <Accordion btnText='Public Key' description={publicKey} /> */}
-
-            <Banner iconColor='indigo-900' />
-
-            <div className='mx-auto w-64 rounded-lg bg-gray-99 p-4'>
+            <div className='mx-auto w-64 rounded-lg bg-gray-light-mid p-4'>
               <h4 className='flex max-w-xs flex-wrap break-words break-all font-semibold text-black'>
                 Public key:
               </h4>
@@ -59,6 +83,6 @@ export default function HomePage() {
           <MenuButtons size='sm'>⚙️</MenuButtons>
           <MenuButtons size='lg'>📝</MenuButtons>
           <MenuButtons size='sm'>📅</MenuButtons>
-          <div className='absolute inset-0 -z-10 rounded-t-3xl bg-gray-98' />
+          <div className='absolute inset-0 -z-10 rounded-t-3xl bg-gray-light-dark' />
         </div>
 */

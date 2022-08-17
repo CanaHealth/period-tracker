@@ -19,14 +19,18 @@ module.exports = {
         primary: ['Inter', ...fontFamily.sans],
       },
       colors: {
-        blue: { 63: '#5f62e4', 81: '#afbef1', 87: '#dcd9e3', 93: '#e7edf8' },
-        electric_cyan: { 81: '#b8dee9', 91: '#d8fcfc', 95: '#eff4f9' },
         gray: {
-          59: '#949799',
-          72: '#b7bcba',
-          98: '#f8fafc',
-          99: '#fcfcfd',
-          '99_': '#feffff',
+          dark: {
+            dark: '#131921',
+            mid: '#1f2937',
+            light: '#949799',
+          },
+          mid: '#d2d4d7',
+          light: {
+            dark: '#f8fafc',
+            mid: '#fcfcfd',
+            light: '#feffff',
+          },
         },
         flow: { heavy: '#FD9AA7', average: '#FCCCD3', light: '#FCE5E8' },
         primary: {
@@ -40,7 +44,6 @@ module.exports = {
           light: '#eff4f9',
         },
       },
-
 
       animation: {
         blob: 'blob 7s infinite',

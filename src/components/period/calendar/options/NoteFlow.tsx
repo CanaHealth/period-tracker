@@ -133,7 +133,7 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
                         setOpener(false);
                       }}
                       className={clsxm(
-                        ' bg-gray-98 shadow-sm ',
+                        ' bg-gray-light-dark shadow-sm ',
                         'flex flex-col items-center justify-center',
                         'mx-auto py-4',
                         ' w-24',
@@ -151,7 +151,7 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
                       aria-label='submit'
                       onClick={handleSubmitFlowdata}
                       className={clsxm(
-                        'border-4 bg-gray-98 shadow-sm ',
+                        'border-4 bg-gray-light-dark shadow-sm ',
                         'flex flex-col items-center justify-center',
                         'mx-auto py-4',
                         ' w-20',

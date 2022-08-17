@@ -23,14 +23,12 @@ import clsxm from '@/lib/clsxm';
 
 import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
-import { manyWeeks, normalizeDate } from '@/util/calendarFunc';
+import { manyWeeks } from '@/util/calendarFunc';
 
 import BoxFactory from './BoxFactory';
 import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage';
 
 const numWeeks = 15;
-
-const timestamp = String(normalizeDate(new Date()).getTime());
 
 const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
   const [localFlowData, setFlowData] = useIsomorphicLocalStorage<FlowData>(
@@ -64,7 +62,7 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
           'h-full max-h-96 w-full max-w-md',
           'flex flex-col-reverse justify-center',
           'overflow-y-scroll overscroll-x-none',
-          'rounded-b-lg bg-gray-98',
+          'rounded-b-lg bg-gray-light-dark',
           'm-4'
         )}
       >
