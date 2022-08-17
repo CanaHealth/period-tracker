@@ -1,6 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 
+
+import { CopyBlock, monoBlue } from "react-code-blocks";
+
 import clsxm from '@/lib/clsxm';
 
 import BigButton from '@/components/period/calendar/options/BigButton';
@@ -25,9 +28,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
   blockExplorer,
   launchBlockExplorer,
   className,
-  data = `{"cipherText":"16d4af05d130ca30f2c07e8894681c70855aefad3e3c4abec333f11ca067
-  fe87966e33417e2952dfa1d34366d751a1d691b9e3cc062af1ceaad92e1268feb9a5f456d21c3ed890e
-  9f9beaf37756c9aef59","authTag":"53dcb5c602bcc434a645d509e7b8a96e"}`,
+  data,
 }) => {
   const setOpener =
     setOpen ||
@@ -81,9 +82,18 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                       Save on-chain
                     </div>
 
-                    <div className='overflow-x-auto rounded-lg bg-gray-100 p-2'>
+                    {/* <div className='overflow-x-auto rounded-lg bg-gray-100 p-2'>
                       {' '}
                       {data}{' '}
+                    </div> */}
+                    <div className='overflow-x-auto'>
+                      <CopyBlock
+                        language="json"
+                        text={data}
+                        codeBlock
+                        theme={monoBlue}
+                        showLineNumbers={false}
+                      />
                     </div>
 
                     <div>
@@ -95,7 +105,8 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                     {blockExplorer ? (
                       <BigButton
                         OnClickDo={launchBlockExplorer}
-                        text='Go'
+                        text='View on Block Explorer'
+                        className="text-sm"
                         iconLocation='r'
                         height='20'
                       />

@@ -21,6 +21,7 @@ import {
 import { usableSecretKey } from '@/util/WalletOperations';
 
 import AcceptModal from './AcceptModal';
+import { encryptData, getDecryptedWallet } from '@/util/dataCryptoOperations';
 
 type PinCodeProps = {
   pincode: number[];
@@ -42,6 +43,7 @@ const PinCode: React.FC<PinCodeProps> = ({
   const [refIndex, setRefIndex] = useState<number>(0);
   const [nftID, setNftID] = useState<string>('');
   const [blockExplorer, setBlockExplorer] = useState<boolean>(false);
+  const [encData, setEncData] = useState<string>('');
 
   const onChangeDigits = (value: number, index: number) => {
     setPin(pin.map((digit, i) => (i === index ? value : digit)));
@@ -78,7 +80,7 @@ const PinCode: React.FC<PinCodeProps> = ({
 
   const launchBlockExplorer = () => {
     const url = `https://solscan.io/account/${nftID}`;
-    window.open(url, '_blank');
+    window.open(url, "_self");
   };
 
   const submitPinCode = () => {
@@ -109,19 +111,21 @@ const PinCode: React.FC<PinCodeProps> = ({
 
         storePasscodeAsCookie(pinConcat);
       }
+
+
+      const decryptedWallet: solanaWallet = getDecryptedWallet(null)
+
+      setEncData(JSON.stringify(
+        encryptData(localStorage.getItem("FLOWDATA")!, usableSecretKey(decryptedWallet.secretKey)), null, 4
+      ));
+
+      console.log(encryptData(localStorage.getItem("FLOWDATA")!, usableSecretKey(decryptedWallet.secretKey)))
     }
   };
 
   const handleAccept = async () => {
     setLoading(true);
     setBlockExplorer(false);
-
-    // console.log(loading);
-    const encryptedWallet = getWalletFromLocalStorage();
-    const decryptedWallet: solanaWallet = decryptWallet(
-      encryptedWallet,
-      getPasscodeFromCookie()
-    );
 
     // TODO: Handle expired cookie.
 
@@ -163,6 +167,7 @@ const PinCode: React.FC<PinCodeProps> = ({
           loading={loading}
           blockExplorer={blockExplorer}
           launchBlockExplorer={launchBlockExplorer}
+          data={encData}
         />
 
         <div className='absolute inset-x-10 -top-10 -z-10 flex h-12  flex-col items-center justify-center rounded-t-full border-x  border-t bg-white py-1 px-2 text-xs'>

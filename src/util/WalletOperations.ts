@@ -160,7 +160,7 @@ const getPasscodeFromCookie = (): string => {
 };
 
 const getSolanaBalance = async (publicKey: string) => {
-  const connection = new Connection("https://api.devnet.solana.com");
+  const connection = new Connection("https://api.mainnet-beta.solana.com");
   const balance = await connection.getBalance(new PublicKey(publicKey));
   return (balance / LAMPORTS_PER_SOL);
 };

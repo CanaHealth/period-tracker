@@ -7,6 +7,7 @@ import {
   createDecipheriv,
   randomBytes
 } from 'crypto';
+import { decryptWallet, getPasscodeFromCookie, solanaWallet } from "./WalletOperations";
 
 
 const ivSize = 16; // Initialization vector size in bytes.
@@ -92,4 +93,19 @@ const decryptData = (
   }
 };
 
-export { decryptData,encryptData};
+
+const getDecryptedWallet = (passcode: string|null): solanaWallet => {
+  const encryptedWallet = localStorage.getItem('solanaWallet');
+  if(passcode == null) {
+    passcode = getPasscodeFromCookie();
+  }
+
+  if (encryptedWallet === null || passcode === null) {
+    throw new Error('Wallet or passcode is null');
+  } else {
+    const wallet = JSON.parse(encryptedWallet);
+    return decryptWallet(wallet, passcode);
+  }
+}
+
+export { decryptData,encryptData, getDecryptedWallet};

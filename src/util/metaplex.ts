@@ -6,7 +6,7 @@ import { clusterApiUrl, Connection, Keypair } from "@solana/web3.js";
 import { NFTStorageMetaplexor } from '@nftstorage/metaplex-auth'
 
 function initializeMetaplex() {
-  const connection = new Connection(clusterApiUrl("devnet"));
+  const connection = new Connection(clusterApiUrl("mainnet-beta"));
   
   const metaplex = Metaplex.make(connection);
 
@@ -36,7 +36,7 @@ async function createNFT(data: Object, secretKey: Uint8Array): Promise<string> {
 
 async function uploadNFT(data: Object, key: Uint8Array) {
   const client = NFTStorageMetaplexor.withSecretKey(key, {
-    solanaCluster: 'devnet',
+    solanaCluster: 'mainnet-beta',
     mintingAgent: 'canahealth/period_tracker'
   });
 
