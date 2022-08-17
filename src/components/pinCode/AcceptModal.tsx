@@ -79,11 +79,6 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                     <div className={clsxm('flex flex-col items-center')}>
                       Save on-chain
                     </div>
-
-                    {/* <div className='overflow-x-auto rounded-lg bg-gray-100 p-2'>
-                      {' '}
-                      {data}{' '}
-                    </div> */}
                     <div className='overflow-x-auto'>
                       <CopyBlock
                         language='json'
