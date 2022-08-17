@@ -13,7 +13,7 @@ function initializeMetaplex() {
   return metaplex;
 }
 
-async function createNFT(data: Object, secretKey: Uint8Array): Promise<string> {
+async function createNFT(data: any, secretKey: Uint8Array): Promise<string> {
   const wallet = Keypair.fromSecretKey(secretKey);
 
   const metaplex = initializeMetaplex();
@@ -34,7 +34,7 @@ async function createNFT(data: Object, secretKey: Uint8Array): Promise<string> {
   return nft.mint.address.toString()
 }
 
-async function uploadNFT(data: Object, key: Uint8Array) {
+async function uploadNFT(data: any, key: Uint8Array) {
   const client = NFTStorageMetaplexor.withSecretKey(key, {
     solanaCluster: process.env.NEXT_PUBLIC_SOLANA_CLUSTER_NAME!,
     mintingAgent: 'canahealth/period_tracker'
