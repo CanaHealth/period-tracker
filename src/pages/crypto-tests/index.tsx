@@ -28,23 +28,25 @@ const index: React.FC<indexProps> = ({
   }
 
   const handleEncrypt = () => {
-    const wallet = createSolanaWallet();
-    const encryptedWallet = encryptWallet(wallet, "000000");
-    storeWalletInLocalStorage(encryptedWallet);
+    // const wallet = createSolanaWallet();
+    // const encryptedWallet = encryptWallet(wallet, "000000");
+    // storeWalletInLocalStorage(encryptedWallet);
 
     // Fetch wallet from local storage
     const walletFromLocalStorage = getKeyFromLocalStorage();
     const decryptedWalletFromLocalStorage = decryptWallet(JSON.parse(walletFromLocalStorage!), "000000");
+
     const encData = encryptData(encryptBox, usableSecretKey(decryptedWalletFromLocalStorage.secretKey));
     console.log(encData);
 
-    mintNFT(usableSecretKey(decryptedWalletFromLocalStorage.secretKey));
+
+    mintNFT(encData, usableSecretKey(decryptedWalletFromLocalStorage.secretKey));
 
     setDecryptBox(JSON.stringify(encData));
   }
 
-  const mintNFT = async (key: Uint8Array) => {
-    const nft = await createNFT(key);
+  const mintNFT = async (data: Object, key: Uint8Array) => {
+    const nft = await createNFT(data, key);
 
     console.log(nft);
   }
