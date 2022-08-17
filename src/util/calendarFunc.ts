@@ -3,10 +3,10 @@ import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 const normalizeDate = (date: Date): Date => {
   const newDate = new Date(date);
 
-  newDate.setHours(8);
-  newDate.setMinutes(0);
-  newDate.setSeconds(0);
-  newDate.setMilliseconds(0);
+  newDate.setUTCHours(8);
+  newDate.setUTCMinutes(0);
+  newDate.setUTCSeconds(0);
+  newDate.setUTCMilliseconds(0);
 
   return newDate;
 };
@@ -55,10 +55,10 @@ const manyWeeks = (
   numWeeks: number,
   flowInfoFromStorage: FlowData
 ): FlowData => {
-  const weeks = {};
+  const weeks: FlowData = {};
   for (let i = 0; i < numWeeks; i++) {
     const step = i;
-    const monday = weeksFrom(findPrevMonday(today), step);
+    const monday = weeksFrom(findPrevMonday(today), -step);
     const week = weekOfDates(monday, flowInfoFromStorage);
     Object.assign(weeks, week);
   }

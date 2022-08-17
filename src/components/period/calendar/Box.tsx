@@ -3,6 +3,8 @@ import { FC } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
+import { findPrevMonday, newToday } from '@/util/calendarFunc';
+
 const colorVarientSelector = {
   normal: 'bg-gray-200', // @default
   flowHeavy: 'bg-flow-heavy',
@@ -47,15 +49,9 @@ export type BoxProps = {
 const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
   const monthNumber = String(date.getDate());
 
-  const findMonday = (date: Date) => {
-    const monday = new Date();
-    monday.setDate(date.getDate() - ((date.getDay() + 6) % 7));
-    return monday;
-  };
-
-  const today = new Date();
-  const mondayOfToday = findMonday(today);
-  const mondayOfFlowData = findMonday(date);
+  const today = newToday();
+  const mondayOfToday = findPrevMonday(today);
+  const mondayOfFlowData = findPrevMonday(date);
   const isCurrentWeek =
     mondayOfToday.toLocaleDateString() == mondayOfFlowData.toLocaleDateString();
 

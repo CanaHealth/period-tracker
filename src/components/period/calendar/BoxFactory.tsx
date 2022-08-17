@@ -20,65 +20,20 @@ const setColorVariant = (howHeavy: FlowIntensity) => {
   }
 };
 
-function useLocalStorage(key: string, initialValue: string) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
-    if (typeof window === 'undefined') {
-      return initialValue;
-    }
-    try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      // If error also return initialValue
-      return initialValue;
-    }
-  });
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      }
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
-  return [storedValue, setValue];
-}
-
-const manageLocalStorage = (dateString: string, nextHowHeavy: string) => {
-  if (nextHowHeavy === 'none') {
-    localStorage.removeItem(dateString);
-  } else {
-    localStorage.setItem(dateString, nextHowHeavy);
-  }
-};
-
-const howHeavyOptions: FlowIntensity[] = ['none', 'light', 'average', 'heavy'];
+const howHeavyOptions: FlowIntensity[] = ['light', 'average', 'heavy', 'none'];
 
 export type BoxFactoryInputs = {
   date: Date;
-  color: FlowIntensity;
+  howHeavy: FlowIntensity;
+  handleFunction: (date: Date, howHeavy: string) => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const BoxFactory: React.FC<BoxFactoryInputs> = ({ date, color }) => {
+const BoxFactory: React.FC<BoxFactoryInputs> = ({
+  date,
+  howHeavy,
+  handleFunction,
+}) => {
   const [open, setOpen] = useState(false);
-  const [howHeavy, setHowHeavy] = useLocalStorage(
-    String(date.getTime()),
-    color
-  );
 
   const handleDoubleClick = () => {
     setOpen(!open);
@@ -90,10 +45,7 @@ const BoxFactory: React.FC<BoxFactoryInputs> = ({ date, color }) => {
         (howHeavyOptions.indexOf(howHeavy) + 1) % howHeavyOptions.length
       ];
 
-    setHowHeavy(nextHowHeavy);
-
-    const dateString = String(date.getTime());
-    manageLocalStorage(dateString, nextHowHeavy);
+    handleFunction(date, nextHowHeavy);
   };
 
   const ColorVariant = setColorVariant(howHeavy);
