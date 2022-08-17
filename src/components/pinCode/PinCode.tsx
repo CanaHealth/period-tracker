@@ -41,6 +41,7 @@ const PinCode: React.FC<PinCodeProps> = ({
   const [open, setOpen] = useState(false);
   const [refIndex, setRefIndex] = useState<number>(0);
   const [nftID, setNftID] = useState<string>('');
+  const [blockExplorer, setBlockExplorer] = useState<boolean>(false);
 
   const onChangeDigits = (value: number, index: number) => {
     setPin(pin.map((digit, i) => (i === index ? value : digit)));
@@ -73,6 +74,11 @@ const PinCode: React.FC<PinCodeProps> = ({
       default:
         break;
     }
+  };
+
+  const launchBlockExplorer = () => {
+    const url = `https://solscan.io/account/${nftID}`;
+    window.open(url, '_blank');
   };
 
   const submitPinCode = () => {
@@ -108,6 +114,8 @@ const PinCode: React.FC<PinCodeProps> = ({
 
   const handleAccept = async () => {
     setLoading(true);
+    setBlockExplorer(false);
+
     // console.log(loading);
     const encryptedWallet = getWalletFromLocalStorage();
     const decryptedWallet: solanaWallet = decryptWallet(
@@ -124,6 +132,7 @@ const PinCode: React.FC<PinCodeProps> = ({
       .then((id) => {
         setLoading(false);
         setNftID(id);
+        setBlockExplorer(true);
       })
       .catch((err) => {
         console.log(err);
@@ -152,6 +161,8 @@ const PinCode: React.FC<PinCodeProps> = ({
           setOpen={setOpen}
           handleSubmit={handleAccept}
           loading={loading}
+          blockExplorer={blockExplorer}
+          launchBlockExplorer={launchBlockExplorer}
         />
 
         <div className='absolute inset-x-10 -top-10 -z-10 flex h-12  flex-col items-center justify-center rounded-t-full border-x  border-t bg-white py-1 px-2 text-xs'>

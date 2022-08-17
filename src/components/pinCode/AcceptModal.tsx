@@ -12,7 +12,7 @@ type AcceptModalProps = {
   handleSubmit?: () => void;
   data?: string;
   loading?: boolean;
-  launchBlockchain?: () => void;
+  launchBlockExplorer?: () => void;
   blockExplorer?: boolean;
   className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
@@ -23,7 +23,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
   open,
   loading,
   blockExplorer,
-  launchBlockchain,
+  launchBlockExplorer,
   className,
   data = `{"cipherText":"16d4af05d130ca30f2c07e8894681c70855aefad3e3c4abec333f11ca067
   fe87966e33417e2952dfa1d34366d751a1d691b9e3cc062af1ceaad92e1268feb9a5f456d21c3ed890e
@@ -86,15 +86,16 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                       {data}{' '}
                     </div>
 
-                    <BigButton
-                      OnClickDo={handleSubmit}
-                      text='Accept'
-                      iconLocation='r'
-                      height='20'
-                    />
-                    {blockExplorer && (
+                    {blockExplorer ? (
                       <BigButton
-                        OnClickDo={launchBlockchain}
+                        OnClickDo={launchBlockExplorer}
+                        text='Go'
+                        iconLocation='r'
+                        height='20'
+                      />
+                    ) : (
+                      <BigButton
+                        OnClickDo={handleSubmit}
                         text='Accept'
                         iconLocation='r'
                         height='20'
