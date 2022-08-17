@@ -11,7 +11,7 @@ import {
   createSolanaWallet,
   encryptWallet,
   getWalletFromLocalStorage,
-  HumanReadableSolanaWallet,
+  solanaWallet,
   storePasscodeAsCookie,
   storeWalletInLocalStorage,
 } from '@/util/WalletOperations';
@@ -20,14 +20,14 @@ type PinCodeProps = {
   pincode: number[];
   className?: string;
   variant?: 'row' | 'col';
-  setPublicKey: React.Dispatch<React.SetStateAction<string>>
+  setPublicKey: React.Dispatch<React.SetStateAction<string>>;
 } & React.ComponentPropsWithoutRef<'div'>;
 
 const PinCode: React.FC<PinCodeProps> = ({
   className,
   pincode,
   variant = 'row',
-  setPublicKey
+  setPublicKey,
 }) => {
   const [pin, setPin] = useState<number[]>(pincode);
   const [refIndex, setRefIndex] = useState<number>(0);
@@ -66,16 +66,13 @@ const PinCode: React.FC<PinCodeProps> = ({
   };
 
   const submitPinCode = () => {
-    const pinConcat = pin.join('');  // Concatenated pincode as string
+    const pinConcat = pin.join(''); // Concatenated pincode as string
     if (pin.length === 6) {
-      if (getWalletFromLocalStorage().publicKey === "") {
+      if (getWalletFromLocalStorage().publicKey === '') {
         const wallet = createSolanaWallet();
 
         // Pass in pin in string format to encrypt wallet.
-        const encryptedWallet: HumanReadableSolanaWallet = encryptWallet(
-          wallet,
-          pinConcat
-        );
+        const encryptedWallet: solanaWallet = encryptWallet(wallet, pinConcat);
 
         setPublicKey(encryptedWallet.publicKey);
 

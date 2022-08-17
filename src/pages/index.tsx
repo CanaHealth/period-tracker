@@ -1,11 +1,36 @@
+import * as React from 'react';
+
+import PinCode from '@/components/pinCode/PinCode';
+
 import Calendar from '../components/period/calendar/Calendar';
 
 export default function HomePage() {
+  const [publicKey, setPublicKey] = React.useState('');
+
   return (
     <main className='min-h-screen'>
-      <div className='mx-auto flex h-screen max-w-md flex-col justify-between'>
+      <div className='mx-auto flex h-screen max-w-md flex-col'>
         <div className='mx-3 rounded-b-lg bg-gray-98'>
           <Calendar />
+
+          <div className='flex flex-row justify-center text-center'>
+            {publicKey != '' ? (
+              <>
+                <h2 className='font-semibold text-black'>
+                  Welcome {publicKey.slice(0, 10)}...
+                </h2>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <div className='mt-16 flex flex-col items-center justify-center'>
+          <PinCode
+            pincode={[0, 0, 0, 0, 0, 0]}
+            setPublicKey={setPublicKey}
+            variant='col'
+          />
         </div>
       </div>
     </main>

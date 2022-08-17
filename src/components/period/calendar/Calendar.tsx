@@ -28,7 +28,7 @@ import { manyWeeks, normalizeDate } from '@/util/calendarFunc';
 import BoxFactory from './BoxFactory';
 import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage';
 
-const numWeeks = 5;
+const numWeeks = 15;
 
 const timestamp = String(normalizeDate(new Date()).getTime());
 
@@ -57,9 +57,15 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
     return manyWeeks(numWeeks, localFlowData || {});
   }, [localFlowData]);
   return (
-    <div className='relative mx-auto h-full max-w-md p-2'>
+    <div className=' mx-auto  max-w-md p-2'>
       <div // 7 column grid for days of the week reverse the order
-        className={clsxm('grid grid-cols-7 gap-1', 'mx-auto')}
+        // max height is 32 and overflow scroll is onlu horizontal
+        className={clsxm(
+          'grid grid-cols-7 gap-1',
+          'mx-auto',
+          'max-h-96 overflow-x-scroll',
+          'h-full'
+        )}
       >
         {Object.keys(weeks || {})
           .sort()
