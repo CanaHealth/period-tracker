@@ -1,9 +1,9 @@
+import Head from 'next/head';
 import * as React from 'react';
 
+import Banner from '@/components/basic/Banner';
+import Calendar from '@/components/period/calendar/Calendar';
 import PinCode from '@/components/pinCode/PinCode';
-
-import Calendar from '../components/period/calendar/Calendar';
-import Head from 'next/head';
 
 export default function HomePage() {
   const [publicKey, setPublicKey] = React.useState('');
@@ -14,14 +14,16 @@ export default function HomePage() {
         <title>Cana Health</title>
       </Head>
       <main className='min-h-screen'>
-        <div className='mx-auto flex h-screen max-w-md flex-col'>
-          <div className='mx-3 rounded-b-lg bg-gray-98'>
-            <Calendar />
-          </div>
+        <div className='mx-auto flex h-screen max-w-xl flex-col justify-start'>
+          <Calendar />
 
           <div //* public key
             className='mt-8 flex flex-row justify-center text-center'
           >
+            {/* <Accordion btnText='Public Key' description={publicKey} /> */}
+
+            <Banner iconColor='indigo-900' />
+
             <div className='mx-auto w-64 rounded-lg bg-gray-99 p-4'>
               <h4 className='flex max-w-xs flex-wrap break-words break-all font-semibold text-black'>
                 Public key:
@@ -31,12 +33,9 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+
           <div className='mt-16 flex flex-col items-center justify-center'>
-            <PinCode
-              pincode={[0, 0, 0, 0, 0, 0]}
-              setPublicKey={setPublicKey}
-              variant='col'
-            />
+            <PinCode pincode={[]} setPublicKey={setPublicKey} variant='col' />
           </div>
         </div>
       </main>

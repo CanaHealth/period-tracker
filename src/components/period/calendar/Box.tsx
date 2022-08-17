@@ -6,10 +6,10 @@ import clsxm from '@/lib/clsxm';
 import { findPrevMonday, newToday } from '@/util/calendarFunc';
 
 const colorVarientSelector = {
-  normal: 'bg-gray-200', // @default
-  flowHeavy: 'bg-flow-heavy',
-  flow: 'bg-flow-average',
-  flowLight: 'bg-flow-light',
+  normal: 'bg-gray-200',
+  heavy: 'bg-flow-heavy',
+  average: 'bg-flow-average',
+  light: 'bg-flow-light',
   ovulation: 'bg-blue-100',
 };
 
@@ -35,9 +35,9 @@ const setDayOfWeekLabel = (num: number) => {
 };
 
 export type ColorVariant =
-  | 'flowHeavy'
-  | 'flowLight'
-  | 'flow'
+  | 'heavy'
+  | 'light'
+  | 'average'
   | 'ovulation'
   | 'normal';
 
@@ -81,6 +81,7 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
           colorVarientSelector[color],
           [isCurrentWeek ? '' : 'hidden']
         )}
+        aria-hidden={isCurrentWeek ? 'false' : 'true'}
       >
         {currentWeekLabel}
       </div>
@@ -91,6 +92,7 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
           'group-focus:opacity-100',
           [isCurrentWeek ? 'hidden' : '']
         )}
+        aria-hidden={isCurrentWeek}
       >
         {DayOfLabel}
       </span>

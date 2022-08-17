@@ -8,11 +8,11 @@ import { FlowIntensity } from '@/components/period/calendar/options/NoteFlow';
 const setColorVariant = (howHeavy: FlowIntensity) => {
   switch (howHeavy) {
     case 'heavy':
-      return 'flowHeavy';
+      return 'heavy';
     case 'light':
-      return 'flowLight';
+      return 'light';
     case 'average':
-      return 'flow';
+      return 'average';
     case 'none':
       return 'normal';
     default:
@@ -51,7 +51,7 @@ const BoxFactory: React.FC<BoxFactoryInputs> = ({
   const ColorVariant = setColorVariant(howHeavy);
 
   return (
-    <div className={clsxm(' m-1 sm:m-2', '')}>
+    <div className={clsxm('flex snap-end items-center justify-center', '')}>
       {/* <NoteFlow
         flowdata={flowdata}
         open={open}
@@ -71,50 +71,3 @@ const BoxFactory: React.FC<BoxFactoryInputs> = ({
 };
 
 export default BoxFactory;
-
-/*
-
-const getLocalArray = (flowData: FlowData, localFlowData: string) => {
-  if (localFlowData) {
-    const localFlowDataArray = JSON.parse(localFlowData);
-    const currentFlowData = flowData.date.getTime();
-
-    const index = localFlowDataArray.findIndex((el: FlowData) => {
-      const localDateHolder = new Date(el.date);
-      return localDateHolder.getTime() === currentFlowData;
-    });
-
-    if (index !== -1) {
-      return localFlowDataArray[index];
-    }
-  }
-};
-
-const manageLocalStorageArray = (nextFlowData: FlowData) => {
-  const localFlowData = localStorage.getItem('FLOWDATA');
-
-  if (localFlowData) {
-    const localFlowDataArray = JSON.parse(localFlowData);
-    const nextFlowDataDate = nextFlowData.date.getTime();
-
-    const index = localFlowDataArray.findIndex((el: FlowData) => {
-      const localDateHolder = new Date(el.date);
-      return localDateHolder.getTime() === nextFlowDataDate;
-    });
-
-    if (index !== -1) {
-      if (nextFlowData.howHeavy === 'none') {
-        localFlowDataArray.splice(index, 1);
-      } else {
-        localFlowDataArray[index] = nextFlowData;
-      }
-    } else {
-      localFlowDataArray.push(nextFlowData);
-    }
-    localStorage.setItem('FLOWDATA', JSON.stringify(localFlowDataArray));
-  } else {
-    localStorage.setItem('FLOWDATA', JSON.stringify([nextFlowData]));
-  }
-};
-
-*/

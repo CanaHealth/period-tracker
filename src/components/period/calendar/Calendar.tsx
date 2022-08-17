@@ -57,60 +57,39 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
     return manyWeeks(numWeeks, localFlowData || {});
   }, [localFlowData]);
   return (
-    <div className=' mx-auto  max-w-md p-2'>
-      <div // 7 column grid for days of the week reverse the order
-        // max height is 32 and overflow scroll is onlu horizontal
+    <div className='relative flex h-full max-h-96 w-full flex-grow  items-center justify-center'>
+      <div
         className={clsxm(
-          'grid grid-cols-7 gap-1',
-          'mx-auto',
-          'max-h-96 overflow-x-scroll',
-          'h-full'
+          'relative ',
+          'h-full max-h-96 w-full max-w-md',
+          'flex flex-col-reverse justify-center',
+          'overflow-y-scroll overscroll-x-none',
+          'rounded-b-lg bg-gray-98',
+          'm-4'
         )}
       >
-        {Object.keys(weeks || {})
-          .sort()
-          .map((key) => {
-            const date = new Date(Number(key));
-            const howHeavy = (localFlowData || {})[key];
-            return (
-              <BoxFactory
-                key={key}
-                date={date}
-                howHeavy={howHeavy}
-                handleFunction={handleChange}
-              />
-            );
-          })}
-      </div>
-      <div // flex - spread center
-        className={clsxm(
-          'flex flex-row items-center justify-around',
-          'mx-auto'
-        )}
-      >
-        {/* <button
-          className='mx-auto rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
-          // onClick={() => {
-          //   localStorage.setItem(
-          //     'FLOWDATA',
-          //     JSON.stringify(mockFlowInfoFromStorage)
-          //   );
-          //   console.log('mock data added to local storage');
-          // }}
-          onClick={() => setFlowData(mockFlowInfoFromStorage)}
+        <div
+          className={clsxm(
+            'grid grid-cols-7 ',
+            'absolute snap-y snap-always',
+            'inset-x-4 bottom-4 gap-4 '
+          )}
         >
-          Generate Mock
-        </button> */}
-
-        {/* <button
-          className='mx-auto rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
-          // onclick stores weeks in local storage
-          onClick={() => {
-            localStorage.setItem('BOOM', JSON.stringify(weeks));
-          }}
-        >
-          Store
-        </button> */}
+          {Object.keys(weeks || {})
+            .sort()
+            .map((key) => {
+              const date = new Date(Number(key));
+              const howHeavy = (localFlowData || {})[key];
+              return (
+                <BoxFactory
+                  key={key}
+                  date={date}
+                  howHeavy={howHeavy}
+                  handleFunction={handleChange}
+                />
+              );
+            })}
+        </div>
       </div>
     </div>
   );

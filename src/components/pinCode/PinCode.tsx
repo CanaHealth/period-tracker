@@ -7,12 +7,12 @@ import clsxm from '@/lib/clsxm';
 import BigButton from '@/components/period/calendar/options/BigButton';
 import PinInput from '@/components/pinCode/PinInput';
 
+import { encryptData, getDecryptedWallet } from '@/util/dataCryptoOperations';
 import { saveDataOnChain } from '@/util/saveOnChain';
 import {
   createSolanaWallet,
   decryptWallet,
   encryptWallet,
-  getPasscodeFromCookie,
   getWalletFromLocalStorage,
   solanaWallet,
   storePasscodeAsCookie,
@@ -21,7 +21,6 @@ import {
 import { usableSecretKey } from '@/util/WalletOperations';
 
 import AcceptModal from './AcceptModal';
-import { encryptData, getDecryptedWallet } from '@/util/dataCryptoOperations';
 
 type PinCodeProps = {
   pincode: number[];
@@ -80,7 +79,7 @@ const PinCode: React.FC<PinCodeProps> = ({
 
   const launchBlockExplorer = () => {
     const url = `https://solscan.io/account/${nftID}`;
-    window.open(url, "_self");
+    window.open(url, '_self');
   };
 
   const submitPinCode = () => {
@@ -112,14 +111,25 @@ const PinCode: React.FC<PinCodeProps> = ({
         storePasscodeAsCookie(pinConcat);
       }
 
+      const decryptedWallet: solanaWallet = getDecryptedWallet(null);
 
-      const decryptedWallet: solanaWallet = getDecryptedWallet(null)
+      setEncData(
+        JSON.stringify(
+          encryptData(
+            localStorage.getItem('FLOWDATA')!,
+            usableSecretKey(decryptedWallet.secretKey)
+          ),
+          null,
+          4
+        )
+      );
 
-      setEncData(JSON.stringify(
-        encryptData(localStorage.getItem("FLOWDATA")!, usableSecretKey(decryptedWallet.secretKey)), null, 4
-      ));
-
-      console.log(encryptData(localStorage.getItem("FLOWDATA")!, usableSecretKey(decryptedWallet.secretKey)))
+      console.log(
+        encryptData(
+          localStorage.getItem('FLOWDATA')!,
+          usableSecretKey(decryptedWallet.secretKey)
+        )
+      );
     }
   };
 
@@ -129,8 +139,7 @@ const PinCode: React.FC<PinCodeProps> = ({
 
     // TODO: Handle expired cookie.
 
-
-    const decryptedWallet: solanaWallet = getDecryptedWallet(null)
+    const decryptedWallet: solanaWallet = getDecryptedWallet(null);
 
     saveDataOnChain(
       localStorage.getItem('FLOWDATA'),
@@ -142,8 +151,8 @@ const PinCode: React.FC<PinCodeProps> = ({
         setBlockExplorer(true);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
+        throw err;
       });
   };
 
@@ -172,11 +181,6 @@ const PinCode: React.FC<PinCodeProps> = ({
           launchBlockExplorer={launchBlockExplorer}
           data={encData}
         />
-
-        <div className='absolute inset-x-10 -top-10 -z-10 flex h-12  flex-col items-center justify-center rounded-t-full border-x  border-t bg-white py-1 px-2 text-xs'>
-          {' '}
-          enter pin:
-        </div>
 
         <div className='mx-auto flex flex-row justify-center'>
           {pin.map((digit, index) => (

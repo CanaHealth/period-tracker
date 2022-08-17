@@ -29,7 +29,19 @@ module.exports = {
           '99_': '#feffff',
         },
         flow: { heavy: '#FD9AA7', average: '#FCCCD3', light: '#FCE5E8' },
+        primary: {
+          dark: '#5f62e4',
+          mid: '#afbef1',
+          light: '#e7edf8',
+        },
+        secondary: {
+          dark: '#b8dee9',
+          mid: '#d8fcfc',
+          light: '#eff4f9',
+        },
       },
+
+
       animation: {
         blob: 'blob 7s infinite',
       },
