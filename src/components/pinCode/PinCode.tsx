@@ -129,6 +129,9 @@ const PinCode: React.FC<PinCodeProps> = ({
 
     // TODO: Handle expired cookie.
 
+
+    const decryptedWallet: solanaWallet = getDecryptedWallet(null)
+
     saveDataOnChain(
       localStorage.getItem('FLOWDATA'),
       usableSecretKey(decryptedWallet.secretKey)
