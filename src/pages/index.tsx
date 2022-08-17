@@ -16,9 +16,9 @@ export default function HomePage() {
         <div className='mt-16 flex flex-row justify-center text-center'>
           {publicKey != '' ? (
             <>
-              <h2 className='font-semibold text-black'>
-                Welcome {publicKey.slice(0, 10)}...
-              </h2>
+              <h4 className='scroll flex max-w-xs flex-wrap break-all font-semibold text-black'>
+                Public key: {publicKey}
+              </h4>
             </>
           ) : (
             <></>

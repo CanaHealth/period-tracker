@@ -86,6 +86,12 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                       {data}{' '}
                     </div>
 
+                    <div>
+                      {' '}
+                      <h3>Solana balance:</h3>
+                      <p>0.022 SOL</p>
+                    </div>
+
                     {blockExplorer ? (
                       <BigButton
                         OnClickDo={launchBlockExplorer}
