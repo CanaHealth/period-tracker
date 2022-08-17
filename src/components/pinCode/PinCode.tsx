@@ -36,9 +36,11 @@ const PinCode: React.FC<PinCodeProps> = ({
   setPublicKey,
 }) => {
   const [loading, setLoading] = useState(false);
+
   const [pin, setPin] = useState<number[]>(pincode);
   const [open, setOpen] = useState(false);
   const [refIndex, setRefIndex] = useState<number>(0);
+  const [nftID, setNftID] = useState<string>('');
 
   const onChangeDigits = (value: number, index: number) => {
     setPin(pin.map((digit, i) => (i === index ? value : digit)));
@@ -75,6 +77,7 @@ const PinCode: React.FC<PinCodeProps> = ({
 
   const submitPinCode = () => {
     const pinConcat = pin.join(''); // Concatenated pincode as string
+
     if (pin.length === 6) {
       if (getWalletFromLocalStorage().publicKey === '') {
         const wallet = createSolanaWallet();
@@ -91,10 +94,10 @@ const PinCode: React.FC<PinCodeProps> = ({
       } else {
         const encryptedWallet = getWalletFromLocalStorage();
 
-        // const decryptedWallet: HumanReadableSolanaWallet = decryptWallet(
-        //   encryptedWallet,
-        //   pinConcat
-        // );
+        const decryptedWallet: solanaWallet = decryptWallet(
+          encryptedWallet,
+          pinConcat
+        );
 
         setPublicKey(encryptedWallet.publicKey);
 
@@ -104,20 +107,28 @@ const PinCode: React.FC<PinCodeProps> = ({
   };
 
   const handleAccept = async () => {
-    console.log('start');
+    setLoading(true);
+    // console.log(loading);
     const encryptedWallet = getWalletFromLocalStorage();
     const decryptedWallet: solanaWallet = decryptWallet(
       encryptedWallet,
       getPasscodeFromCookie()
     );
-    console.log('decrypted');
 
     // TODO: Handle expired cookie.
-    await saveDataOnChain(
+
+    saveDataOnChain(
       localStorage.getItem('FLOWDATA'),
       usableSecretKey(decryptedWallet.secretKey)
-    );
-    console.log('saved');
+    )
+      .then((id) => {
+        setLoading(false);
+        setNftID(id);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   return (
@@ -139,7 +150,8 @@ const PinCode: React.FC<PinCodeProps> = ({
         <AcceptModal
           open={open}
           setOpen={setOpen}
-          handleSubmit={() => handleAccept()}
+          handleSubmit={handleAccept}
+          loading={loading}
         />
 
         <div className='absolute inset-x-10 -top-10 -z-10 flex h-12  flex-col items-center justify-center rounded-t-full border-x  border-t bg-white py-1 px-2 text-xs'>

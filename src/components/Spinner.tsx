@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-type spinnerProps = {
+type SpinnerProps = {
   className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const spinner: React.FC<spinnerProps> = ({ className }) => {
+const Spinner: React.FC<SpinnerProps> = ({ className }) => {
   return (
     <div className={clsxm('', className)}>
       <div role='status'>
@@ -32,4 +32,4 @@ const spinner: React.FC<spinnerProps> = ({ className }) => {
   );
 };
 
-export default spinner;
+export default Spinner;

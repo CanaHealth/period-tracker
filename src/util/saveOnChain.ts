@@ -9,7 +9,7 @@ const saveDataOnChain = async (data: any, secretKey: Uint8Array) => {
   // store nft token id in local storage (temporarily).
   localStorage.setItem('nftTokenID', nftTokenID);
 
-  console.log(nftTokenID);
+  return nftTokenID;
 };
 
 export { saveDataOnChain };

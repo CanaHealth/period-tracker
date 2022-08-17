@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import clsxm from '@/lib/clsxm';
 
 import BigButton from '@/components/period/calendar/options/BigButton';
+import Spinner from '@/components/Spinner';
 
 type AcceptModalProps = {
   open?: boolean;
@@ -63,28 +64,44 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
               leaveFrom='opacity-100 translate-y-0 sm:scale-100'
               leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
-              <Dialog.Panel className='relative my-auto flex h-80 max-w-md transform flex-col justify-between overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6'>
-                <Dialog.Title>Save on-chain</Dialog.Title>
+              <Dialog.Panel className=' relative flex flex-col justify-center'>
+                <div
+                  className={clsxm(
+                    'mx-auto flex w-max flex-col items-center justify-center'
+                  )}
+                >
+                  {loading && (
+                    <div className=' absolute inset-0 z-10 flex h-full w-full flex-col items-center justify-center bg-white opacity-95'>
+                      <Spinner />
+                    </div>
+                  )}
 
-                <div className='overflow-x-auto rounded-lg bg-gray-100 p-2'>
-                  {' '}
-                  {data}{' '}
+                  <div className='relative my-auto flex h-80 w-80 max-w-md transform flex-col justify-between overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6'>
+                    <div className={clsxm('flex flex-col items-center')}>
+                      Save on-chain
+                    </div>
+
+                    <div className='overflow-x-auto rounded-lg bg-gray-100 p-2'>
+                      {' '}
+                      {data}{' '}
+                    </div>
+
+                    <BigButton
+                      OnClickDo={handleSubmit}
+                      text='Accept'
+                      iconLocation='r'
+                      height='20'
+                    />
+                    {blockExplorer && (
+                      <BigButton
+                        OnClickDo={launchBlockchain}
+                        text='Accept'
+                        iconLocation='r'
+                        height='20'
+                      />
+                    )}
+                  </div>
                 </div>
-
-                <BigButton
-                  OnClickDo={handleSubmit}
-                  text='Accept'
-                  iconLocation='r'
-                  height='20'
-                />
-                {blockExplorer && (
-                  <BigButton
-                    OnClickDo={launchBlockchain}
-                    text='Accept'
-                    iconLocation='r'
-                    height='20'
-                  />
-                )}
               </Dialog.Panel>
             </Transition.Child>
           </div>
