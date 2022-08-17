@@ -12,18 +12,17 @@ export default function HomePage() {
       <div className='mx-auto flex h-screen max-w-md flex-col'>
         <div className='mx-3 rounded-b-lg bg-gray-98'>
           <Calendar />
-
-          <div className='flex flex-row justify-center text-center'>
-            {publicKey != '' ? (
-              <>
-                <h2 className='font-semibold text-black'>
-                  Welcome {publicKey.slice(0, 10)}...
-                </h2>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
+        </div>
+        <div className='mt-16 flex flex-row justify-center text-center'>
+          {publicKey != '' ? (
+            <>
+              <h2 className='font-semibold text-black'>
+                Welcome {publicKey.slice(0, 10)}...
+              </h2>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
         <div className='mt-16 flex flex-col items-center justify-center'>
           <PinCode

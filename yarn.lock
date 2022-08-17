@@ -2975,7 +2975,7 @@
     cborg "^1.6.0"
     multiformats "^9.5.4"
 
-"@ipld/dag-pb@^2.0.2", "@ipld/dag-pb@^2.1.16", "@ipld/dag-pb@^2.1.17":
+"@ipld/dag-pb@^2.0.2", "@ipld/dag-pb@^2.1.16":
   version "2.1.17"
   resolved "https://registry.yarnpkg.com/@ipld/dag-pb/-/dag-pb-2.1.17.tgz#baafe2fc6bbd1654c402a804ea54b8860cfb2912"
   integrity sha512-AmzOdmdv5hT8iGsrbpzm5R0Fvk7DEbtwcglG2gJLvW9q3zwb+E681hY4EwEELypM1Rfnp/JDA9dGqYcpEi/iAg==
@@ -3351,45 +3351,6 @@
   resolved "https://registry.yarnpkg.com/@metaplex-foundation/cusper/-/cusper-0.0.2.tgz#dc2032a452d6c269e25f016aa4dd63600e2af975"
   integrity sha512-S9RulC2fFCFOQraz61bij+5YCHhSO9llJegK8c8Y6731fSi6snUSQJdCUqYS8AIgR0TKbQvdvgSyIIdbDFZbBA==
 
-"@metaplex-foundation/js-plugin-nft-storage@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/js-plugin-nft-storage/-/js-plugin-nft-storage-0.1.1.tgz#62218802792379f48d19f77a12eda090f83f8b9a"
-  integrity sha512-5V+K6t0qQgzV+siU6WE4ogJLnEEUhCtHrApPz/CJk0upCbVyeP9nzNittqV3HjgHINQaryFb3m9j0YmAzCVPyQ==
-  dependencies:
-    "@ipld/dag-pb" "^2.1.17"
-    "@metaplex-foundation/js" "*"
-    "@nftstorage/metaplex-auth" "^1.2.0"
-    ipfs-car "^0.7.0"
-    ipfs-unixfs "^6.0.9"
-    multiformats "^9.7.0"
-    nft.storage "^6.4.1"
-
-"@metaplex-foundation/js@*":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/js/-/js-0.15.0.tgz#0e0165695d101382e377e6b55972b6119db2b8fa"
-  integrity sha512-i+S4Z8fb9HIC+Yyx8Kaeau7jKFv8qIOE5pLsdQx4eGkqrQyxVynRyzP6EMsitkGJ11pHUYvrcmRmTvMYYV8pfQ==
-  dependencies:
-    "@bundlr-network/client" "^0.7.14"
-    "@metaplex-foundation/beet" "^0.4.0"
-    "@metaplex-foundation/beet-solana" "^0.3.0"
-    "@metaplex-foundation/mpl-auction-house" "^2.1.1"
-    "@metaplex-foundation/mpl-candy-machine" "^4.4.1"
-    "@metaplex-foundation/mpl-token-metadata" "^2.2.2"
-    "@solana/spl-token" "^0.2.0"
-    "@solana/web3.js" "^1.47.3"
-    abort-controller "^3.0.0"
-    bignumber.js "^9.0.2"
-    bn.js "^5.2.0"
-    bs58 "^5.0.0"
-    buffer "^6.0.3"
-    cross-fetch "^3.1.5"
-    debug "^4.3.4"
-    eventemitter3 "^4.0.7"
-    lodash.clonedeep "^4.5.0"
-    lodash.isequal "^4.5.0"
-    mime "^3.0.0"
-    tweetnacl "^1.0.3"
-
 "@metaplex-foundation/js@^0.14.1":
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/@metaplex-foundation/js/-/js-0.14.1.tgz#082e2da098c64d4654a3d309a845f2cec1548064"
@@ -3431,17 +3392,6 @@
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-4.3.0.tgz#168e0de04548b0ba62abb78ddc90aafd07de804d"
   integrity sha512-Vgx0Ly+JGosXFFz/mz5eWKovZgAQBLSFAwuat/c+yGmT7FGlnCEqV3lsBsg+P8iiuG39DxCvNfBQEH8fsiuOlQ==
-  dependencies:
-    "@metaplex-foundation/beet" "^0.4.0"
-    "@metaplex-foundation/beet-solana" "^0.3.0"
-    "@metaplex-foundation/cusper" "^0.0.2"
-    "@metaplex-foundation/mpl-core" "^0.6.1"
-    "@solana/web3.js" "^1.35.1"
-
-"@metaplex-foundation/mpl-candy-machine@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-4.4.1.tgz#71762ce5afb49f4a9719d6fe7e83581b21ea5938"
-  integrity sha512-cHJoRx4jYghtV7zrJbwKbxhxn8H01CpelZRRep0DdRCUQPlsNU5nkGVYNZzzotJ8d0hUiD4Qv5wi/WFY5FmEoA==
   dependencies:
     "@metaplex-foundation/beet" "^0.4.0"
     "@metaplex-foundation/beet-solana" "^0.3.0"
@@ -11495,33 +11445,6 @@ ipfs-car@^0.6.2:
     streaming-iterables "^6.0.0"
     uint8arrays "^3.0.0"
 
-ipfs-car@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/ipfs-car/-/ipfs-car-0.7.0.tgz#72955d2b6904e87edfa17bbe5c00c1b3fcb79bb9"
-  integrity sha512-9ser6WWZ1ZMTCGbcVkRXUzOrpQ4SIiLfzIEnk+3LQsXbV09yeZg3ijhRuEXozEIYE68Go9JmOFshamsK9iKlNQ==
-  dependencies:
-    "@ipld/car" "^3.2.3"
-    "@web-std/blob" "^3.0.1"
-    bl "^5.0.0"
-    blockstore-core "^1.0.2"
-    browser-readablestream-to-it "^1.0.2"
-    idb-keyval "^6.0.3"
-    interface-blockstore "^2.0.2"
-    ipfs-core-types "^0.8.3"
-    ipfs-core-utils "^0.12.1"
-    ipfs-unixfs-exporter "^7.0.4"
-    ipfs-unixfs-importer "^9.0.4"
-    ipfs-utils "^9.0.2"
-    it-all "^1.0.5"
-    it-last "^1.0.5"
-    it-pipe "^1.1.0"
-    meow "^9.0.0"
-    move-file "^2.1.0"
-    multiformats "^9.6.3"
-    stream-to-it "^0.2.3"
-    streaming-iterables "^6.0.0"
-    uint8arrays "^3.0.0"
-
 ipfs-core-types@^0.8.3, ipfs-core-types@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/ipfs-core-types/-/ipfs-core-types-0.8.4.tgz#4d483dc6035714ea48a0b02e3f82b6c6d55c8525"
@@ -11594,7 +11517,7 @@ ipfs-unixfs-importer@^9.0.4:
     rabin-wasm "^0.1.4"
     uint8arrays "^3.0.0"
 
-ipfs-unixfs@^6.0.0, ipfs-unixfs@^6.0.3, ipfs-unixfs@^6.0.5, ipfs-unixfs@^6.0.6, ipfs-unixfs@^6.0.9:
+ipfs-unixfs@^6.0.0, ipfs-unixfs@^6.0.3, ipfs-unixfs@^6.0.5, ipfs-unixfs@^6.0.6:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/ipfs-unixfs/-/ipfs-unixfs-6.0.9.tgz#f6613b8e081d83faa43ed96e016a694c615a9374"
   integrity sha512-0DQ7p0/9dRB6XCb0mVCTli33GzIzSVx5udpJuVM47tGcD+W+Bl4LsnoLswd3ggNnNEakMv1FdoFITiEnchXDqQ==
@@ -13961,7 +13884,7 @@ multiaddr@^10.0.0:
     uint8arrays "^3.0.0"
     varint "^6.0.0"
 
-multiformats@^9.0.4, multiformats@^9.4.13, multiformats@^9.4.2, multiformats@^9.4.5, multiformats@^9.4.7, multiformats@^9.5.4, multiformats@^9.6.2, multiformats@^9.6.3, multiformats@^9.6.4, multiformats@^9.7.0:
+multiformats@^9.0.4, multiformats@^9.4.13, multiformats@^9.4.2, multiformats@^9.4.5, multiformats@^9.4.7, multiformats@^9.5.4, multiformats@^9.6.2, multiformats@^9.6.3:
   version "9.7.1"
   resolved "https://registry.yarnpkg.com/multiformats/-/multiformats-9.7.1.tgz#ab348e5fd6f8e7fb3fd56033211bda48854e2173"
   integrity sha512-TaVmGEBt0fhxiNJMGphBfB+oGvUxFs8KgGvgl8d3C+GWtrFcvXdJ2196eg+dYhmSFClmgFfSfJEklo+SZzdNuw==
@@ -14139,25 +14062,6 @@ nft.storage@^5.2.5:
     multiformats "^9.6.3"
     p-retry "^4.6.1"
     streaming-iterables "^6.0.0"
-
-nft.storage@^6.4.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-6.4.1.tgz#262faa3ba67970cbdd48480aa048d96671c6ccb4"
-  integrity sha512-UwZ+QgDCr58X+vHN4BydqdB89M8Vaza+vkWR9RatC3rXuDfIyYE5T7oOV53tbiuhA8x5Yi56tlG3NI8wLfOO1A==
-  dependencies:
-    "@ipld/car" "^3.2.3"
-    "@ipld/dag-cbor" "^6.0.13"
-    "@web-std/blob" "^3.0.1"
-    "@web-std/fetch" "^3.0.3"
-    "@web-std/file" "^3.0.0"
-    "@web-std/form-data" "^3.0.0"
-    carbites "^1.0.6"
-    ipfs-car "^0.6.2"
-    it-pipe "^1.1.0"
-    multiformats "^9.6.4"
-    p-retry "^4.6.1"
-    streaming-iterables "^6.0.0"
-    throttled-queue "^2.1.2"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -17608,11 +17512,6 @@ throttle-debounce@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-3.0.1.tgz#32f94d84dfa894f786c9a1f290e7a645b6a19abb"
   integrity sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==
-
-throttled-queue@^2.1.2:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/throttled-queue/-/throttled-queue-2.1.4.tgz#4e2008c73ab3f72ba1bb09496c3cc9c5b745dbee"
-  integrity sha512-YGdk8sdmr4ge3g+doFj/7RLF5kLM+Mi7DEciu9PHxnMJZMeVuZeTj31g4VE7ekUffx/IdbvrtOCiz62afg0mkg==
 
 through2@^2.0.0, through2@~2.0.0:
   version "2.0.5"

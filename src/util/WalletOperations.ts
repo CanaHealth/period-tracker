@@ -147,18 +147,28 @@ const usableSecretKey = (secretKey: string): Uint8Array => {
  * @param passcode entered by user to decrypt wallet.
  */
 const storePasscodeAsCookie = (passcode: string) => {
-  document.cookie = `passcode=${passcode}; max-age=600` 
-}
+  document.cookie = `passcode=${passcode}; max-age=600`;
+};
+
+const getPasscodeFromCookie = (): string => {
+  const passcode = document.cookie
+    .split(';')
+    .find((item) => item.includes('passcode'))
+    ?.split('=')[1];
+  console.log(passcode);
+  return passcode!;
+};
 
 export {
   createSolanaWallet,
   decryptWallet,
   encryptWallet,
+  getPasscodeFromCookie,
   getWalletFromLocalStorage,
   hashPasscode,
   storePasscodeAsCookie,
   storeWalletInLocalStorage,
-  usableSecretKey
+  usableSecretKey,
 };
 
 // /**

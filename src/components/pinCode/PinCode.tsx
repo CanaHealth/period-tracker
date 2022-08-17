@@ -7,14 +7,20 @@ import clsxm from '@/lib/clsxm';
 import BigButton from '@/components/period/calendar/options/BigButton';
 import PinInput from '@/components/pinCode/PinInput';
 
+import { saveDataOnChain } from '@/util/saveOnChain';
 import {
   createSolanaWallet,
+  decryptWallet,
   encryptWallet,
+  getPasscodeFromCookie,
   getWalletFromLocalStorage,
   solanaWallet,
   storePasscodeAsCookie,
   storeWalletInLocalStorage,
 } from '@/util/WalletOperations';
+import { usableSecretKey } from '@/util/WalletOperations';
+
+import AcceptModal from './AcceptModal';
 
 type PinCodeProps = {
   pincode: number[];
@@ -29,7 +35,9 @@ const PinCode: React.FC<PinCodeProps> = ({
   variant = 'row',
   setPublicKey,
 }) => {
+  const [loading, setLoading] = useState(false);
   const [pin, setPin] = useState<number[]>(pincode);
+  const [open, setOpen] = useState(false);
   const [refIndex, setRefIndex] = useState<number>(0);
 
   const onChangeDigits = (value: number, index: number) => {
@@ -95,6 +103,23 @@ const PinCode: React.FC<PinCodeProps> = ({
     }
   };
 
+  const handleAccept = async () => {
+    console.log('start');
+    const encryptedWallet = getWalletFromLocalStorage();
+    const decryptedWallet: solanaWallet = decryptWallet(
+      encryptedWallet,
+      getPasscodeFromCookie()
+    );
+    console.log('decrypted');
+
+    // TODO: Handle expired cookie.
+    await saveDataOnChain(
+      localStorage.getItem('FLOWDATA'),
+      usableSecretKey(decryptedWallet.secretKey)
+    );
+    console.log('saved');
+  };
+
   return (
     <div
       className={clsxm(
@@ -111,6 +136,12 @@ const PinCode: React.FC<PinCodeProps> = ({
           variant === 'row' && ['flex-row']
         )}
       >
+        <AcceptModal
+          open={open}
+          setOpen={setOpen}
+          handleSubmit={() => handleAccept()}
+        />
+
         <div className='absolute inset-x-10 -top-10 -z-10 flex h-12  flex-col items-center justify-center rounded-t-full border-x  border-t bg-white py-1 px-2 text-xs'>
           {' '}
           enter pin:
@@ -132,10 +163,12 @@ const PinCode: React.FC<PinCodeProps> = ({
         <BigButton
           OnClickDo={() => {
             submitPinCode();
+            setOpen(true);
           }}
           icon={<HiBadgeCheck />}
+          text='Save on-chain'
           iconLocation='r'
-          height='10'
+          height='20'
           className={clsxm([
             variant === 'row' && ['w-fit px-10'],
             variant === 'col' && ['w-full'],

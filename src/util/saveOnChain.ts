@@ -1,4 +1,3 @@
-import { solanaWallet } from './WalletOperations';
 import { encryptData } from './dataCryptoOperations';
 import { createNFT } from './metaplex';
 
@@ -11,7 +10,6 @@ const saveDataOnChain = async (data: any, secretKey: Uint8Array) => {
   localStorage.setItem('nftTokenID', nftTokenID);
 
   console.log(nftTokenID);
-}
-
+};
 
 export { saveDataOnChain };
