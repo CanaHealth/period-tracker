@@ -67,13 +67,9 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
     <div
       className={clsxm(
         'group relative flex h-8 w-8 items-center justify-center rounded-md text-xs',
+        'hover:border-0 hover:bg-gray-dark-dark hover:text-white',
         colorVarientSelector[color],
         [isCurrentDay ? 'border-2 border-black text-black' : ' text-gray-700'],
-        [
-          isCurrentWeek
-            ? ''
-            : ' hover:border-0 hover:bg-gray-dark-dark hover:text-white',
-        ],
         'transition-transform duration-200 ease-in-out',
         'hover:scale-110 hover:shadow-md',
         ' active:scale-100'
@@ -83,7 +79,7 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
         className={clsxm(
           ' absolute inset-0 flex items-center justify-center rounded-md text-xs',
           colorVarientSelector[color],
-          [isCurrentWeek ? '' : 'hidden']
+          [isCurrentWeek ? 'border-0' : 'hidden']
         )}
         aria-hidden={isCurrentWeek ? 'false' : 'true'}
       >
@@ -91,7 +87,7 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
       </div>
       <span
         className={clsxm(
-          ' opacity-0 group-hover:opacity-100',
+          'opacity-0 group-hover:opacity-100',
           'group-active:opacity-100',
           'group-focus:opacity-100',
           [isCurrentWeek ? 'hidden' : '']
