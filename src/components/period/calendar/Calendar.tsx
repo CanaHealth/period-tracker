@@ -31,6 +31,13 @@ import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage';
 const numWeeks = 15;
 
 const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
+  // wasScrolled is used to diable the bounce animation
+  const [wasScrolled, setWasScrolled] = React.useState(false);
+  // check if the calender was scrolled
+  const handleScroll = () => {
+    setWasScrolled(true);
+  };
+
   const [localFlowData, setFlowData] = useIsomorphicLocalStorage<FlowData>(
     'FLOWDATA',
     {} as FlowData
@@ -62,15 +69,19 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
           'h-full max-h-96 w-full max-w-md',
           'flex flex-col-reverse justify-center',
           'overflow-y-scroll overscroll-x-none',
-          'rounded-b-lg bg-gray-light-dark',
+          'rounded-b-lg bg-white',
           'm-4'
         )}
+        onScroll={handleScroll}
       >
         <div
           className={clsxm(
             'grid grid-cols-7 ',
             'absolute snap-y snap-always',
-            'inset-x-4 bottom-4 gap-4 '
+            'inset-x-4 bottom-4 gap-4 ',
+            'animate-showScroll',
+
+            wasScrolled && ['animate-none']
           )}
         >
           {Object.keys(weeks || {})

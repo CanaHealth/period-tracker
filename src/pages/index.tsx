@@ -1,16 +1,18 @@
 import Head from 'next/head';
 import * as React from 'react';
 
+import Accordion from '@/components/basic/Accordion';
+import Layout from '@/components/layout/Layout';
+import MetaMaskLogo from '@/components/logos/MetaMaskLogo';
+import PhantomLogo from '@/components/logos/PhantomLogo';
 import Calendar from '@/components/period/calendar/Calendar';
 import BigButton from '@/components/period/calendar/options/BigButton';
-import Accordion from '@/components/pinCode/Accordion';
-import PinCode from '@/components/pinCode/PinCode';
 
 export default function HomePage() {
   const [publicKey, setPublicKey] = React.useState('');
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>Cana Health</title>
       </Head>
@@ -26,26 +28,29 @@ export default function HomePage() {
                 <BigButton
                   OnClickDo={() => setPublicKey('000000')}
                   text='Phantom'
+                  icon={<PhantomLogo size={20} />}
                   height='10'
                   className='text-xs'
                 />
                 <BigButton
                   OnClickDo={() => setPublicKey('000000')}
                   text='Metamask'
-                  height='10'
-                  className='text-xs'
-                />
-                <BigButton
-                  OnClickDo={() => setPublicKey('000000')}
-                  text='Rainbow'
+                  icon={<MetaMaskLogo size={20} />}
                   height='10'
                   className='text-xs'
                 />
               </div>
             }
           />
+        </div>
+      </main>
+    </Layout>
+  );
+}
 
-          <div //* public key
+/*
+
+<div //* public key
             className='mt-8 flex flex-row justify-center text-center'
           >
             <div className='mx-auto w-64 rounded-lg bg-gray-light-mid p-4'>
@@ -60,14 +65,8 @@ export default function HomePage() {
 
           <div className='mt-16 flex flex-col items-center justify-center'>
             <PinCode pincode={[]} setPublicKey={setPublicKey} variant='col' />
-          </div>
-        </div>
-      </main>
-    </>
-  );
-}
+          </div> 
 
-/*
         <div className='mx-8 mb-auto mt-16'>
           <TitleText username={userName} />
         </div>

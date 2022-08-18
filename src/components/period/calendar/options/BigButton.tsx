@@ -25,10 +25,10 @@ const BigButton: React.FC<BigButtonProps> = ({
       type='button'
       className={clsxm(
         'flex w-44',
-        'flex-col items-center justify-center rounded shadow-sm hover:shadow-md',
-        'border border-blue-93 bg-white  text-indigo-800',
+        'flex-col items-center justify-center rounded shadow-sm',
+        'rounded-3xl border border-blue-93 bg-white  text-indigo-800',
         'transition-all ease-out active:bg-gray-800 active:text-white',
-        'hover:bg-gray-600 hover:text-white ',
+        'hover:bg-gray-600 hover:text-white hover:shadow-md',
         [
           height === '10' && !text && ['h-10'],
           height === '20' && ['h-20'],

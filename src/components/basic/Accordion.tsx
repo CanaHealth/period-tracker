@@ -1,6 +1,6 @@
 import { Disclosure, Transition } from '@headlessui/react';
 import * as React from 'react';
-import { HiChevronUp } from 'react-icons/hi';
+import { HiChevronDown } from 'react-icons/hi';
 
 import clsxm from '@/lib/clsxm';
 
@@ -18,27 +18,27 @@ const Accordion: React.FC<AccordionProps> = ({
   // TODO:
 
   return (
-    <div className='w-full px-4 pt-16'>
-      <div className='mx-auto w-full max-w-md rounded-2xl bg-white p-2'>
+    <div className={clsxm('w-full p-2', className)}>
+      <div className='mx-auto w-full max-w-md rounded-2xl'>
         <Disclosure>
           {({ open }) => (
             <>
               <Disclosure.Button
                 className={clsxm(
                   'group transform transition-transform duration-200 ease-in-out',
-                  'flex w-full justify-between rounded-lg',
+                  'flex w-full items-center justify-center rounded-lg',
                   'px-4 py-2 ',
                   'text-left text-sm font-medium',
                   'bg-primary-light text-black ',
-                  'hover:bg-gray-dark-dark hover:text-white',
+                  'hover:bg-gray-dark hover:text-white',
                   // 'active:scale-95',
-                  'focus:outline-none focus-visible:ring focus-visible:ring-primary-mid focus-visible:ring-opacity-75'
+                  'focus-visible:ring-primary-mid focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                 )}
               >
                 <span>{title}</span>
-                <HiChevronUp
+                <HiChevronDown
                   className={clsxm(
-                    [open && 'rotate-180  '],
+                    [open && '-rotate-90   '],
                     ' group-hover:text-white',
                     'h-5 w-5 text-black duration-75 ease-in-out'
                   )}
@@ -52,7 +52,8 @@ const Accordion: React.FC<AccordionProps> = ({
                 leaveFrom='transform scale-100 opacity-100'
                 leaveTo='transform scale-95 opacity-0'
               >
-                <Disclosure.Panel className='flex items-center justify-center break-words bg-gray-light-mid py-4 text-sm text-black '>
+                <Disclosure.Panel className='box-content flex items-center justify-center break-words rounded-b-xl bg-white py-4 text-sm text-black'>
+                  <div className='inset-x-o absolute -top-1 h-2 w-full' />
                   {description}
                 </Disclosure.Panel>
               </Transition>
