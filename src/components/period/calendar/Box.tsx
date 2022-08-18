@@ -47,7 +47,7 @@ export type BoxProps = {
 } & React.ComponentPropsWithoutRef<'div'>;
 
 const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
-  const monthNumber = String(date.getDate());
+  const dayInMonthNumber = String(date.getDate());
 
   const today = newToday();
   const mondayOfToday = findPrevMonday(today);
@@ -59,8 +59,6 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
 
   const DayOfWeekNum = date.getDay();
 
-  const DayOfLabel = monthNumber;
-
   const currentWeekLabel = setDayOfWeekLabel(DayOfWeekNum);
 
   const isEvenMonth = date.getMonth() % 2 == 0;
@@ -70,7 +68,7 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
       className={clsxm(
         'group relative flex h-8 w-8 items-center justify-center rounded-md text-xs',
         colorVarientSelector[color],
-        [isEvenMonth ? 'opacity-50 shadow-lg' : 'opacity-100'],
+        [isEvenMonth ? 'opacity-50 shadow-sm' : 'opacity-100'],
         [isCurrentDay ? 'border-2 border-black text-black' : ' text-gray-700'],
         [isCurrentWeek ? '' : ' hover:bg-gray-dark-dark hover:text-white'],
         'transition-transform duration-200 ease-in-out',
@@ -78,26 +76,25 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
         ' active:scale-100'
       )}
     >
-      <div
+      {/* <div
         className={clsxm(
           ' absolute inset-0 flex items-center justify-center rounded-md text-xs',
           colorVarientSelector[color],
-          [isCurrentWeek ? 'border-0' : 'hidden']
+          [isCurrentDay ? 'border-0' : '']
         )}
-        aria-hidden={isCurrentWeek ? 'false' : 'true'}
+        aria-hidden={isCurrentDay ? 'false' : 'true'}
       >
         {currentWeekLabel}
-      </div>
+      </div> */}
       <span
         className={clsxm(
           'opacity-0 group-hover:opacity-100',
           'group-active:opacity-100',
-          'group-focus:opacity-100',
-          [isCurrentWeek ? 'hidden' : '']
+          'group-focus:opacity-100'
         )}
         aria-hidden={isCurrentWeek}
       >
-        {DayOfLabel}
+        {dayInMonthNumber}
       </span>
     </div>
   );

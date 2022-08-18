@@ -23,7 +23,7 @@ import clsxm from '@/lib/clsxm';
 
 import { FlowData } from '@/components/period/calendar/options/NoteFlow';
 
-import { manyWeeks } from '@/util/calendarFunc';
+import { manyWeeks, manyWeeks } from '@/util/calendarFunc';
 
 import BoxFactory from './BoxFactory';
 import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage';
@@ -61,8 +61,22 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
   const weeks = useMemo(() => {
     return manyWeeks(numWeeks, localFlowData || {});
   }, [localFlowData]);
+
+  // const [weeks, setWeeks] = React.useState(() => [])
+
+  // const loadMore = React.useCallback(() => {
+  //   return setTimeout(() => {
+  //     setWeeks((weeks) => [...weeks, ...generateWeeks(100, weeks.length)])
+  //   }, 200)
+  // }, [setWeeks])
+
+  // React.useEffect(() => {
+  //   const timeout = loadMore()
+  //   return () => clearTimeout(timeout)
+  // }, [])
+
   return (
-    <div className='flex h-96 flex-col justify-center'>
+    <div className='flex h-96 justify-center'>
       <div className='relative flex h-full max-h-96 w-full flex-grow  items-center justify-center'>
         <div
           className={clsxm(
@@ -70,7 +84,7 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
             'h-full max-h-96 w-full max-w-md',
             'flex flex-col-reverse justify-center',
             'overflow-y-scroll overscroll-x-none',
-            ' bg-white',
+            'rounded-b-lg bg-white',
             'm-4'
           )}
           onScroll={handleScroll}
@@ -101,19 +115,6 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
               })}
           </div>
         </div>
-      </div>
-      <div
-        className='mx-auto grid w-full max-w-md grid-cols-7 gap-4 rounded-b-lg bg-white px-4 
-      pb-4'
-      >
-        {['Mu', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
-          <div
-            className=' text-gray--dark mx-auto h-full rounded-b-xl bg-gray-light-dark px-2 pb-1 text-center text-xs'
-            key={day}
-          >
-            {day}
-          </div>
-        ))}
       </div>
     </div>
   );
