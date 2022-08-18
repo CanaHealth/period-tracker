@@ -28,6 +28,7 @@ const Accordion: React.FC<AccordionProps> = ({
                   'group transform transition-transform duration-200 ease-in-out',
                   'flex w-full items-center justify-center rounded-lg',
                   'px-4 py-2 ',
+                  'h-16',
                   'text-left text-sm font-medium',
                   'bg-primary-light text-black ',
                   'hover:bg-gray-dark hover:text-white',

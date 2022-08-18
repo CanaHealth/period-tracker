@@ -14,56 +14,80 @@ export default function HomePage() {
   const [connected, setConnected] = React.useState(false);
   const [IsModalOpen, setIsModalOpen] = React.useState(false);
 
+  const WalletProps = [
+    {
+      text: 'Metamask',
+      icon: <MetaMaskLogo size={20} />,
+    },
+    {
+      text: 'Phantom',
+      icon: <PhantomLogo size={20} />,
+    },
+  ];
+
   return (
     <Layout>
       <Head>
         <title>Cana Health</title>
       </Head>
       <main className='h-full min-h-screen'>
-        <Modal
-          isOpen={IsModalOpen}
-          setIsOpen={setIsModalOpen}
-          onClick={() => {
-            setConnected(true);
-            setIsModalOpen(false);
-          }}
-          title='Connect Wallet'
-          description='Please connect your wallet to continue'
-          btnlabel='Connect'
-        />
         <div className='mx-auto flex max-w-xl flex-col justify-start'>
           <Calendar />
           <section className='my-8 flex flex-col items-center justify-center'>
             {connected ? (
               //! If connected render
-              <BigButton text='save on-chain' height='20' className='text-sm' />
+              <>
+                <Modal
+                  isOpen={IsModalOpen}
+                  setIsOpen={setIsModalOpen}
+                  onClick={() => {
+                    setConnected(true);
+                    setIsModalOpen(false);
+                  }}
+                  title='Authorise data encryption and NFT minting'
+                  description='Please authorise Cana Health to mint an NFT on your behalf using funds from your wallet. This will allow you to track your period and gain insights into your health.'
+                  btnlabel='Accept'
+                />
+                <BigButton
+                  text='save on-chain'
+                  height='20'
+                  className='text-sm'
+                  OnClickDo={() => setIsModalOpen(true)}
+                />
+              </>
             ) : (
               //! If not connected render
-              <Accordion
-                title='Connect wallet'
-                description={
-                  <div className='flex flex-col items-center justify-center space-y-3'>
-                    <BigButton
-                      OnClickDo={() => {
-                        setIsModalOpen(true);
-                      }}
-                      text='Phantom'
-                      icon={<PhantomLogo size={20} />}
-                      height='10'
-                      className='text-xs'
-                    />
-                    <BigButton
-                      OnClickDo={() => {
-                        setIsModalOpen(true);
-                      }}
-                      text='Metamask'
-                      icon={<MetaMaskLogo size={20} />}
-                      height='10'
-                      className='text-xs'
-                    />
-                  </div>
-                }
-              />
+              <>
+                <Modal
+                  isOpen={IsModalOpen}
+                  setIsOpen={setIsModalOpen}
+                  onClick={() => {
+                    setConnected(true);
+                    setIsModalOpen(false);
+                  }}
+                  title='Connect Wallet'
+                  description='Please connect your wallet to continue'
+                  btnlabel='Connect'
+                />
+                <Accordion
+                  title='Connect wallet'
+                  description={
+                    <div className='flex flex-col items-center justify-center space-y-3'>
+                      {/* map walletprops obkject */}
+                      {WalletProps.map((wallet, key) => (
+                        <BigButton
+                          key={key}
+                          text={wallet.text}
+                          icon={wallet.icon}
+                          height='16'
+                          className='text-sm'
+                          OnClickDo={() => setIsModalOpen(true)}
+                        />
+                      ))}
+                    </div>
+                  }
+                />
+              </>
             )}
           </section>
         </div>

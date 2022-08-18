@@ -5,7 +5,7 @@ import clsxm from '@/lib/clsxm';
 export type BigButtonProps = {
   icon?: React.ReactNode;
   iconLocation?: 't' | 'b' | 'l' | 'r';
-  height?: '10' | '20' | '24' | '32';
+  height?: '10' | '16' | '20' | '24' | '32';
   text?: string;
   className?: string;
   OnClickDo?: () => void;
@@ -31,6 +31,7 @@ const BigButton: React.FC<BigButtonProps> = ({
         'hover:bg-gray-600 hover:text-white hover:shadow-md',
         [
           height === '10' && !text && ['h-10'],
+          height === '16' && ['h-16'],
           height === '20' && ['h-20'],
           height === '24' && ['h-24'],
           height === '32' && ['h-32'],
