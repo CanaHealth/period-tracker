@@ -63,11 +63,15 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
 
   const currentWeekLabel = setDayOfWeekLabel(DayOfWeekNum);
 
+  // change apacity of box depending if month is even or odd
+  const isEvenMonth = date.getMonth() % 2 == 0;
+
   return (
     <div
       className={clsxm(
         'group relative flex h-8 w-8 items-center justify-center rounded-md text-xs',
         colorVarientSelector[color],
+        [isEvenMonth ? 'opacity-50 shadow-lg' : 'opacity-100'],
         [isCurrentDay ? 'border-2 border-black text-black' : ' text-gray-700'],
         [isCurrentWeek ? '' : ' hover:bg-gray-dark-dark hover:text-white'],
         'transition-transform duration-200 ease-in-out',
