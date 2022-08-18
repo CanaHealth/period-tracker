@@ -80,7 +80,6 @@ export default function HomePage() {
                           text={wallet.text}
                           icon={wallet.icon}
                           height='16'
-                          className='text-sm'
                           OnClickDo={() => setIsModalOpen(true)}
                         />
                       ))}

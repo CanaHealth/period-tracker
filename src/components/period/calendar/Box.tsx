@@ -63,7 +63,6 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
 
   const currentWeekLabel = setDayOfWeekLabel(DayOfWeekNum);
 
-  // change apacity of box depending if month is even or odd
   const isEvenMonth = date.getMonth() % 2 == 0;
 
   return (
