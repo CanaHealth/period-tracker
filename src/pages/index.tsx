@@ -2,6 +2,7 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import Accordion from '@/components/basic/Accordion';
+import Modal from '@/components/basic/Modal';
 import Layout from '@/components/layout/Layout';
 import MetaMaskLogo from '@/components/logos/MetaMaskLogo';
 import PhantomLogo from '@/components/logos/PhantomLogo';
@@ -10,6 +11,8 @@ import BigButton from '@/components/period/calendar/options/BigButton';
 
 export default function HomePage() {
   const [publicKey, setPublicKey] = React.useState('');
+  const [connected, setConnected] = React.useState(false);
+  const [IsModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
     <Layout>
@@ -17,31 +20,52 @@ export default function HomePage() {
         <title>Cana Health</title>
       </Head>
       <main className='h-full min-h-screen'>
+        <Modal
+          isOpen={IsModalOpen}
+          setIsOpen={setIsModalOpen}
+          onClick={() => {
+            setConnected(true);
+            setIsModalOpen(false);
+          }}
+          title='Connect Wallet'
+          description='Please connect your wallet to continue'
+          btnlabel='Connect'
+        />
         <div className='mx-auto flex max-w-xl flex-col justify-start'>
-          <div className='flex h-96 justify-center'>
-            <Calendar />
-          </div>
-          <Accordion
-            title='Set up wallet'
-            description={
-              <div className='flex flex-col items-center justify-center space-y-3'>
-                <BigButton
-                  OnClickDo={() => setPublicKey('000000')}
-                  text='Phantom'
-                  icon={<PhantomLogo size={20} />}
-                  height='10'
-                  className='text-xs'
-                />
-                <BigButton
-                  OnClickDo={() => setPublicKey('000000')}
-                  text='Metamask'
-                  icon={<MetaMaskLogo size={20} />}
-                  height='10'
-                  className='text-xs'
-                />
-              </div>
-            }
-          />
+          <Calendar />
+          <section className='my-8 flex flex-col items-center justify-center'>
+            {connected ? (
+              //! If connected render
+              <BigButton text='save on-chain' height='20' className='text-sm' />
+            ) : (
+              //! If not connected render
+              <Accordion
+                title='Connect wallet'
+                description={
+                  <div className='flex flex-col items-center justify-center space-y-3'>
+                    <BigButton
+                      OnClickDo={() => {
+                        setIsModalOpen(true);
+                      }}
+                      text='Phantom'
+                      icon={<PhantomLogo size={20} />}
+                      height='10'
+                      className='text-xs'
+                    />
+                    <BigButton
+                      OnClickDo={() => {
+                        setIsModalOpen(true);
+                      }}
+                      text='Metamask'
+                      icon={<MetaMaskLogo size={20} />}
+                      height='10'
+                      className='text-xs'
+                    />
+                  </div>
+                }
+              />
+            )}
+          </section>
         </div>
       </main>
     </Layout>

@@ -24,9 +24,9 @@ const BigButton: React.FC<BigButtonProps> = ({
       aria-label={text}
       type='button'
       className={clsxm(
-        'flex w-44',
+        'mx-auto flex w-44',
         'flex-col items-center justify-center rounded shadow-sm',
-        'rounded-3xl border border-blue-93 bg-white  text-indigo-800',
+        'border-blue-93 rounded-3xl border bg-white  text-indigo-800',
         'transition-all ease-out active:bg-gray-800 active:text-white',
         'hover:bg-gray-600 hover:text-white hover:shadow-md',
         [
