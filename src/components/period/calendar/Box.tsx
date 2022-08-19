@@ -90,7 +90,8 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
         className={clsxm(
           'opacity-0 group-hover:opacity-100',
           'group-active:opacity-100',
-          'group-focus:opacity-100'
+          'group-focus:opacity-100',
+          [isCurrentWeek ? 'opacity-100' : '']
         )}
         aria-hidden={isCurrentWeek}
       >
