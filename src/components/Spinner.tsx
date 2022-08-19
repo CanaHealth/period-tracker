@@ -1,10 +1,10 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 type SpinnerProps = {
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const Spinner: React.FC<SpinnerProps> = ({ className }) => {
   return (
@@ -29,7 +29,7 @@ const Spinner: React.FC<SpinnerProps> = ({ className }) => {
         <span className='sr-only'>Loading...</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Spinner;
+export default Spinner

@@ -1,14 +1,14 @@
-import { Disclosure, Transition } from '@headlessui/react';
-import * as React from 'react';
-import { HiChevronDown } from 'react-icons/hi';
+import { Disclosure, Transition } from '@headlessui/react'
+import * as React from 'react'
+import { HiChevronDown } from 'react-icons/hi'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 type AccordionProps = {
-  title?: string;
-  description?: string | React.ReactNode;
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  title?: string
+  description?: string | React.ReactNode
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const Accordion: React.FC<AccordionProps> = ({
   className,
@@ -63,7 +63,7 @@ const Accordion: React.FC<AccordionProps> = ({
         </Disclosure>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Accordion;
+export default Accordion

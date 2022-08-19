@@ -108,10 +108,10 @@ export default Calendar;
 
 // generate storybook
 
-import { Meta, Story } from '@storybook/react/types-6-0';
-import * as React from 'react';
+import { Meta, Story } from '@storybook/react/types-6-0'
+import * as React from 'react'
 
-import Calendar from '@/components/period/calendar/Calendar';
+import Calendar from '@/components/period/calendar/Calendar'
 
 export default {
   title: 'Period/Calendar',
@@ -119,13 +119,13 @@ export default {
   decorators: [
     (Story) => <div className='h-full bg-gray-mid-light'>{Story()}</div>,
   ],
-} as Meta;
+} as Meta
 
-const Template: Story = (args) => <Calendar {...args} />;
-export const Default = Template.bind({});
-Default.args = {};
+const Template: Story = (args) => <Calendar {...args} />
+export const Default = Template.bind({})
+Default.args = {}
 
 // blank page
 
-export const Blank = Template.bind({});
-Blank.args = {};
+export const Blank = Template.bind({})
+Blank.args = {}

@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 type InfoCardProps = {
-  walletAddress?: string;
-  subheading?: string;
-  heading?: string;
-  description?: string;
-  buttonText?: string;
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  walletAddress?: string
+  subheading?: string
+  heading?: string
+  description?: string
+  buttonText?: string
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const InfoCard: React.FC<InfoCardProps> = ({
   walletAddress = 'generate',
@@ -46,8 +46,8 @@ const InfoCard: React.FC<InfoCardProps> = ({
             type='button'
             // onclick copy wallet address to clipboard and open new tab with moonpay.com
             onClick={() => {
-              navigator.clipboard.writeText(walletAddress);
-              window.open('https://www.moonpay.com/buy/sol');
+              navigator.clipboard.writeText(walletAddress)
+              window.open('https://www.moonpay.com/buy/sol')
             }}
             className='inline-flex  items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm'
           >
@@ -56,7 +56,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InfoCard;
+export default InfoCard

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { FC } from 'react';
+import * as React from 'react'
+import { FC } from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
-import { findPrevMonday, newToday } from '@/util/calendarFunc';
+import { findPrevMonday, newToday } from '@/util/calendarFunc'
 
 const colorVarientSelector = {
   normal: 'border-gray-light border-2 bg-gray-mid-light',
@@ -11,57 +11,57 @@ const colorVarientSelector = {
   average: 'bg-flow-average',
   light: 'bg-flow-light',
   ovulation: 'bg-blue-100',
-};
+}
 
 const setDayOfWeekLabel = (num: number) => {
   switch (num) {
     case 1:
-      return 'Mo';
+      return 'Mo'
     case 2:
-      return 'Tu';
+      return 'Tu'
     case 3:
-      return 'We';
+      return 'We'
     case 4:
-      return 'Th';
+      return 'Th'
     case 5:
-      return 'Fr';
+      return 'Fr'
     case 6:
-      return 'Sa';
+      return 'Sa'
     case 0:
-      return 'Su';
+      return 'Su'
     default:
-      return undefined;
+      return undefined
   }
-};
+}
 
 export type ColorVariant =
   | 'heavy'
   | 'light'
   | 'average'
   | 'ovulation'
-  | 'normal';
+  | 'normal'
 
 export type BoxProps = {
-  date: Date;
-  color?: ColorVariant; //  @default 'normal'
-} & React.ComponentPropsWithoutRef<'div'>;
+  date: Date
+  color?: ColorVariant //  @default 'normal'
+} & React.ComponentPropsWithoutRef<'div'>
 
 const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
-  const dayInMonthNumber = String(date.getDate());
+  const dayInMonthNumber = String(date.getDate())
 
-  const today = newToday();
-  const mondayOfToday = findPrevMonday(today);
-  const mondayOfFlowData = findPrevMonday(date);
+  const today = newToday()
+  const mondayOfToday = findPrevMonday(today)
+  const mondayOfFlowData = findPrevMonday(date)
   const isCurrentWeek =
-    mondayOfToday.toLocaleDateString() == mondayOfFlowData.toLocaleDateString();
+    mondayOfToday.toLocaleDateString() == mondayOfFlowData.toLocaleDateString()
 
-  const isCurrentDay = today.toLocaleDateString() == date.toLocaleDateString();
+  const isCurrentDay = today.toLocaleDateString() == date.toLocaleDateString()
 
-  const DayOfWeekNum = date.getDay();
+  const DayOfWeekNum = date.getDay()
 
-  const currentWeekLabel = setDayOfWeekLabel(DayOfWeekNum);
+  const currentWeekLabel = setDayOfWeekLabel(DayOfWeekNum)
 
-  const isEvenMonth = date.getMonth() % 2 == 0;
+  const isEvenMonth = date.getMonth() % 2 == 0
 
   return (
     <div
@@ -98,7 +98,7 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
         {dayInMonthNumber}
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default Box;
+export default Box

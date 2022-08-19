@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 function withOpacityValue(variable) {
   return ({ opacityValue }) => {
     if (opacityValue === undefined) {
-      return `rgb(var(${variable}))`;
+      return `rgb(var(${variable}))`
     }
-    return `rgb(var(${variable}) / ${opacityValue})`;
-  };
+    return `rgb(var(${variable}) / ${opacityValue})`
+  }
 }
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
@@ -49,9 +49,6 @@ module.exports = {
             light: '#feffff',
           },
         },
-
-
-
       },
 
       animation: {
@@ -74,15 +71,15 @@ module.exports = {
           },
         },
         showScroll: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)', },
-          '33%': { transform: 'translate(0px, 50px) scale(1)', },
-          '66%': { transform: 'translate(0px, 0px) scale(1)', },
-          '80%': { transform: 'translate(0px, 3px) scale(1)', },
-          '100%': { transform: 'translate(0px, 0px) scale(1)', },
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(0px, 50px) scale(1)' },
+          '66%': { transform: 'translate(0px, 0px) scale(1)' },
+          '80%': { transform: 'translate(0px, 3px) scale(1)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
         },
       },
     },
   },
 
   plugins: [require('@tailwindcss/forms')],
-};
+}

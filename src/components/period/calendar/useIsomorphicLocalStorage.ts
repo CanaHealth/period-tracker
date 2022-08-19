@@ -1,18 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react'
 
 type LocalStorageStateNoInit<T> = [
   value: T | undefined,
   setValue: (value: T | ((oldValue: T | undefined) => T | undefined)) => void,
   isLoading: boolean
-];
+]
 type LocalStorageStateWithInit<T> = [
   value: T,
   setValue: (value: T | ((oldValue: T) => T)) => void,
   isLoading: boolean
-];
+]
 export type LocalStorageState<T> =
   | LocalStorageStateNoInit<T>
-  | LocalStorageStateWithInit<T>;
+  | LocalStorageStateWithInit<T>
 
 /**
  *
@@ -23,41 +23,41 @@ export type LocalStorageState<T> =
 export function useIsomorphicLocalStorage<T>(
   key: string,
   initialValue: T | (() => T)
-): Readonly<LocalStorageStateWithInit<T>>;
+): Readonly<LocalStorageStateWithInit<T>>
 export function useIsomorphicLocalStorage<T>(
   key: string
-): Readonly<LocalStorageStateNoInit<T>>;
+): Readonly<LocalStorageStateNoInit<T>>
 export function useIsomorphicLocalStorage<T>(
   key: string,
   initialValue?: T | (() => T)
 ): Readonly<LocalStorageState<T>> {
-  const [isLoading, setIsLoading] = useState(true);
-  const [value, setValue] = useState<T | undefined>(initialValue);
+  const [isLoading, setIsLoading] = useState(true)
+  const [value, setValue] = useState<T | undefined>(initialValue)
 
   // read from local storage on mount
   useEffect(() => {
-    const item = window.localStorage.getItem(key);
+    const item = window.localStorage.getItem(key)
     if (item) {
-      setValue(JSON.parse(item));
+      setValue(JSON.parse(item))
     }
-    setIsLoading(false);
-  }, [setValue, key]);
+    setIsLoading(false)
+  }, [setValue, key])
 
   const syncValue = useCallback(
     (newValue: T | ((oldVal: T | undefined) => T)) => {
       const valueToStore =
-        newValue instanceof Function ? newValue(value) : newValue;
+        newValue instanceof Function ? newValue(value) : newValue
 
-      setValue(valueToStore);
+      setValue(valueToStore)
 
       if (valueToStore === undefined) {
-        window.localStorage.removeItem(key);
+        window.localStorage.removeItem(key)
       } else {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
       }
     },
     [key, value]
-  );
+  )
 
-  return [value, syncValue, isLoading] as Readonly<LocalStorageState<T>>;
+  return [value, syncValue, isLoading] as Readonly<LocalStorageState<T>>
 }

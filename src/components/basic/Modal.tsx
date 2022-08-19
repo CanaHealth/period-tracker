@@ -1,17 +1,17 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 type ModalProps = {
-  setIsOpen: (open: boolean) => void;
-  onClick: () => void;
-  isOpen: boolean;
-  title: string;
-  description: string;
-  btnlabel: string;
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  setIsOpen: (open: boolean) => void
+  onClick: () => void
+  isOpen: boolean
+  title: string
+  description: string
+  btnlabel: string
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const Modal: React.FC<ModalProps> = ({
   className,
@@ -23,8 +23,8 @@ const Modal: React.FC<ModalProps> = ({
   onClick,
 }) => {
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   return (
     <div className={clsxm('', className)}>
@@ -80,7 +80,7 @@ const Modal: React.FC<ModalProps> = ({
         </Dialog>
       </Transition>
     </div>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

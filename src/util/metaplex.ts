@@ -1,35 +1,35 @@
 /**
  * `metaplex.ts` initializes and uses the MetaPlex JS SDK.
  */
-import { keypairIdentity, Metaplex } from "@metaplex-foundation/js";
-import { clusterApiUrl, Connection, Keypair } from "@solana/web3.js";
+import { keypairIdentity, Metaplex } from '@metaplex-foundation/js'
 import { NFTStorageMetaplexor } from '@nftstorage/metaplex-auth'
+import { Connection, Keypair } from '@solana/web3.js'
 
 function initializeMetaplex() {
-  const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_CLUSTER_URL!);
-  
-  const metaplex = Metaplex.make(connection);
+  const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_CLUSTER_URL!)
 
-  return metaplex;
+  const metaplex = Metaplex.make(connection)
+
+  return metaplex
 }
 
 async function createNFT(data: any, secretKey: Uint8Array): Promise<string> {
-  const wallet = Keypair.fromSecretKey(secretKey);
+  const wallet = Keypair.fromSecretKey(secretKey)
 
-  const metaplex = initializeMetaplex();
-  metaplex.use(keypairIdentity(wallet));
-  
-  const cid = await uploadNFT(data, secretKey);
-  console.log("CID: ", cid);
+  const metaplex = initializeMetaplex()
+  metaplex.use(keypairIdentity(wallet))
+
+  const cid = await uploadNFT(data, secretKey)
+  console.log('CID: ', cid)
 
   const { nft } = await metaplex
-  .nfts()
-  .create({
-      uri: "ipfs://" + cid,
-      name: "Cana",
+    .nfts()
+    .create({
+      uri: 'ipfs://' + cid,
+      name: 'Cana',
       sellerFeeBasisPoints: 500, // Represents 5.00%.
-  })
-  .run();
+    })
+    .run()
 
   return nft.mint.address.toString()
 }
@@ -37,13 +37,13 @@ async function createNFT(data: any, secretKey: Uint8Array): Promise<string> {
 async function uploadNFT(data: any, key: Uint8Array) {
   const client = NFTStorageMetaplexor.withSecretKey(key, {
     solanaCluster: process.env.NEXT_PUBLIC_SOLANA_CLUSTER_NAME!,
-    mintingAgent: 'canahealth/period_tracker'
-  });
+    mintingAgent: 'canahealth/period_tracker',
+  })
 
-  const blob: Blob = new Blob([JSON.stringify(data)]);
-  const cid = await client.storeBlob(blob);
+  const blob: Blob = new Blob([JSON.stringify(data)])
+  const cid = await client.storeBlob(blob)
 
-  return cid;
+  return cid
 }
 
-export { createNFT,initializeMetaplex };
+export { createNFT, initializeMetaplex }

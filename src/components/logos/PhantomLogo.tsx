@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import * as React from 'react';
+import Image from 'next/image'
+import * as React from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 type PhantomLogoProps = {
-  size: number;
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  size: number
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const PhantomLogo: React.FC<PhantomLogoProps> = ({ className, size }) => {
   // TODO:
@@ -20,7 +20,7 @@ const PhantomLogo: React.FC<PhantomLogoProps> = ({ className, size }) => {
         height={size}
       />
     </div>
-  );
-};
+  )
+}
 
-export default PhantomLogo;
+export default PhantomLogo

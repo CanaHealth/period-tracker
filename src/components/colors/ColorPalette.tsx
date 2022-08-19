@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
 type ColorPaletteProps = {
-  colors: { [key: string]: { [key: string]: string } };
-} & React.ComponentPropsWithoutRef<'div'>;
+  colors: { [key: string]: { [key: string]: string } }
+} & React.ComponentPropsWithoutRef<'div'>
 
 export default function ColorPalette({ colors }: ColorPaletteProps) {
   return (
@@ -29,5 +29,5 @@ export default function ColorPalette({ colors }: ColorPaletteProps) {
         </div>
       ))}
     </div>
-  );
+  )
 }

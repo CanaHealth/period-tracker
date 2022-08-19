@@ -1,4 +1,4 @@
-import InfoCard from '@/components/layout/InfoCard';
+import InfoCard from '@/components/layout/InfoCard'
 
 export default function FundPage() {
   return (
@@ -14,5 +14,5 @@ export default function FundPage() {
         />
       </section>
     </main>
-  );
+  )
 }

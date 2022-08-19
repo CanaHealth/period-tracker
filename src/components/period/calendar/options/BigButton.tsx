@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 export type BigButtonProps = {
-  icon?: React.ReactNode;
-  iconLocation?: 't' | 'b' | 'l' | 'r';
-  height?: '10' | '16' | '20' | '24' | '32';
-  text?: string;
-  className?: string;
-  OnClickDo?: () => void;
-};
+  icon?: React.ReactNode
+  iconLocation?: 't' | 'b' | 'l' | 'r'
+  height?: '10' | '16' | '20' | '24' | '32'
+  text?: string
+  className?: string
+  OnClickDo?: () => void
+}
 
 const BigButton: React.FC<BigButtonProps> = ({
   icon,
@@ -54,7 +54,7 @@ const BigButton: React.FC<BigButtonProps> = ({
         {text && <span className='m-1 w-max'>{text}</span>}
       </div>
     </button>
-  );
-};
+  )
+}
 
-export default BigButton;
+export default BigButton

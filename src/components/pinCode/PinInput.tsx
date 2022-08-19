@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { useRef } from 'react';
+import * as React from 'react'
+import { useRef } from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 export type PinInputProps = {
-  value: number;
-  refIndex: number;
-  myRef?: boolean;
-  className?: string;
-  whenFocused: (index: number) => void;
-} & React.ComponentPropsWithoutRef<'div'>;
+  value: number
+  refIndex: number
+  myRef?: boolean
+  className?: string
+  whenFocused: (index: number) => void
+} & React.ComponentPropsWithoutRef<'div'>
 
 const PinInput: React.FC<PinInputProps> = ({
   myRef = false,
@@ -18,15 +18,15 @@ const PinInput: React.FC<PinInputProps> = ({
   className,
   whenFocused,
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
 
   //usestate for blur
 
   React.useEffect(() => {
     if (myRef) {
-      inputRef.current?.focus();
+      inputRef.current?.focus()
     }
-  }, [myRef]);
+  }, [myRef])
 
   return (
     <div className=' relative'>
@@ -40,17 +40,17 @@ const PinInput: React.FC<PinInputProps> = ({
         type='number'
         value={value}
         onChange={() => {
-          null;
+          null
         }}
         ref={inputRef}
         // onfocus select all text when focused
         onFocus={() => {
-          inputRef.current?.focus();
-          whenFocused(refIndex);
+          inputRef.current?.focus()
+          whenFocused(refIndex)
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default PinInput;
+export default PinInput

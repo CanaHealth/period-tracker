@@ -1,16 +1,16 @@
-import { Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { HiBadgeCheck } from 'react-icons/hi';
-import { ImCross } from 'react-icons/im';
+import { Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react'
+import { HiBadgeCheck } from 'react-icons/hi'
+import { ImCross } from 'react-icons/im'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 type BannerProps = {
-  showUp?: boolean;
-  icon?: React.ReactNode;
-  iconColor?: string;
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  showUp?: boolean
+  icon?: React.ReactNode
+  iconColor?: string
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const Banner: React.FC<BannerProps> = ({
   showUp = true,
@@ -18,7 +18,7 @@ const Banner: React.FC<BannerProps> = ({
   icon,
   iconColor,
 }) => {
-  const [show, setShow] = useState(showUp);
+  const [show, setShow] = useState(showUp)
 
   return (
     <div
@@ -68,7 +68,7 @@ const Banner: React.FC<BannerProps> = ({
                     type='button'
                     className='inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                     onClick={() => {
-                      setShow(false);
+                      setShow(false)
                     }}
                   >
                     <span className='sr-only'>Close</span>
@@ -81,7 +81,7 @@ const Banner: React.FC<BannerProps> = ({
         </Transition>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

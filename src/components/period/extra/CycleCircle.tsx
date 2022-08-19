@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from 'react'
 
 type CycleCircleProps = {
-  timeString: string;
-  numberString: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  timeString: string
+  numberString: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 export default function CycleCircle({
   timeString,
@@ -14,5 +14,5 @@ export default function CycleCircle({
       <p className='text-md'>{timeString}</p>
       <p className='text-4xl font-bold'>{numberString}</p>
     </div>
-  );
+  )
 }

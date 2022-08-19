@@ -1,28 +1,28 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
 import {
   FlowIntensity,
   NoteFlowProps,
-} from '@/components/period/calendar/options/NoteFlow';
+} from '@/components/period/calendar/options/NoteFlow'
 
 export type buttonProp = {
-  icon: React.ReactNode;
-  text: FlowIntensity;
-  className?: string;
-};
+  icon: React.ReactNode
+  text: FlowIntensity
+  className?: string
+}
 
-export type buttonsProps = buttonProp[];
+export type buttonsProps = buttonProp[]
 
 type NoteFlowButtonsProps = {
-  renderButton: buttonProp;
-  flowdata: NoteFlowProps['flowdata'];
-  index: number;
-  handleSubmit: (flowdata: NoteFlowProps['flowdata']) => void;
+  renderButton: buttonProp
+  flowdata: NoteFlowProps['flowdata']
+  index: number
+  handleSubmit: (flowdata: NoteFlowProps['flowdata']) => void
 
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const NoteFlowButtons: React.FC<NoteFlowButtonsProps> = ({
   flowdata,
@@ -42,7 +42,7 @@ const NoteFlowButtons: React.FC<NoteFlowButtonsProps> = ({
         'm-2 flex h-24 w-44 flex-col items-center justify-center rounded border-2 border-white shadow-sm hover:shadow-md md:h-44',
         className,
         renderButton.text == flowdata.howHeavy
-          ? 'border border-blue-93'
+          ? 'border-blue-93 border'
           : 'bg-gray-200 text-gray-600'
       )}
       onClick={() => handleSubmit({ ...flowdata, howHeavy: renderButton.text })}
@@ -59,7 +59,7 @@ const NoteFlowButtons: React.FC<NoteFlowButtonsProps> = ({
         {renderButton.text}
       </div>
     </button>
-  );
-};
+  )
+}
 
-export default NoteFlowButtons;
+export default NoteFlowButtons

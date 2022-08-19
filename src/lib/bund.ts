@@ -1,5 +1,5 @@
 // import the client
-import Bundlr from '@bundlr-network/client';
+import Bundlr from '@bundlr-network/client'
 
 // type bundlrProps = {
 //   address?: string;
@@ -7,17 +7,17 @@ import Bundlr from '@bundlr-network/client';
 
 export async function bund() {
   // currencies with a keyfile: load + parse your keyfile as below:
-  const key = process.env.NEXT_PUBLIC_WALLET_PRIVATE_KEY;
+  const key = process.env.NEXT_PUBLIC_WALLET_PRIVATE_KEY
   // other currencies without one - set key as your private key string
 
   // initialise a bundlr client
-  const bundlr = new Bundlr('https://node1.bundlr.network', 'matic', key);
+  const bundlr = new Bundlr('https://node1.bundlr.network', 'matic', key)
 
   // get your account address (associated with your private key)
-  const address = bundlr.address;
+  const address = bundlr.address
 
-  const balance = await bundlr.getLoadedBalance();
-  return { address, balance };
+  const balance = await bundlr.getLoadedBalance()
+  return { address, balance }
 
   // // convert it into decimal units
   // const decimalBalance = bundlr.utils.unitConverter(balance);
@@ -51,4 +51,4 @@ export async function bund() {
 
   // // once the upload succeeds, your data will be instantly accessible at `https://arweave.net/${id}`
 }
-bund();
+bund()

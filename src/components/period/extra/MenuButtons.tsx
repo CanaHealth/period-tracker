@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
 type MenuButtonsProps = {
-  size?: 'sm' | 'lg';
-} & React.ComponentPropsWithoutRef<'div'>;
+  size?: 'sm' | 'lg'
+} & React.ComponentPropsWithoutRef<'div'>
 
 export default function MenuButtons({ size, ...rest }: MenuButtonsProps) {
   return (
@@ -14,5 +14,5 @@ export default function MenuButtons({ size, ...rest }: MenuButtonsProps) {
     >
       {rest.children}
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import PinCode from '@/components/pinCode/PinCode';
+import PinCode from '@/components/pinCode/PinCode'
 
 export default function IndexPage() {
-  const [publicKey, setPublicKey] = React.useState('');
+  const [publicKey, setPublicKey] = React.useState('')
 
   return (
     <main className='bg-gray-light-dark'>
@@ -30,5 +30,5 @@ export default function IndexPage() {
         />
       </section>
     </main>
-  );
+  )
 }

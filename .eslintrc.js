@@ -72,4 +72,4 @@ module.exports = {
     React: true,
     JSX: true,
   },
-};
+}

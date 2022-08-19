@@ -1,26 +1,26 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useState } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
-import { BsDroplet, BsDropletFill, BsDropletHalf } from 'react-icons/bs';
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useEffect, useState } from 'react'
+import { AiFillCloseCircle } from 'react-icons/ai'
+import { BsDroplet, BsDropletFill, BsDropletHalf } from 'react-icons/bs'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
-import NoteFlowButtons, { buttonsProps } from './NoteFlowButtons';
+import NoteFlowButtons, { buttonsProps } from './NoteFlowButtons'
 
-export type FlowIntensity = 'light' | 'heavy' | 'average' | 'none';
+export type FlowIntensity = 'light' | 'heavy' | 'average' | 'none'
 
 export type FlowData = {
-  [key: string]: FlowIntensity;
-};
+  [key: string]: FlowIntensity
+}
 
 export type NoteFlowProps = {
-  flowdata: FlowData;
-  buttons?: buttonsProps;
-  className?: string;
-  open?: boolean;
-  setOpen?: (open: boolean) => void;
-  handleSubmit?: (flowdata: FlowData) => void;
-} & React.ComponentPropsWithoutRef<'div'>;
+  flowdata: FlowData
+  buttons?: buttonsProps
+  className?: string
+  open?: boolean
+  setOpen?: (open: boolean) => void
+  handleSubmit?: (flowdata: FlowData) => void
+} & React.ComponentPropsWithoutRef<'div'>
 
 const NoteFlow: React.FC<NoteFlowProps> = ({
   handleSubmit,
@@ -36,34 +36,34 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
 }) => {
   // don't allow submit data if no selection has been made
   //use effect to manage canSubmit state
-  const [canSubmit, setCanSubmit] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false)
 
   const setOpener =
     setOpen ||
     (() => {
-      !open;
-    });
+      !open
+    })
   const handleSubmited =
     handleSubmit ||
     (() => {
-      flowdata;
-    });
+      flowdata
+    })
 
   useEffect(() => {
     if (flowdata.howHeavy !== 'none') {
-      setCanSubmit(true);
+      setCanSubmit(true)
     } else {
-      setCanSubmit(false);
+      setCanSubmit(false)
     }
-  }, [flowdata.howHeavy]);
+  }, [flowdata.howHeavy])
   // create funtion that checks canSubmit state and if true, calls handleSubmit with flowdata
   const handleSubmitFlowdata = () => {
     if (canSubmit) {
-      setOpener(false);
+      setOpener(false)
     } else {
-      alert('Please select a flow or close the dialog');
+      alert('Please select a flow or close the dialog')
     }
-  };
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -129,8 +129,8 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
                         handleSubmited({
                           ...flowdata,
                           howHeavy: 'none',
-                        });
-                        setOpener(false);
+                        })
+                        setOpener(false)
                       }}
                       className={clsxm(
                         ' bg-gray-light-dark shadow-sm ',
@@ -175,7 +175,7 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default NoteFlow;
+export default NoteFlow

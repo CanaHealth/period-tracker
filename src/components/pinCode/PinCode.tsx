@@ -1,14 +1,14 @@
-import React from 'react';
-import { useState } from 'react';
-import { HiBadgeCheck } from 'react-icons/hi';
+import React from 'react'
+import { useState } from 'react'
+import { HiBadgeCheck } from 'react-icons/hi'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
-import BigButton from '@/components/period/calendar/options/BigButton';
-import PinInput from '@/components/pinCode/PinInput';
+import BigButton from '@/components/period/calendar/options/BigButton'
+import PinInput from '@/components/pinCode/PinInput'
 
-import { encryptData, getDecryptedWallet } from '@/util/dataCryptoOperations';
-import { saveDataOnChain } from '@/util/saveOnChain';
+import { encryptData, getDecryptedWallet } from '@/util/dataCryptoOperations'
+import { saveDataOnChain } from '@/util/saveOnChain'
 import {
   createSolanaWallet,
   decryptWallet,
@@ -17,17 +17,17 @@ import {
   solanaWallet,
   storePasscodeAsCookie,
   storeWalletInLocalStorage,
-} from '@/util/WalletOperations';
-import { usableSecretKey } from '@/util/WalletOperations';
+} from '@/util/WalletOperations'
+import { usableSecretKey } from '@/util/WalletOperations'
 
-import AcceptModal from './AcceptModal';
+import AcceptModal from './AcceptModal'
 
 type PinCodeProps = {
-  pincode: number[];
-  className?: string;
-  variant?: 'row' | 'col';
-  setPublicKey: React.Dispatch<React.SetStateAction<string>>;
-} & React.ComponentPropsWithoutRef<'div'>;
+  pincode: number[]
+  className?: string
+  variant?: 'row' | 'col'
+  setPublicKey: React.Dispatch<React.SetStateAction<string>>
+} & React.ComponentPropsWithoutRef<'div'>
 
 const PinCode: React.FC<PinCodeProps> = ({
   className,
@@ -35,29 +35,29 @@ const PinCode: React.FC<PinCodeProps> = ({
   variant = 'row',
   setPublicKey,
 }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const [pin, setPin] = useState<number[]>(pincode);
-  const [open, setOpen] = useState(false);
-  const [refIndex, setRefIndex] = useState<number>(0);
-  const [nftID, setNftID] = useState<string>('');
-  const [blockExplorer, setBlockExplorer] = useState<boolean>(false);
-  const [encData, setEncData] = useState<string>('');
+  const [pin, setPin] = useState<number[]>(pincode)
+  const [open, setOpen] = useState(false)
+  const [refIndex, setRefIndex] = useState<number>(0)
+  const [nftID, setNftID] = useState<string>('')
+  const [blockExplorer, setBlockExplorer] = useState<boolean>(false)
+  const [encData, setEncData] = useState<string>('')
 
   const onChangeDigits = (value: number, index: number) => {
-    setPin(pin.map((digit, i) => (i === index ? value : digit)));
-  };
+    setPin(pin.map((digit, i) => (i === index ? value : digit)))
+  }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const { key } = event;
+    const { key } = event
 
     switch (key) {
       case 'ArrowLeft':
-        setRefIndex(Math.max(0, refIndex - 1));
-        break;
+        setRefIndex(Math.max(0, refIndex - 1))
+        break
       case 'ArrowRight':
-        setRefIndex(Math.min(pin.length - 1, refIndex + 1));
-        break;
+        setRefIndex(Math.min(pin.length - 1, refIndex + 1))
+        break
       case '0':
       case '1':
       case '2':
@@ -68,50 +68,50 @@ const PinCode: React.FC<PinCodeProps> = ({
       case '7':
       case '8':
       case '9':
-        onChangeDigits(Number(key), refIndex);
-        setRefIndex(Math.min(pin.length - 1, refIndex + 1));
-        break;
+        onChangeDigits(Number(key), refIndex)
+        setRefIndex(Math.min(pin.length - 1, refIndex + 1))
+        break
 
       default:
-        break;
+        break
     }
-  };
+  }
 
   const launchBlockExplorer = () => {
-    const url = `https://solscan.io/account/${nftID}`;
-    window.open(url, '_self');
-  };
+    const url = `https://solscan.io/account/${nftID}`
+    window.open(url, '_self')
+  }
 
   const submitPinCode = () => {
-    const pinConcat = pin.join(''); // Concatenated pincode as string
+    const pinConcat = pin.join('') // Concatenated pincode as string
 
     if (pin.length === 6) {
       if (getWalletFromLocalStorage().publicKey === '') {
-        const wallet = createSolanaWallet();
+        const wallet = createSolanaWallet()
 
         // Pass in pin in string format to encrypt wallet.
-        const encryptedWallet: solanaWallet = encryptWallet(wallet, pinConcat);
+        const encryptedWallet: solanaWallet = encryptWallet(wallet, pinConcat)
 
-        setPublicKey(encryptedWallet.publicKey);
+        setPublicKey(encryptedWallet.publicKey)
 
         // Store wallet in local storage.
-        storeWalletInLocalStorage(encryptedWallet);
+        storeWalletInLocalStorage(encryptedWallet)
 
-        storePasscodeAsCookie(pinConcat);
+        storePasscodeAsCookie(pinConcat)
       } else {
-        const encryptedWallet = getWalletFromLocalStorage();
+        const encryptedWallet = getWalletFromLocalStorage()
 
         const decryptedWallet: solanaWallet = decryptWallet(
           encryptedWallet,
           pinConcat
-        );
+        )
 
-        setPublicKey(encryptedWallet.publicKey);
+        setPublicKey(encryptedWallet.publicKey)
 
-        storePasscodeAsCookie(pinConcat);
+        storePasscodeAsCookie(pinConcat)
       }
 
-      const decryptedWallet: solanaWallet = getDecryptedWallet(null);
+      const decryptedWallet: solanaWallet = getDecryptedWallet(null)
 
       setEncData(
         JSON.stringify(
@@ -122,39 +122,39 @@ const PinCode: React.FC<PinCodeProps> = ({
           null,
           4
         )
-      );
+      )
 
       console.log(
         encryptData(
           localStorage.getItem('FLOWDATA')!,
           usableSecretKey(decryptedWallet.secretKey)
         )
-      );
+      )
     }
-  };
+  }
 
   const handleAccept = async () => {
-    setLoading(true);
-    setBlockExplorer(false);
+    setLoading(true)
+    setBlockExplorer(false)
 
     // TODO: Handle expired cookie.
 
-    const decryptedWallet: solanaWallet = getDecryptedWallet(null);
+    const decryptedWallet: solanaWallet = getDecryptedWallet(null)
 
     saveDataOnChain(
       localStorage.getItem('FLOWDATA'),
       usableSecretKey(decryptedWallet.secretKey)
     )
       .then((id) => {
-        setLoading(false);
-        setNftID(id);
-        setBlockExplorer(true);
+        setLoading(false)
+        setNftID(id)
+        setBlockExplorer(true)
       })
       .catch((err) => {
-        setLoading(false);
-        throw err;
-      });
-  };
+        setLoading(false)
+        throw err
+      })
+  }
 
   return (
     <div
@@ -197,8 +197,8 @@ const PinCode: React.FC<PinCodeProps> = ({
 
         <BigButton
           OnClickDo={() => {
-            submitPinCode();
-            setOpen(true);
+            submitPinCode()
+            setOpen(true)
           }}
           icon={<HiBadgeCheck />}
           text='Save on-chain'
@@ -211,7 +211,7 @@ const PinCode: React.FC<PinCodeProps> = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PinCode;
+export default PinCode

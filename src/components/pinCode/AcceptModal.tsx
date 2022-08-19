@@ -1,22 +1,22 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import { CopyBlock, monoBlue } from 'react-code-blocks';
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+import { CopyBlock, monoBlue } from 'react-code-blocks'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
-import BigButton from '@/components/period/calendar/options/BigButton';
-import Spinner from '@/components/Spinner';
+import BigButton from '@/components/period/calendar/options/BigButton'
+import Spinner from '@/components/Spinner'
 
 type AcceptModalProps = {
-  open?: boolean;
-  setOpen?: (open: boolean) => void;
-  handleSubmit?: () => void;
-  data?: string;
-  loading?: boolean;
-  launchBlockExplorer?: () => void;
-  blockExplorer?: boolean;
-  className?: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  open?: boolean
+  setOpen?: (open: boolean) => void
+  handleSubmit?: () => void
+  data?: string
+  loading?: boolean
+  launchBlockExplorer?: () => void
+  blockExplorer?: boolean
+  className?: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 const AcceptModal: React.FC<AcceptModalProps> = ({
   handleSubmit,
@@ -31,8 +31,8 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
   const setOpener =
     setOpen ||
     (() => {
-      !open;
-    });
+      !open
+    })
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -121,10 +121,10 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default AcceptModal;
+export default AcceptModal
 
 /*
 

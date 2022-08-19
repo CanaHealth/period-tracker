@@ -8,9 +8,9 @@ export const CurrentWeekArgs = {
     { DayOfWeekLabel: 'Sa' },
     { DayOfWeekLabel: 'Su' },
   ],
-};
+}
 
-export const HistoricalWeekArgs = { week: [{}, {}, {}, {}, {}, {}, {}] };
+export const HistoricalWeekArgs = { week: [{}, {}, {}, {}, {}, {}, {}] }
 export const HistoricalWeekWithOvulationArgs = {
   week: [
     { color: 'ovulation' },
@@ -21,7 +21,7 @@ export const HistoricalWeekWithOvulationArgs = {
     {},
     {},
   ],
-};
+}
 
 export const FlowWeekArgs = {
   week: [
@@ -33,4 +33,4 @@ export const FlowWeekArgs = {
     { color: 'flow' },
     { color: 'flow' },
   ],
-};
+}

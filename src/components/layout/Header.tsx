@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import Roots_Logo_Small from '~/svg/Roots_Logo_Small.svg';
+import Roots_Logo_Small from '~/svg/Roots_Logo_Small.svg'
 
 export default function Example() {
   return (
@@ -24,5 +24,5 @@ export default function Example() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-import Head from 'next/head';
-import * as React from 'react';
+import Head from 'next/head'
+import * as React from 'react'
 
-import Accordion from '@/components/basic/Accordion';
-import Modal from '@/components/basic/Modal';
-import Layout from '@/components/layout/Layout';
-import MetaMaskLogo from '@/components/logos/MetaMaskLogo';
-import PhantomLogo from '@/components/logos/PhantomLogo';
-import Calendar from '@/components/period/calendar/Calendar';
-import BigButton from '@/components/period/calendar/options/BigButton';
+import Accordion from '@/components/basic/Accordion'
+import Modal from '@/components/basic/Modal'
+import Layout from '@/components/layout/Layout'
+import MetaMaskLogo from '@/components/logos/MetaMaskLogo'
+import PhantomLogo from '@/components/logos/PhantomLogo'
+import Calendar from '@/components/period/calendar/Calendar'
+import BigButton from '@/components/period/calendar/options/BigButton'
 
 export default function HomePage() {
-  const [publicKey, setPublicKey] = React.useState('');
-  const [connected, setConnected] = React.useState(false);
-  const [IsModalOpen, setIsModalOpen] = React.useState(false);
+  const [publicKey, setPublicKey] = React.useState('')
+  const [connected, setConnected] = React.useState(false)
+  const [IsModalOpen, setIsModalOpen] = React.useState(false)
 
   const WalletProps = [
     {
@@ -23,7 +23,7 @@ export default function HomePage() {
       text: 'Phantom',
       icon: <PhantomLogo size={20} />,
     },
-  ];
+  ]
 
   return (
     <Layout>
@@ -41,8 +41,8 @@ export default function HomePage() {
                   isOpen={IsModalOpen}
                   setIsOpen={setIsModalOpen}
                   onClick={() => {
-                    setConnected(true);
-                    setIsModalOpen(false);
+                    setConnected(true)
+                    setIsModalOpen(false)
                   }}
                   title='Authorise data encryption and NFT minting'
                   description='Please authorise Cana Health to mint an NFT on your behalf using funds from your wallet. This will allow you to track your period and gain insights into your health.'
@@ -62,8 +62,8 @@ export default function HomePage() {
                   isOpen={IsModalOpen}
                   setIsOpen={setIsModalOpen}
                   onClick={() => {
-                    setConnected(true);
-                    setIsModalOpen(false);
+                    setConnected(true)
+                    setIsModalOpen(false)
                   }}
                   title='Connect Wallet'
                   description='Please connect your wallet to continue'
@@ -92,7 +92,7 @@ export default function HomePage() {
         </div>
       </main>
     </Layout>
-  );
+  )
 }
 
 /*

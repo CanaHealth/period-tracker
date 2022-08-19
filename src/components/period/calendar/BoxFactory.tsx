@@ -1,54 +1,54 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
-import Box from '@/components/period/calendar/Box';
-import { FlowIntensity } from '@/components/period/calendar/options/NoteFlow';
+import Box from '@/components/period/calendar/Box'
+import { FlowIntensity } from '@/components/period/calendar/options/NoteFlow'
 
 const setColorVariant = (howHeavy: FlowIntensity) => {
   switch (howHeavy) {
     case 'heavy':
-      return 'heavy';
+      return 'heavy'
     case 'light':
-      return 'light';
+      return 'light'
     case 'average':
-      return 'average';
+      return 'average'
     case 'none':
-      return 'normal';
+      return 'normal'
     default:
-      return undefined;
+      return undefined
   }
-};
+}
 
-const howHeavyOptions: FlowIntensity[] = ['light', 'average', 'heavy', 'none'];
+const howHeavyOptions: FlowIntensity[] = ['light', 'average', 'heavy', 'none']
 
 export type BoxFactoryInputs = {
-  date: Date;
-  howHeavy: FlowIntensity;
-  handleFunction: (date: Date, howHeavy: string) => void;
-} & React.ComponentPropsWithoutRef<'div'>;
+  date: Date
+  howHeavy: FlowIntensity
+  handleFunction: (date: Date, howHeavy: string) => void
+} & React.ComponentPropsWithoutRef<'div'>
 
 const BoxFactory: React.FC<BoxFactoryInputs> = ({
   date,
   howHeavy,
   handleFunction,
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleDoubleClick = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
   const handleClick = () => {
     const nextHowHeavy =
       howHeavyOptions[
         (howHeavyOptions.indexOf(howHeavy) + 1) % howHeavyOptions.length
-      ];
+      ]
 
-    handleFunction(date, nextHowHeavy);
-  };
+    handleFunction(date, nextHowHeavy)
+  }
 
-  const ColorVariant = setColorVariant(howHeavy);
+  const ColorVariant = setColorVariant(howHeavy)
 
   return (
     <div className={clsxm('flex snap-end items-center justify-center', '')}>
@@ -67,7 +67,7 @@ const BoxFactory: React.FC<BoxFactoryInputs> = ({
         <Box color={ColorVariant} date={date} />
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default BoxFactory;
+export default BoxFactory

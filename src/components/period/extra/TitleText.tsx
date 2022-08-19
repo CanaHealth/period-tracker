@@ -1,23 +1,23 @@
-import * as React from 'react';
+import * as React from 'react'
 
 type titleTextProps = {
-  username: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  username: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 /** Write a function that gives me a greeting for the user based on time of day.
  * @param {string} username - The username of the user.
  * @returns {string} - A greeting for the user.
  */
 function greetUserBasedOnTime() {
-  const currentHour = new Date().getHours();
+  const currentHour = new Date().getHours()
   if (currentHour < 12) {
-    return 'Good morning';
+    return 'Good morning'
   } else if (currentHour < 17) {
-    return 'Good afternoon';
+    return 'Good afternoon'
   } else if (currentHour < 23) {
-    return 'Good evening';
+    return 'Good evening'
   } else {
-    return 'Good night';
+    return 'Good night'
   }
 }
 
@@ -27,5 +27,5 @@ export default function TitleText({ ...rest }: titleTextProps) {
       <p className=''>{greetUserBasedOnTime()},</p>
       <p className='font-bold'>{rest.username}</p>
     </span>
-  );
+  )
 }

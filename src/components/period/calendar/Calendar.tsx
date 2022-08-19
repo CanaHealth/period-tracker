@@ -16,36 +16,36 @@
   -   NoteFlow takes and updates FlowData { howHeavy, date }
 */
 
-import * as React from 'react';
-import { useMemo } from 'react';
+import * as React from 'react'
+import { useMemo } from 'react'
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/lib/clsxm'
 
-import { FlowData } from '@/components/period/calendar/options/NoteFlow';
+import { FlowData } from '@/components/period/calendar/options/NoteFlow'
 
-import { manyWeeks } from '@/util/calendarFunc';
+import { manyWeeks } from '@/util/calendarFunc'
 
-import BoxFactory from './BoxFactory';
-import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage';
+import BoxFactory from './BoxFactory'
+import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage'
 
-const numWeeks = 15;
+const numWeeks = 15
 
 const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
   // wasScrolled is used to diable the bounce animation
-  const [wasScrolled, setWasScrolled] = React.useState(false);
+  const [wasScrolled, setWasScrolled] = React.useState(false)
   // check if the calender was scrolled
   const handleScroll = () => {
-    setWasScrolled(true);
-  };
+    setWasScrolled(true)
+  }
 
   const [localFlowData, setFlowData] = useIsomorphicLocalStorage<FlowData>(
     'FLOWDATA',
     {} as FlowData
-  );
+  )
 
   const handleChange = React.useCallback(
     (date: Date, howHeavy: string) => {
-      const timestamp = String(date.getTime());
+      const timestamp = String(date.getTime())
 
       setFlowData(
         (prev = {} as FlowData) =>
@@ -53,14 +53,14 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
             ...prev,
             [timestamp]: howHeavy,
           } as FlowData)
-      );
+      )
     },
     [setFlowData]
-  );
+  )
 
   const weeks = useMemo(() => {
-    return manyWeeks(numWeeks, localFlowData || {});
-  }, [localFlowData]);
+    return manyWeeks(numWeeks, localFlowData || {})
+  }, [localFlowData])
   return (
     <div className='flex h-96 flex-col justify-center'>
       <div className='relative flex h-full max-h-96 w-full flex-grow  items-center justify-center'>
@@ -88,8 +88,8 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
             {Object.keys(weeks || {})
               .sort()
               .map((key) => {
-                const date = new Date(Number(key));
-                const howHeavy = (localFlowData || {})[key];
+                const date = new Date(Number(key))
+                const howHeavy = (localFlowData || {})[key]
                 return (
                   <BoxFactory
                     key={key}
@@ -97,7 +97,7 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
                     howHeavy={howHeavy}
                     handleFunction={handleChange}
                   />
-                );
+                )
               })}
           </div>
         </div>
@@ -116,7 +116,7 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Calendar;
+export default Calendar

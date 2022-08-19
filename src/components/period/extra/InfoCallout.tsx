@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from 'react'
 
 type InfoCalloutProps = {
-  description: string;
-  value: string;
-} & React.ComponentPropsWithoutRef<'div'>;
+  description: string
+  value: string
+} & React.ComponentPropsWithoutRef<'div'>
 
 export default function InfoCallout({ description, value }: InfoCalloutProps) {
   return (
@@ -13,5 +13,5 @@ export default function InfoCallout({ description, value }: InfoCalloutProps) {
         {value}
       </span>
     </div>
-  );
+  )
 }
