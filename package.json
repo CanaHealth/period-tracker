@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "license": "SEE LICENSE in LICENSE.md",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "qs": "git status && git add . && git commit -m 'fix: saving' && git push",
     "dev": "next dev",
