@@ -24,6 +24,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@3rdweb/hooks": "^1.9.2",
     "@bundlr-network/client": "^0.7.15",
     "@headlessui/react": "^1.6.6",
     "@metaplex-foundation/js": "^0.14.1",

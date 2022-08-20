@@ -16,8 +16,13 @@
   -   NoteFlow takes and updates FlowData { howHeavy, date }
 */
 
-import * as React from 'react'
-import { useMemo } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  FC,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 
 import clsxm from '@/lib/clsxm'
 
@@ -30,9 +35,9 @@ import { useIsomorphicLocalStorage } from './useIsomorphicLocalStorage'
 
 const numWeeks = 15
 
-const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
+const Calendar: FC<ComponentPropsWithoutRef<'div'>> = () => {
   // wasScrolled is used to diable the bounce animation
-  const [wasScrolled, setWasScrolled] = React.useState(false)
+  const [wasScrolled, setWasScrolled] = useState(false)
   // check if the calender was scrolled
   const handleScroll = () => {
     setWasScrolled(true)
@@ -43,7 +48,7 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
     {} as FlowData
   )
 
-  const handleChange = React.useCallback(
+  const handleChange = useCallback(
     (date: Date, howHeavy: string) => {
       const timestamp = String(date.getTime())
 
@@ -108,7 +113,7 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
       >
         {['Mu', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
           <div
-            className=' text-gray--dark mx-auto h-full rounded-b-xl bg-gray-light-dark px-2 pb-1 text-center text-xs'
+            className=' text-gray--dark mx-auto h-full  px-2 pb-1 text-center text-xs'
             key={day}
           >
             {day}

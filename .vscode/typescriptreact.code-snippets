@@ -1,35 +1,31 @@
 {
   //#region  //*=========== React ===========
-  "import React": {
-    "prefix": "ir",
-    "body": ["import * as React from 'react';"]
-  },
-  "React.useState": {
+
+  "useState": {
     "prefix": "us",
     "body": [
-      "const [${1}, set${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}] = React.useState<$3>(${2:initial${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}})$0"
+      "const [${1}, set${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}] = useState<$3>(${2:initial${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}})$0"
     ]
   },
-  "React.useEffect": {
+  "useEffect": {
     "prefix": "uf",
-    "body": ["React.useEffect(() => {", "  $0", "}, []);"]
+    "body": ["useEffect(() => {", "  $0", "}, []);"]
   },
-  "React.useReducer": {
+  "useReducer": {
     "prefix": "ur",
     "body": [
-      "const [state, dispatch] = React.useReducer(${0:someReducer}, {",
+      "const [state, dispatch] = useReducer(${0:someReducer}, {",
       "  ",
       "})"
     ]
   },
-  "React.useRef": {
+  "useRef": {
     "prefix": "urf",
-    "body": ["const ${1:someRef} = React.useRef($0)"]
+    "body": ["const ${1:someRef} = useRef($0)"]
   },
   "React Functional Component": {
     "prefix": "rc",
     "body": [
-      "import * as React from 'react';\n",
       "export default function ${1:${TM_FILENAME_BASE}}() {",
       "  return (",
       "    <div>",
@@ -42,12 +38,11 @@
   "React Functional Component with Props": {
     "prefix": "rcp",
     "body": [
-      "import * as React from 'react';\n",
       "import clsxm from '@/lib/clsxm';\n",
       "type ${1:${TM_FILENAME_BASE}}Props= {\n",
       "className?: string;",
-      "} & React.ComponentPropsWithoutRef<'div'>\n",
-      "const ${1:${TM_FILENAME_BASE}}: React.FC<${1:${TM_FILENAME_BASE}}Props> = ({",
+      "} & ComponentPropsWithoutRef<'div'>\n",
+      "const ${1:${TM_FILENAME_BASE}}: FC<${1:${TM_FILENAME_BASE}}Props> = ({",
       "className,",
       "}) => {",
       "// TODO:",

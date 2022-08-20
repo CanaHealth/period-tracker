@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { PropsWithChildren } from 'react'
 
 import clsxm from '@/lib/clsxm'
 
@@ -11,13 +11,14 @@ export type BigButtonProps = {
   OnClickDo?: () => void
 }
 
-const BigButton: React.FC<BigButtonProps> = ({
+const BigButton: React.FC<PropsWithChildren<BigButtonProps>> = ({
   icon,
   text,
   height = 10,
   iconLocation = 'r',
   OnClickDo,
   className,
+  children,
 }) => {
   return (
     <button
@@ -52,6 +53,7 @@ const BigButton: React.FC<BigButtonProps> = ({
       >
         {icon && <span className='m-1'>{icon}</span>}
         {text && <span className='m-1 w-max'>{text}</span>}
+        {children}
       </div>
     </button>
   )
