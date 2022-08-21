@@ -4,7 +4,7 @@ import { HiBadgeCheck } from 'react-icons/hi'
 
 import clsxm from '@/lib/clsxm'
 
-import BigButton from '@/components/period/calendar/options/BigButton'
+import BigButton from '@/components/buttons/BigButton'
 import PinInput from '@/components/pinCode/PinInput'
 
 import { encryptData, getDecryptedWallet } from '@/util/dataCryptoOperations'

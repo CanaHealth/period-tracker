@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import * as React from 'react'
+import { FC } from 'react'
 
 import clsxm from '@/lib/clsxm'
 
@@ -8,14 +8,14 @@ type MetaMaskLogoProps = {
   className?: string
 } & React.ComponentPropsWithoutRef<'div'>
 
-const MetaMaskLogo: React.FC<MetaMaskLogoProps> = ({ className, size }) => {
+const MetaMaskLogo: FC<MetaMaskLogoProps> = ({ className, size }) => {
   // TODO:
 
   return (
     <div className={clsxm('mx-auto', className)}>
       <Image
-        src='/logos/metamask-fox.svg'
-        alt='Metamask wallet logo'
+        src='/logos/CanaHealthLogo.svg'
+        alt='Cana Health logo'
         width={size}
         height={size}
       />

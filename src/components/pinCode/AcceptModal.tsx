@@ -4,7 +4,7 @@ import { CopyBlock, monoBlue } from 'react-code-blocks'
 
 import clsxm from '@/lib/clsxm'
 
-import BigButton from '@/components/period/calendar/options/BigButton'
+import BigButton from '@/components/buttons/BigButton'
 import Spinner from '@/components/Spinner'
 
 type AcceptModalProps = {

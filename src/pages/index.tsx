@@ -1,14 +1,10 @@
-import { useWeb3 } from '@3rdweb/hooks'
 import Head from 'next/head'
 
+import Footer from '@/components/layout/Footer'
 import Layout from '@/components/layout/Layout'
 import Calendar from '@/components/period/calendar/Calendar'
-import BigButton from '@/components/period/calendar/options/BigButton'
 
 export default function HomePage() {
-  const { connectWallet, address, error } = useWeb3()
-  error ? console.log(error) : null
-
   return (
     <Layout>
       <Head>
@@ -17,17 +13,8 @@ export default function HomePage() {
       <main className='h-full min-h-screen'>
         <div className='mx-auto flex max-w-xl flex-col justify-start space-y-10'>
           <Calendar />
-
-          {address ? (
-            <p className='cursor-pointer rounded-full bg-gray-200 px-2 py-1 font-mono font-medium duration-100 hover:bg-gray-300'>
-              {address}
-            </p>
-          ) : (
-            <BigButton OnClickDo={() => connectWallet('injected')} height='20'>
-              Connect Wallet
-            </BigButton>
-          )}
         </div>
+        <Footer />
       </main>
     </Layout>
   )
