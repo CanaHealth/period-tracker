@@ -113,8 +113,8 @@ const Footer: FC<PropsWithChildren<FooterProps>> = ({
           <WalletConnectButton />
           {chainId ? <p> from</p> : null}
 
-          <div className='group relative flex w-24 flex-col space-y-2 break-words text-center text-xs'>
-            <div className='mx-auto h-8 w-8'>
+          <div className='flexitems-center group relative justify-center'>
+            <div className='required: mx-auto flex h-8 w-8 flex-shrink'>
               {chainId ? chainId === 1 ? <Ethereum /> : <Polygon /> : null}
             </div>
             <span
