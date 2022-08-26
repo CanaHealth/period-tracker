@@ -9,6 +9,8 @@ export default function HomePage() {
   const { connectWallet, address, error } = useWeb3()
   error ? console.log(error) : null
 
+
+
   return (
     <Layout>
       <Head>
@@ -19,9 +21,14 @@ export default function HomePage() {
           <Calendar />
 
           {address ? (
-            <p className='cursor-pointer rounded-full bg-gray-200 px-2 py-1 font-mono font-medium duration-100 hover:bg-gray-300'>
-              {address}
-            </p>
+            <>
+              <p className='cursor-pointer rounded-full bg-gray-200 px-2 py-1 font-mono font-medium duration-100 hover:bg-gray-300'>
+                {address}
+              </p>
+              <BigButton OnClickDo={() => connectWallet('injected')} height='20'>
+                Encrypt Data
+              </BigButton>
+            </>
           ) : (
             <BigButton OnClickDo={() => connectWallet('injected')} height='20'>
               Connect Wallet
