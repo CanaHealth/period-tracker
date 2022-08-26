@@ -1,11 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { CopyBlock, monoBlue } from 'react-code-blocks';
 
 import clsxm from '@/lib/clsxm';
 
 import BigButton from '@/components/period/calendar/options/BigButton';
 import Spinner from '@/components/Spinner';
+import { getSolanaBalance, getWalletFromLocalStorage } from '@/util/WalletOperations';
 
 type AcceptModalProps = {
   open?: boolean;
@@ -33,6 +34,18 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
     (() => {
       !open;
     });
+
+  const [balance, setBalance] = useState<string>("");
+
+  useEffect(() => {
+    async function getBalance() {
+      const pubKey = getWalletFromLocalStorage().publicKey;
+      const balance = await getSolanaBalance(pubKey);
+      console.log(`Balance: ${balance} SOL`);
+      setBalance(balance.toString());
+    }
+    getBalance();
+  }, [])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -92,7 +105,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                     <div>
                       {' '}
                       <h3>Solana balance:</h3>
-                      <p>0.022 SOL</p>
+                      <p>{balance} SOL</p>
                     </div>
 
                     <div className='my-2 flex flex-col items-center justify-center'>
@@ -107,7 +120,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                       ) : (
                         <BigButton
                           OnClickDo={handleSubmit}
-                          text='Accept'
+                          text='Buy Solana'
                           iconLocation='r'
                           height='20'
                         />
