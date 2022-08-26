@@ -6,7 +6,7 @@ import clsxm from '@/lib/clsxm'
 import { findPrevMonday, newToday } from '@/util/calendarFunc'
 
 const colorVarientSelector = {
-  normal: 'border-gray-light border-2 bg-gray-mid-light',
+  normal: 'bg-gray-mid-light',
   heavy: 'bg-flow-heavy',
   average: 'bg-flow-average',
   light: 'bg-flow-light',
@@ -69,8 +69,8 @@ const Box: FC<BoxProps> = ({ color = 'normal', date }) => {
         'group relative flex h-8 w-8 items-center justify-center rounded-md text-xs',
         colorVarientSelector[color],
         [isEvenMonth ? 'opacity-50 shadow-sm' : 'opacity-100'],
+        [isCurrentWeek ? 'border border-gray-mid-dark' : ''],
         [isCurrentDay ? 'border-2 border-black text-black' : ' text-gray-700'],
-        [isCurrentWeek ? '' : ' hover:bg-gray-dark-dark hover:text-white'],
         'transition-transform duration-200 ease-in-out',
         'hover:scale-110 hover:shadow-md',
         ' active:scale-100'

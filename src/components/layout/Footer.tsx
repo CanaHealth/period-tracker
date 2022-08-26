@@ -120,7 +120,7 @@ const Footer: FC<PropsWithChildren<FooterProps>> = ({
             <span
               className={`
                               
-                              absolute inset-x-0 -top-14
+                              absolute -top-14 -left-14
                               mx-auto hidden
                               h-10
                               w-max rounded-md  border-b-2

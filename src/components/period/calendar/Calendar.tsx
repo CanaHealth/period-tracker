@@ -108,8 +108,8 @@ const Calendar: FC<ComponentPropsWithoutRef<'div'>> = () => {
         </div>
       </div>
       <div
-        className='mx-auto grid w-full max-w-md grid-cols-7 gap-4 rounded-b-lg bg-white px-4 
-      pb-4'
+        className='mx-4 grid w-full max-w-md grid-cols-7 gap-4 rounded-b-lg bg-white px-4 pb-4 
+      sm:mx-auto'
       >
         {['Mu', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
           <div
