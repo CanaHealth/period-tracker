@@ -4,7 +4,7 @@ import { HiBadgeCheck } from 'react-icons/hi';
 
 import clsxm from '@/lib/clsxm';
 
-import KindaBigButton from '@/components/period/calendar/options/KindaBigButton';
+import BigButton from '@/components/period/calendar/options/BigButton';
 import PinInput from '@/components/pinCode/PinInput';
 
 import { saveDataOnChain } from '@/util/saveOnChain';
@@ -34,7 +34,7 @@ const PinCode: React.FC<PinCodeProps> = ({
   className,
   pincode,
   variant = 'row',
-  setPublicKey,
+  setPublicKey
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -191,7 +191,7 @@ const PinCode: React.FC<PinCodeProps> = ({
           ))}
         </div>
 
-        <KindaBigButton
+        <BigButton
           OnClickDo={() => {
             submitPinCode();
             setOpen(true);
