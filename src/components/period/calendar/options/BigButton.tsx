@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-export type KindaBigButtonProps = {
+export type BigButtonProps = {
   icon?: React.ReactNode;
   iconLocation?: 't' | 'b' | 'l' | 'r';
   height?: '10' | '20' | '24' | '32';
@@ -11,7 +11,7 @@ export type KindaBigButtonProps = {
   OnClickDo?: () => void;
 };
 
-const KindaBigButton: React.FC<KindaBigButtonProps> = ({
+const BigButton: React.FC<BigButtonProps> = ({
   icon,
   text,
   height = 10,
@@ -56,4 +56,4 @@ const KindaBigButton: React.FC<KindaBigButtonProps> = ({
   );
 };
 
-export default KindaBigButton;
+export default BigButton;

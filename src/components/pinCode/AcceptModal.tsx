@@ -120,7 +120,7 @@ const AcceptModal: React.FC<AcceptModalProps> = ({
                       ) : (
                         <BigButton
                           OnClickDo={handleSubmit}
-                          text='Buy Solana'
+                          text='Accept'
                           iconLocation='r'
                           height='20'
                         />
