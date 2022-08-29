@@ -5,6 +5,9 @@
 :root {
 }
 
+@layer components {
+}
+
 @layer base {
   /* inter var - latin */
   @font-face {

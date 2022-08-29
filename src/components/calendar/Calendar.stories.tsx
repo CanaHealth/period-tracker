@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-import { FlowData } from '@/components/period/calendar/options/NoteFlow';
+import { flowData } from '@/components/period/calendar/options/NoteFlow';
 
 import { manyWeeks } from '@/util/calendarFunc';
 
@@ -22,9 +22,9 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
     setWasScrolled(true);
   };
 
-  const [localFlowData, setFlowData] = useIsomorphicLocalStorage<FlowData>(
-    'FLOWDATA',
-    {} as FlowData
+  const [localFlowData, setFlowData] = useIsomorphicLocalStorage<flowData>(
+    'flowData',
+    {} as flowData
   );
 
   const handleChange = React.useCallback(
@@ -32,11 +32,11 @@ const Calendar: React.FC<React.ComponentPropsWithoutRef<'div'>> = () => {
       const timestamp = String(date.getTime());
 
       setFlowData(
-        (prev = {} as FlowData) =>
+        (prev = {} as flowData) =>
           ({
             ...prev,
             [timestamp]: howHeavy,
-          } as FlowData)
+          } as flowData)
       );
     },
     [setFlowData]
@@ -111,14 +111,12 @@ export default Calendar;
 import { Meta, Story } from '@storybook/react/types-6-0'
 import * as React from 'react'
 
-import Calendar from '@/components/period/calendar/Calendar'
+import Calendar from '@/components/calendar/Calendar'
 
 export default {
   title: 'Period/Calendar',
   component: Calendar,
-  decorators: [
-    (Story) => <div className='h-full bg-gray-mid-light'>{Story()}</div>,
-  ],
+  decorators: [(Story) => <div className='h-full bg-gray-400'>{Story()}</div>],
 } as Meta
 
 const Template: Story = (args) => <Calendar {...args} />

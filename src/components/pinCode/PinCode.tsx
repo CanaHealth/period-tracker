@@ -116,7 +116,7 @@ const PinCode: React.FC<PinCodeProps> = ({
       setEncData(
         JSON.stringify(
           encryptData(
-            localStorage.getItem('FLOWDATA')!,
+            localStorage.getItem('flowData')!,
             usableSecretKey(decryptedWallet.secretKey)
           ),
           null,
@@ -126,7 +126,7 @@ const PinCode: React.FC<PinCodeProps> = ({
 
       console.log(
         encryptData(
-          localStorage.getItem('FLOWDATA')!,
+          localStorage.getItem('flowData')!,
           usableSecretKey(decryptedWallet.secretKey)
         )
       )
@@ -142,7 +142,7 @@ const PinCode: React.FC<PinCodeProps> = ({
     const decryptedWallet: solanaWallet = getDecryptedWallet(null)
 
     saveDataOnChain(
-      localStorage.getItem('FLOWDATA'),
+      localStorage.getItem('flowData'),
       usableSecretKey(decryptedWallet.secretKey)
     )
       .then((id) => {

@@ -1,5 +1,3 @@
-import { FlowData } from '@/components/period/calendar/options/NoteFlow'
-
 const normalizeDate = (date: Date): Date => {
   const newDate = new Date(date)
 
@@ -13,8 +11,20 @@ const normalizeDate = (date: Date): Date => {
 
 const today = normalizeDate(new Date())
 
+const isToday = (date: Date): boolean => {
+  return date.getTime() === today.getTime()
+}
+
 const newToday = () => {
   return today
+}
+
+const produceYearMonthDay = (date: Date): string => {
+  return date.toISOString().slice(0, 10)
+}
+
+const dayOfWeekFromISOString = (ISOdate: string): string => {
+  return ISOdate.split('-')[2]
 }
 
 const dayOfMiliseconds = 1000 * 60 * 60 * 24
@@ -34,45 +44,76 @@ const findPrevMonday = (date: Date) => {
   return normalizeDate(monday)
 }
 
-const weekOfDates = (monday: Date, flowInfoFromStorage: FlowData): FlowData => {
-  const days: FlowData = {}
-  const mondayInTest = findPrevMonday(monday)
-  const defaultFlow = 'none'
-
-  for (let i = 0; i < 7; i++) {
-    const step = i
-    const day = daysFrom(mondayInTest, step)
-    const timestamp = day.getTime()
-    const dayFlow = flowInfoFromStorage[timestamp] || defaultFlow
-
-    days[timestamp] = dayFlow
-  }
-
-  return days
+const isCurrentWeek = (date: Date): boolean => {
+  return findPrevMonday(today).getTime() === findPrevMonday(date).getTime()
 }
 
-const manyWeeks = (
-  numWeeks: number,
-  flowInfoFromStorage: FlowData
-): FlowData => {
-  const weeks: FlowData = {}
-  for (let i = 0; i < numWeeks; i++) {
-    const step = i
-    const monday = weeksFrom(findPrevMonday(today), -step)
-    const week = weekOfDates(monday, flowInfoFromStorage)
-    Object.assign(weeks, week)
+// const weekOfDates = (monday: Date, flowInfoFromStorage: flowData): flowData => {
+//   const days: flowData = {}
+//   const mondayInTest = findPrevMonday(monday)
+//   const defaultFlow = 'none'
+
+//   for (let i = 0; i < 7; i++) {
+//     const step = i
+//     const day = daysFrom(mondayInTest, step)
+//     const timestamp = day.getTime()
+//     const dayFlow = flowInfoFromStorage[timestamp] || defaultFlow
+
+//     days[timestamp] = dayFlow
+//   }
+
+//   return days
+// }
+
+const produceMondays = (from: number, to: number): Date[] => {
+  const mondays = []
+  for (let i = from; i <= to; i++) {
+    mondays.push(weeksFrom(findPrevMonday(today), i))
   }
-  return weeks
+  return mondays
 }
+
+const produceWeek = (startDate: Date): Date[] => {
+  const startNormalized = normalizeDate(startDate)
+  const week = [0, 1, 2, 3, 4, 5, 6].map((day) => {
+    return daysFrom(startNormalized, day)
+  })
+  return week
+}
+
+const isEvenMonth = (date: Date): boolean => {
+  return date.getMonth() % 2 === 0
+}
+
+// const manyWeeks = (
+//   numWeeks: number,
+//   flowInfoFromStorage: flowData
+// ): flowData => {
+//   const weeks: flowData = {}
+//   for (let i = 0; i < numWeeks; i++) {
+//     const step = i
+//     const monday = weeksFrom(findPrevMonday(today), -step)
+//     const week = weekOfDates(monday, flowInfoFromStorage)
+//     Object.assign(weeks, week)
+//   }
+//   return weeks
+// }
 
 export {
   dayOfMiliseconds,
+  dayOfWeekFromISOString,
   daysFrom,
   findPrevMonday,
-  manyWeeks,
+  isCurrentWeek,
+  isEvenMonth,
+  isToday,
+  // manyWeeks,
   newToday,
   normalizeDate,
-  weekOfDates,
+  produceMondays,
+  produceWeek,
+  produceYearMonthDay,
+  // weekOfDates,
   weekOfMiliseconds,
   weeksFrom,
 }

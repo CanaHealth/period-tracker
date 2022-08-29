@@ -2,13 +2,13 @@
 import { afterAll, describe, expect, it } from '@jest/globals'
 import { cleanup, fireEvent, render } from '@testing-library/react'
 
-import { mockFlowInfoFromStorage } from '@/components/period/calendar/Calendar'
-
 import {
   daysFrom,
   findPrevMonday,
   manyWeeks,
+  newToday,
   normalizeDate,
+  produceMondays,
   weekOfDates,
   weeksFrom,
 } from '@/util/calendarFunc'
@@ -24,9 +24,9 @@ describe('normalizeDate', () => {
     expect(date).toBeInstanceOf(Date)
   })
 
-  it('returns a date object with time 00:00:01', () => {
+  it('returns a date object with time 08:00:01', () => {
     const date = normalizeDate(defaultDay)
-    expect(date.getHours()).toEqual(8)
+    expect(date.getHours()).toEqual(4)
     expect(date.getMinutes()).toEqual(0)
     expect(date.getSeconds()).toEqual(0)
     expect(date.getMilliseconds()).toEqual(0)
@@ -75,21 +75,43 @@ describe('findPrevMonday', () => {
   })
 })
 
-// test weekOfDates
-describe('weekOfDates', () => {
-  it('returns an array of 7 objects { timestamp: flow Intensity }', () => {
-    const week = weekOfDates(defaultDay, mockFlowInfoFromStorage)
-    expect(Object.keys(week).length).toEqual(7)
+describe('produceMondays', () => {
+  it('returns an array of 5 arrays of 3 dates and the prevMonday of today is second', () => {
+    const start = -10
+    const end = 10
+    const length = Math.abs(start) + Math.abs(end) + 1
+    const indexOfMonday = (length - 1) / 2
+    const mondays = produceMondays(start, end)
+    expect(mondays.length).toEqual(length)
+    expect(mondays[indexOfMonday].getDate()).toEqual(
+      findPrevMonday(newToday()).getDate()
+    )
   })
 })
 
+// test weekOfDates
+// describe('weekOfDates', () => {
+//   it('returns an array of 7 objects { timestamp: flow Intensity }', () => {
+//     const week = weekOfDates(defaultDay, mockFlowInfoFromStorage)
+//     expect(Object.keys(week).length).toEqual(7)
+//   })
+// })
+
 // test manyWeeks
-describe('manyWeeks', () => {
-  it('returns an array of 5 arrays of 7 objects { timestamp: flow Intensity }', () => {
-    const weeks = manyWeeks(defaultDay, 5, mockFlowInfoFromStorage)
-    expect(Object.keys(weeks).length).toEqual(5 * 7)
-  })
-})
+// describe('manyWeeks', () => {
+//   it('returns an array of 5 arrays of 7 objects { timestamp: flow Intensity }', () => {
+//     const weeks = manyWeeks(defaultDay, 5, mockFlowInfoFromStorage)
+//     expect(Object.keys(weeks).length).toEqual(5 * 7)
+//   })
+// })
+
+// const produceMondays = (from: number, to: number): Date[] => {
+//   const mondays = []
+//   for (let i = from; i <= to; i++) {
+//     mondays.push(weeksFrom(findPrevMonday(today), i))
+//   }
+//   return mondays
+// }
 
 afterAll(() => {
   cleanup()

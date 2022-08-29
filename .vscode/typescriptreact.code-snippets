@@ -42,18 +42,10 @@
       "import clsxm from '@/lib/clsxm';",
       "",
       "type ${1:${TM_FILENAME_BASE}}Props= {",
-      "onHoverClass?: string",
-      "onActiveClass?: string",
-      "onFocusClass?: string",
-      "shouldTransition?: boolean",
       "className?: string;",
       "",
       "} & ComponentPropsWithoutRef<'div'>\n",
       "const ${1:${TM_FILENAME_BASE}}: FC<PropsWithChildren<${1:${TM_FILENAME_BASE}}Props>> = ({",
-      "onHoverClass,",
-      "onActiveClass,",
-      "onFocusClass,",
-      "shouldTransition,",
       "className,",
       "children,",
       "}) => {",
@@ -64,10 +56,6 @@
       "       ",
       "       className={clsxm('',",
       "       className,",
-      "       onHoverClass,",
-      "       onActiveClass,",
-      "       onFocusClass,",
-      "       [shouldTransition && 'transition-all ease-out'],",
       "",
       "    )}>",
       "      {children}",
@@ -218,8 +206,7 @@
     "body": [
       "/* eslint-disable unused-imports/no-unused-imports */",
       "import { describe, expect, it, screen } from '@jest/globals';",
-      "import { fireEvent, render } from '@testing-library/react';",
-      "import { axe } from 'jest-axe';"
+      "import { fireEvent, render } from '@testing-library/react';"
     ]
   }
   //#endregion  //*=========== Testing ===========

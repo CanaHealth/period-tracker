@@ -31,7 +31,7 @@ const Accordion: React.FC<AccordionProps> = ({
                   'h-16',
                   'text-left text-sm font-medium',
                   'bg-primary-light text-black ',
-                  'hover:bg-gray-dark hover:text-white',
+                  'hover:bg-gray-800 hover:text-white',
                   // 'active:scale-95',
                   'focus-visible:ring-primary-mid focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                 )}

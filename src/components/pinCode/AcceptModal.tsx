@@ -140,24 +140,24 @@ import BigButton from '@/components/period/calendar/options/BigButton';
 
 export type FlowIntensity = 'light' | 'heavy' | 'average' | 'none';
 
-export type FlowData = {
+export type flowData = {
   [key: string]: FlowIntensity;
 };
 
 export type NoteFlowProps = {
-  flowdata: FlowData;
+  flowData: flowData;
   buttons?: buttonsProps;
   className?: string;
   open?: boolean;
   setOpen?: (open: boolean) => void;
-  handleSubmit?: (flowdata: FlowData) => void;
+  handleSubmit?: (flowData: flowData) => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
 const NoteFlow: React.FC<NoteFlowProps> = ({
   handleSubmit,
   setOpen,
   open,
-  flowdata,
+  flowData,
   buttons = [
     { icon: <BsDroplet />, text: 'light' },
     { icon: <BsDropletHalf />, text: 'average' },
@@ -177,17 +177,17 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
   const handleSubmited =
     handleSubmit ||
     (() => {
-      flowdata;
+      flowData;
     });
 
   useEffect(() => {
-    if (flowdata.howHeavy !== 'none') {
+    if (flowData.howHeavy !== 'none') {
       setCanSubmit(true);
     } else {
       setCanSubmit(false);
     }
-  }, [flowdata.howHeavy]);
-  // create funtion that checks canSubmit state and if true, calls handleSubmit with flowdata
+  }, [flowData.howHeavy]);
+  // create funtion that checks canSubmit state and if true, calls handleSubmit with flowData
   const handleSubmitFlowdata = () => {
     if (canSubmit) {
       setOpener(false);
@@ -226,7 +226,7 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
               leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
               <Dialog.Panel className='relative my-auto transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6'>
-                <Dialog.Title>{flowdata.date.toDateString()}</Dialog.Title>
+                <Dialog.Title>{flowData.date.toDateString()}</Dialog.Title>
                 <div className='absolute top-0 right-0 hidden pt-4 pr-4 sm:block'>
                   <button
                     type='button'
@@ -244,7 +244,7 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
                         key={index}
                         renderButton={button}
                         index={index}
-                        flowdata={flowdata}
+                        flowData={flowData}
                         handleSubmit={handleSubmited}
                       />
                     ))}
@@ -258,7 +258,7 @@ const NoteFlow: React.FC<NoteFlowProps> = ({
                       aria-label='set to none'
                       onClick={() => {
                         handleSubmited({
-                          ...flowdata,
+                          ...flowData,
                           howHeavy: 'none',
                         });
                         setOpener(false);

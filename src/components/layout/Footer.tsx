@@ -120,12 +120,12 @@ const Footer: FC<PropsWithChildren<FooterProps>> = ({
             <span
               className={`
                               
-                              absolute -top-14 -left-14
-                              mx-auto hidden
-                              h-10
-                              w-max rounded-md  border-b-2
-                              border-primary-dark
-                              bg-gray-light-dark
+                              border-primary-dark absolute -top-14
+                              -left-14 mx-auto
+                              hidden
+                              h-10 w-max  rounded-md
+                              border-b-2
+                              bg-gray-300
                               px-4
                               text-center
                               group-hover:flex

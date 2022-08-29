@@ -14,14 +14,17 @@
     "typecheck": "tsc --noEmit --incremental false",
     "test:watch": "jest --watch",
     "test": "jest",
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
     "release": "standard-version",
     "push-release": "git push --follow-tags origin main",
     "postbuild": "next-sitemap",
     "prepare": "husky install",
-    "sb": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "sb": "yarn run test:generate-output && start-storybook -p 6006",
+    "prebuild:storybook": "yarn run test:generate-output",
+    "build:storybook": "build-storybook -c .storybook -o build/",
+    "predeploy": "yarn run build:storybook"
   },
   "dependencies": {
     "@3rdweb/chain-icons": "^1.0.1",
@@ -75,7 +78,6 @@
     "eslint-plugin-unused-imports": "^1.1.5",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "jest-axe": "^6.0.0",
     "jest-localstorage-mock": "^2.4.22",
     "lint-staged": "^11.2.6",
     "next-sitemap": "^1.9.12",

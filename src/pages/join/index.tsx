@@ -6,7 +6,7 @@ export default function IndexPage() {
   const [publicKey, setPublicKey] = React.useState('')
 
   return (
-    <main className='bg-gray-light-dark'>
+    <main className='bg-gray-300'>
       <div className='flex flex-row justify-center pt-8 text-center'>
         {publicKey != '' ? (
           <>
