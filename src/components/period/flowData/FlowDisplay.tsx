@@ -99,7 +99,8 @@ const FlowDisplay: FC<PropsWithChildren<FlowDisplayProps>> = ({
           [showLabel ? 'hidden' : ''],
           [flow === 'heavy' && '  scale-100 text-black'],
           [flow === 'average' && 'scale-90  text-black'],
-          [flow === 'light' && '  scale-75  text-black']
+          [flow === 'light' && '  scale-75  text-black'],
+          [flow === undefined && 'hidden']
         )}
       >
         <BsDroplet />

@@ -42,6 +42,11 @@ Large.args = {
   size: 'lg',
 }
 
+export const FlowUndefined = Template.bind({})
+FlowUndefined.args = {
+  flow: undefined,
+}
+
 export const FlowHeavy = Template.bind({})
 FlowHeavy.args = {
   flow: 'heavy',
