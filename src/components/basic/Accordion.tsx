@@ -30,10 +30,10 @@ const Accordion: React.FC<AccordionProps> = ({
                   'px-4 py-2 ',
                   'h-16',
                   'text-left text-sm font-medium',
-                  'bg-primary-light text-black ',
+                  'bg-brand-light text-black ',
                   'hover:bg-gray-800 hover:text-white',
                   // 'active:scale-95',
-                  'focus-visible:ring-primary-mid focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
+                  'focus-visible:ring-brand-mid focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
                 )}
               >
                 <span>{title}</span>

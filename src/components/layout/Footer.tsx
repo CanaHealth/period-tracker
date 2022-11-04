@@ -83,7 +83,7 @@ const Footer: FC<PropsWithChildren<FooterProps>> = ({
   return (
     <footer
       className={clsxm(
-        ' absolute inset-x-0 bottom-0 mx-auto flex rounded-t-md bg-white',
+        'mx-auto flex rounded-t-md bg-white',
         className,
         onHoverClass,
         onActiveClass,
@@ -120,11 +120,11 @@ const Footer: FC<PropsWithChildren<FooterProps>> = ({
             <span
               className={`
                               
-                              border-primary-dark absolute -top-14
-                              -left-14 mx-auto
-                              hidden
-                              h-10 w-max  rounded-md
-                              border-b-2
+                              absolute -top-14 -left-14
+                              mx-auto hidden
+                              h-10
+                              w-max rounded-md  border-b-2
+                              border-brand-900
                               bg-gray-300
                               px-4
                               text-center

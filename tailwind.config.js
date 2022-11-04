@@ -12,46 +12,53 @@ function withOpacityValue(variable) {
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    "./public/**/*.html",
+    "./node_modules/flowbite-react/**/*.js",
+  ],
   theme: {
     extend: {
+      screens: {
+        xs: '512px',
+      },
       fontFamily: {
         primary: ['Inter', ...fontFamily.sans],
       },
       colors: {
         flow: { heavy: '#FD9AA7', average: '#FCCCD3', light: '#FCE5E8' },
-        primary: {
-          100: '#eff2fc',
-          200: '#dfe5f9',
-          300: '#cfd8f7',
-          400: '#bfcbf4',
-          500: '#afbef1',
-          600: '#8c98c1',
-          700: '#697291',
-          800: '#464c60',
-          900: '#232630',
+        brand: {
+          100: "#e0e0f1",
+          200: "#c2c2e2",
+          300: "#a3a3d4",
+          400: "#8585c5",
+          500: "#6666b7",
+          600: "#525292",
+          700: "#3d3d6e",
+          800: "#292949",
+          900: "#141425"
         },
         secondary: {
-          100: '#dfe0fa',
-          200: '#bfc0f4',
-          300: '#9fa1ef',
-          400: '#7f81e9',
-          500: '#5f62e4',
-          600: '#4c4eb6',
-          700: '#393b89',
-          800: '#26275b',
-          900: '#13142e',
+          100: "#fcf6f7",
+          200: "#f9ecef",
+          300: "#f7e3e7",
+          400: "#f4d9df",
+          500: "#f1d0d7",
+          600: "#c1a6ac",
+          700: "#917d81",
+          800: "#605356",
+          900: "#302a2b"
         },
         accent: {
-          100: '#f7fefe',
-          200: '#effefe',
-          300: '#e8fdfd',
-          400: '#e0fdfd',
-          500: '#d8fcfc',
-          600: '#adcaca',
-          700: '#829797',
-          800: '#566565',
-          900: '#2b3232',
+          100: "#cef4d9",
+          200: "#9de9b4",
+          300: "#6ddf8e",
+          400: "#3cd469",
+          500: "#0bc943",
+          600: "#09a136",
+          700: "#077928",
+          800: "#04501b",
+          900: "#02280d"
         },
         warning: {
           100: '#ffebed',
@@ -98,14 +105,15 @@ module.exports = {
         },
         showScroll: {
           '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(0px, 50px) scale(1)' },
+          '33%': { transform: 'translate(0px, 5px) scale(1)' },
           '66%': { transform: 'translate(0px, 0px) scale(1)' },
-          '80%': { transform: 'translate(0px, 3px) scale(1)' },
+          '80%': { transform: 'translate(0px, 1px) scale(1)' },
           '100%': { transform: 'translate(0px, 0px) scale(1)' },
         },
       },
     },
   },
 
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require("flowbite/plugin")],
+
 }

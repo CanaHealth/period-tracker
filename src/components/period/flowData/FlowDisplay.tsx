@@ -1,111 +1,108 @@
-import { ComponentPropsWithoutRef, FC, PropsWithChildren } from 'react'
-import { useCallback } from 'react'
-import { BsDroplet } from 'react-icons/bs'
+import {
+  ComponentPropsWithoutRef,
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+} from 'react'
 
 import clsxm from '@/lib/clsxm'
 
-import {
-  findColorClass,
-  optionOfFlow,
-} from '@/components/period/flowData/utils'
+import { cycleFlow, flowData } from '@/components/period/flowData/utils'
 
+import { Data } from '@/context/Data'
+import { isCurrentWeek } from '@/util/calendarFunc'
 import {
-  daysFrom,
+  findWeekday,
   isEvenMonth,
-  isToday,
-  normalizeDate,
+  isTodayCheck,
   produceYearMonthDay,
 } from '@/util/calendarFunc'
 
-type FlowDisplayProps = {
+import Droplet from './Droplet'
+
+export type FlowDisplayProps = {
   date: Date
-  flow?: optionOfFlow
-  showLabel?: boolean
-  handleClick?: (date: Date, flow: optionOfFlow) => void
+  // handleClick?: (date: Date, flow: optionOfFlow) => void
   className?: string
 } & ComponentPropsWithoutRef<'button'>
 
-const cycleFlow = (flow: optionOfFlow) => {
-  switch (flow) {
-    case undefined:
-      return 'light'
-    case 'light':
-      return 'average'
-    case 'average':
-      return 'heavy'
-    case 'heavy':
-      return undefined
-  }
-}
-
 const FlowDisplay: FC<PropsWithChildren<FlowDisplayProps>> = ({
-  handleClick,
   date,
-  flow,
-  showLabel = false,
   className,
 }) => {
+  const timestamp = String(date.getTime())
+  const { state, setState } = useContext(Data)
+
+  const flow = state[timestamp]
+
   const whenClicked = useCallback(() => {
     const nextFlow = cycleFlow(flow)
+    if (nextFlow) {
+      setState((prevState: flowData) => ({
+        ...prevState,
+        [timestamp]: nextFlow,
+      }))
+    } else {
+      setState((prevState: flowData) => {
+        //creste new object that contains everything except prevState[timestamp]
+        const { [timestamp]: _, ...newState } = prevState
+        return newState
+      })
+    }
+  }, [flow, setState, timestamp])
 
-    handleClick && handleClick(date, nextFlow)
-  }, [flow, handleClick, date])
-
-  const isEmphasized = isToday(date)
+  const isToday = isTodayCheck(date)
 
   const yearMonthDay = produceYearMonthDay(date)
 
-  const opacity = isEvenMonth(date) ? '50' : '100'
-
-  const colorClass = findColorClass(flow)
-
   const dayOfMonth = yearMonthDay.split('-')[2]
+
+  const firstDayOfMonth = dayOfMonth === '01'
+
+  const monthName = date.toDateString().split(' ')[1]
+
+  const dayOfWeek = findWeekday(date)
 
   return (
     <button
+      //  Button background color handles the color for flow, and today.
       onClick={() => {
         whenClicked()
       }}
-      aria-label={yearMonthDay}
       aria-describedby={`${yearMonthDay}-description`}
       role='button'
       className={clsxm(
         className,
-        'group relative flex items-center justify-center bg-primary-200 transition-all ease-out',
-        'hover:border-dark-dark hover:scale-110 hover:shadow-md active:scale-100',
-        'rounded-md',
-        'h-7 w-7 text-xs',
-        'sm:h-8 sm:w-8 sm:text-sm',
-        'md:text-md md:h-10 md:w-10',
-        [opacity === '50' && ' bg-primary-300'],
-
-        [isEmphasized ? 'border-2 border-black text-gray-900 opacity-100' : ''],
-        colorClass
+        'hover:border-dark-dark md:text-md group relative flex h-9 w-9 items-center justify-center rounded-md bg-brand-200 text-sm transition-all ease-out hover:scale-110 hover:shadow-md active:scale-100 sm:w-12 md:h-12',
+        [
+          isEvenMonth(date) ? 'bg-brand-200' : 'bg-brand-100',
+          isToday && 'border-slate-600 bg-slate-800 text-white opacity-100',
+          isCurrentWeek(date) && 'border-2 border-slate-200',
+          flow && `bg-flow-${flow} text-black`,
+        ]
       )}
     >
       <label
-        className={clsxm(
-          'opacity-0 group-hover:opacity-100',
-          [showLabel ? 'opacity-100' : ''],
-          [isEmphasized ? 'opacity-100' : '']
-        )}
-      >
-        {dayOfMonth}
-      </label>
-      <div
+        // This lable handles the on hover display
+        // the display hierarchy is: 1) Flow 2) New Month 3) Day of week
+        htmlFor={yearMonthDay}
+        id='weekday-or-month-label'
         aria-hidden='true'
-        className={clsxm(
-          ' absolute inset-0 flex flex-col items-center justify-center text-lg group-hover:hidden',
-          [showLabel ? 'hidden' : ''],
-          [flow === 'heavy' && '  scale-100 text-black'],
-          [flow === 'average' && 'scale-90  text-black'],
-          [flow === 'light' && '  scale-75  text-black'],
-          [flow === undefined && 'hidden']
-        )}
+        className={clsxm('flex items-center justify-center', [
+          !flow && !firstDayOfMonth && !isToday && 'hidden group-hover:flex',
+        ])}
       >
-        <BsDroplet />
-      </div>
-      <span className='hidden' id={`${yearMonthDay}-description`}>
+        {flow ? (
+          <Droplet flow={flow} />
+        ) : firstDayOfMonth ? (
+          monthName
+        ) : (
+          dayOfWeek
+        )}
+      </label>
+
+      <span className='sr-only' id={`${yearMonthDay}-description`}>
         {`logged flow` + (flow ? flow : 'none')}
       </span>
     </button>
@@ -113,47 +110,3 @@ const FlowDisplay: FC<PropsWithChildren<FlowDisplayProps>> = ({
 }
 
 export default FlowDisplay
-
-// export const produceWeek = (startDate: Date): JSX.Element[] => {
-//   const startNormalized = normalizeDate(startDate)
-//   const todayIs = newToday()
-//   const week = [0, 1, 2, 3, 4, 5, 6].map((day) => {
-//     const date = daysFrom(startNormalized, day)
-//     const ISOstring = produceYearMonthDay(date)
-//     const opacity = date.getMonth() % 2 === 0 ? 75 : 100
-//     const isToday = date.getTime() === todayIs.getTime()
-//     return (
-//       <FlowDisplay
-//         key={`${ISOstring}`}
-//         yearMonthDay={ISOstring}
-//         opacity={opacity}
-//         isEmphasized={isToday}
-//       />
-//     )
-//   })
-//   return week
-// }
-
-export const produceWeek = (startDate: Date): Date[] => {
-  const startNormalized = normalizeDate(startDate)
-  const week = [0, 1, 2, 3, 4, 5, 6].map((day) => {
-    return daysFrom(startNormalized, day)
-  })
-  return week
-}
-
-// const weekOfDates = (monday: Date, flowInfoFromStorage: flowData): flowData => {
-//   const days: flowData = {}
-//   const mondayInTest = findPrevMonday(monday)
-//   const defaultFlow = 'none'
-
-//   for (let i = 0; i < 7; i++) {
-//     const step = i
-//     const day = daysFrom(mondayInTest, step)
-//     const timestamp = day.getTime()
-//     const dayFlow = flowInfoFromStorage[timestamp] || defaultFlow
-
-//   }
-
-//   return days
-// }

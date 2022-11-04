@@ -1,31 +1,35 @@
 {
   //#region  //*=========== React ===========
-
-  "useState": {
+  "import React": {
+    "prefix": "ir",
+    "body": ["import * as React from 'react';"]
+  },
+  "React.useState": {
     "prefix": "us",
     "body": [
-      "const [${1}, set${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}] = useState<$3>(${2:initial${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}})$0"
+      "const [${1}, set${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}] = React.useState<$3>(${2:initial${1/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}})$0"
     ]
   },
-  "useEffect": {
+  "React.useEffect": {
     "prefix": "uf",
-    "body": ["useEffect(() => {", "  $0", "}, []);"]
+    "body": ["React.useEffect(() => {", "  $0", "}, []);"]
   },
-  "useReducer": {
+  "React.useReducer": {
     "prefix": "ur",
     "body": [
-      "const [state, dispatch] = useReducer(${0:someReducer}, {",
+      "const [state, dispatch] = React.useReducer(${0:someReducer}, {",
       "  ",
       "})"
     ]
   },
-  "useRef": {
+  "React.useRef": {
     "prefix": "urf",
-    "body": ["const ${1:someRef} = useRef($0)"]
+    "body": ["const ${1:someRef} = React.useRef($0)"]
   },
   "React Functional Component": {
     "prefix": "rc",
     "body": [
+      "import * as React from 'react';\n",
       "export default function ${1:${TM_FILENAME_BASE}}() {",
       "  return (",
       "    <div>",
@@ -38,27 +42,18 @@
   "React Functional Component with Props": {
     "prefix": "rcp",
     "body": [
-      "import { ComponentPropsWithoutRef, FC, PropsWithChildren } from 'react'",
-      "import clsxm from '@/lib/clsxm';",
-      "",
-      "type ${1:${TM_FILENAME_BASE}}Props= {",
+      "import clsxm from '@/lib/clsxm';\n",
+      "type ${1:${TM_FILENAME_BASE}}Props= {\n",
       "className?: string;",
-      "",
-      "} & ComponentPropsWithoutRef<'div'>\n",
-      "const ${1:${TM_FILENAME_BASE}}: FC<PropsWithChildren<${1:${TM_FILENAME_BASE}}Props>> = ({",
+      "} & React.ComponentPropsWithoutRef<'div'>\n",
+      "const ${1:${TM_FILENAME_BASE}}: React.FC<${1:${TM_FILENAME_BASE}}Props> = ({",
       "className,",
-      "children,",
       "}) => {",
       "// TODO:",
       "  ",
       "  return (",
-      "    <div ",
-      "       ",
-      "       className={clsxm('',",
-      "       className,",
-      "",
-      "    )}>",
-      "      {children}",
+      "    <div className={clsxm('', className)}>",
+      "      $0",
       "    </div>",
       "  )",
       "}\n",
@@ -98,13 +93,12 @@
     "prefix": "np",
     "body": [
       "import * as React from 'react';\n",
+      "import Layout from '@/components/layout/Layout';",
       "export default function ${1:${TM_FILENAME_BASE/(^[a-zA-Z])(.*)/${1:/upcase}${2}/}}Page() {",
       "  return (",
-      "      <main>\n",
-      "        <section className='layout py-20 min-h-screen'>",
+      "    <Layout>",
       "            $0",
-      "        </section>",
-      "      </main>",
+      "    </Layout>",
       "  )",
       "}"
     ]
@@ -182,10 +176,6 @@
     "prefix": "ff",
     "body": ["<>", "\t${TM_SELECTED_TEXT}", "</>"]
   },
-  "Split Class Names": {
-    "prefix": "scn",
-    "body": ["{`", "\t${TM_SELECTED_TEXT}", "`}"]
-  },
   "Wrap with clsx": {
     "prefix": "cx",
     "body": ["{clsx(${TM_SELECTED_TEXT}$0)}"]
@@ -206,7 +196,8 @@
     "body": [
       "/* eslint-disable unused-imports/no-unused-imports */",
       "import { describe, expect, it, screen } from '@jest/globals';",
-      "import { fireEvent, render } from '@testing-library/react';"
+      "import { fireEvent, render } from '@testing-library/react';",
+      "import { axe } from 'jest-axe';"
     ]
   }
   //#endregion  //*=========== Testing ===========
